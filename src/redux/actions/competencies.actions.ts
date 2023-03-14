@@ -1,5 +1,5 @@
 import { PAGE_DEFAULT } from "../../common/constants/pagination.js";
-import { Meta } from "../../common/interfaces/pagination.interface.js";
+import { Meta } from "../../common/interfaces/pagination.interface";
 import {
   CreatePlan,
   GetManyPlans,
@@ -8,18 +8,18 @@ import {
 } from "../../types/academic-plan";
 
 export enum PlanActions {
-  CREATE_PLAN = "CREATE_PLAN",
-  SUCCESS_CREATE_PLAN = "SUCCESS_CREATE_PLAN",
-  UPDATE_PLAN = "UPDATE_PLAN",
-  SUCCESS_UPDATE_PLAN = "SUCCESS_UPDATE_PLAN",
+  CREATE_COMPETENCY = "CREATE_COMPETENCY",
+  SUCCESS_CREATE_COMPETENCY = "SUCCESS_CREATE_COMPETENCY",
+  UPDATE_COMPETENCY = "UPDATE_COMPETENCY",
+  SUCCESS_UPDATE_COMPETENCY = "SUCCESS_UPDATE_COMPETENCY",
   GET_PLANS = "GET_PLANS",
   GET_PLANS_REQUEST = "GET_PLANS_REQUEST",
   SUCCESS_GET_PLANS = "SUCCESS_GET_PLANS",
-  DELETE_PLAN = "DELETE_PLAN",
-  SUCCESS_DELETE_PLAN = "SUCCESS_DELETE_PLAN",
-  REQUEST_PLAN_FAILED = "REQUEST_PLAN_FAILED",
-  GET_ONE_PLAN = "GET_ONE_PLAN",
-  GET_ONE_PLAN_SUCCESS = "GET_ONE_PLAN_SUCCESS",
+  DELETE_COMPETENCY = "DELETE_COMPETENCY",
+  SUCCESS_DELETE_COMPETENCY = "SUCCESS_DELETE_COMPETENCY",
+  REQUEST_COMPETENCY_FAILED = "REQUEST_PLAN_FAILED",
+  GET_ONE_COMPETENCY = "GET_ONE_COMPETENCY",
+  GET_ONE_COMPETENCY_SUCCESS = "GET_ONE_COMPETENCY_SUCCESS",
 }
 
 export const requestPlanSuccess = (type: PlanActions, payload?: any) => ({
@@ -28,20 +28,20 @@ export const requestPlanSuccess = (type: PlanActions, payload?: any) => ({
 });
 
 export const requestPlanFailed = () => ({
-  type: PlanActions.REQUEST_PLAN_FAILED,
+  type: PlanActions.REQUEST_COMPETENCY_FAILED,
 });
 export interface CreatePlanAction {
-  type: PlanActions.CREATE_PLAN | PlanActions.SUCCESS_CREATE_PLAN;
+  type: PlanActions.CREATE_COMPETENCY | PlanActions.SUCCESS_CREATE_COMPETENCY;
   payload: CreatePlan;
 }
 
 export interface UpdatePlanAction {
-  type: PlanActions.UPDATE_PLAN | PlanActions.SUCCESS_UPDATE_PLAN;
+  type: PlanActions.UPDATE_COMPETENCY | PlanActions.SUCCESS_UPDATE_COMPETENCY;
   payload: UpdatePlan;
 }
 
 export interface DeletePlanAction {
-  type: PlanActions.DELETE_PLAN | PlanActions.SUCCESS_DELETE_PLAN;
+  type: PlanActions.DELETE_COMPETENCY | PlanActions.SUCCESS_DELETE_COMPETENCY;
   payload: string;
 }
 
@@ -72,21 +72,21 @@ export type PlanActionsType =
 
 export const updatePlan = (payload: UpdatePlan) => {
   return {
-    type: PlanActions.UPDATE_PLAN,
+    type: PlanActions.UPDATE_COMPETENCY,
     payload,
   };
 };
 
 export const deletePlan = (payload: string) => {
   return {
-    type: PlanActions.DELETE_PLAN,
+    type: PlanActions.DELETE_COMPETENCY,
     payload,
   };
 };
 
 export const createPlan = (payload: CreatePlan) => {
   return {
-    type: PlanActions.CREATE_PLAN,
+    type: PlanActions.CREATE_COMPETENCY,
     payload,
   };
 };
@@ -100,7 +100,7 @@ export const getPlans = (payload?: GetManyPlans) => {
 
 export const getOnePlan = (payload: string) => {
   return {
-    type: PlanActions.GET_ONE_PLAN,
+    type: PlanActions.GET_ONE_COMPETENCY,
     payload,
   };
 };

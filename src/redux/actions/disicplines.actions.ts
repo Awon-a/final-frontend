@@ -1,5 +1,9 @@
 import { Meta } from "../../common/interfaces/pagination.interface.js";
 import {
+  Competency,
+  GetManyCompetenciesByDiscipline,
+} from "../../types/competencies.js";
+import {
   CreateDiscipline,
   Discipline,
   GetManyDisciplines,
@@ -16,6 +20,8 @@ export enum DisciplineActions {
   DELETE_DISCIPLINE = "DELETE_DISCIPLINE",
   SUCCESS_DELETE_DISCIPLINE = "SUCCESS_DELETE_DISCIPLINE",
   REQUEST_DISCIPLINE_FAILED = "REQUEST_DISCIPLINE_FAILED",
+  GET_COMPETENCIES_BY_DISCIPLINE = "GET_COMPETENCIES_BY_DISCIPLINE",
+  SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE = "SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE",
 }
 
 export const requestDisciplineSuccess = (
@@ -69,13 +75,28 @@ export interface GetDisciplinesSuccessAction {
   };
 }
 
+export interface GetCompetenciesByDisciplineAction {
+  type: DisciplineActions.GET_COMPETENCIES_BY_DISCIPLINE;
+  payload: GetManyCompetenciesByDiscipline;
+}
+
+export interface GetCompetenciesByDisciplineSuccessAction {
+  type: DisciplineActions.SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE;
+  payload: {
+    data: Competency[];
+    meta: Meta;
+  };
+}
+
 export type DisciplineActionsType =
   | CreateDisciplineAction
   | UpdateDisciplineAction
   | GetDisciplinesAction
   | GetDisciplinesSuccessAction
   | FailedAction
-  | DeleteDisciplineAction;
+  | DeleteDisciplineAction
+  | GetCompetenciesByDisciplineAction
+  | GetCompetenciesByDisciplineSuccessAction;
 
 export const updateDiscipine = (payload: UpdateDiscipline) => {
   return {
@@ -101,6 +122,15 @@ export const createDiscipline = (payload: CreateDiscipline) => {
 export const getDisciplines = (payload?: GetManyDisciplines) => {
   return {
     type: DisciplineActions.GET_DISCIPLINES,
+    payload,
+  };
+};
+
+export const getCompetenciesByDiscipline = (
+  payload: GetManyCompetenciesByDiscipline
+) => {
+  return {
+    type: DisciplineActions.GET_COMPETENCIES_BY_DISCIPLINE,
     payload,
   };
 };

@@ -1,6 +1,11 @@
 import { AxiosResponse } from "axios";
 import { LIMIT_DEFAULT, PAGE_DEFAULT } from "../common/constants/pagination";
+import { Meta } from "../common/interfaces/pagination.interface.js";
 import { $api } from "../http/http";
+import {
+  Competency,
+  GetManyCompetenciesByDiscipline,
+} from "../types/competencies.js";
 import {
   CreateDiscipline,
   Discipline,
@@ -26,6 +31,24 @@ export class DisciplineAPI {
       ...query,
     };
     const response = await $api.get(DisciplineAPI.DISICPLINE_URL, { params });
+    return response.data;
+  }
+
+  public static async getCompetenciesById({
+    disciplineId,
+    ...query
+  }: GetManyCompetenciesByDiscipline): Promise<
+    AxiosResponse<{ data: Competency[]; meta: Meta }>
+  > {
+    const params = {
+      page: PAGE_DEFAULT,
+      limit: LIMIT_DEFAULT,
+      ...query,
+    };
+    const response = await $api.get(
+      DisciplineAPI.DISICPLINE_URL + `/${disciplineId}/competencies`,
+      { params }
+    );
     return response.data;
   }
 }

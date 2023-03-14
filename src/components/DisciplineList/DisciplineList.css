@@ -1,0 +1,91 @@
+.my .ant-table-thead > tr > th {
+  background: #6e7ab9;
+  color: #f8f3f3;
+  line-height: 3.8vh;
+  padding: 8px 8px;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+/* .my .ant-table-cell:before {
+  width: 5px;
+} */
+
+.my .ant-table-thead > tr > th:first-child {
+  border-top-left-radius: 0 !important;
+}
+
+.my .ant-table-thead > tr > th:last-child {
+  border-top-right-radius: 0 !important;
+}
+
+.my .ant-table-tbody > tr > td {
+  line-height: 2.8vh;
+  padding: 8px 8px;
+  background-color: #f8f3f3;
+  font-family: "Signika", sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+  color: #505050;
+}
+
+.my .ant-table-tbody:hover > tr:hover > td {
+  background-color: #d4d3d3;
+}
+
+.table-name {
+  width: 307px;
+  height: 4vh;
+
+  font-family: "Signika", sans-serif;
+  font-style: bold;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 0%;
+  color: #505050;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.my-table-container {
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 5.1%;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 1624px;
+}
+
+.pagination-table {
+  position: absolute;
+  margin-left: 7%;
+  bottom: 5.2%;
+  margin-top: 10%;
+  color-scheme: red;
+}
+
+.pagination-table .ant-pagination {
+  color: #505050;
+}
+
+.pagination-table .ant-pagination .ant-pagination-item-active {
+  border-color: #6e7ab9;
+}
+
+.pagination-table .ant-pagination .ant-pagination-item {
+  border: 0px;
+  min-width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.pagination-table .ant-pagination .ant-pagination-item-active a {
+  color: #6e7ab9;
+}

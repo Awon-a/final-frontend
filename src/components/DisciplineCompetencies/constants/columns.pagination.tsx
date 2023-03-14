@@ -5,15 +5,9 @@ import SeeMoreIcon from "../../../common/assets/more.svg";
 
 export const columns = [
   {
-    title: "Название дисциплины",
+    title: "Название компетенции",
     key: "name",
     dataIndex: "name",
-    ellipsis: true,
-  },
-  {
-    title: "Код подразделения",
-    key: "codeDepartment",
-    dataIndex: "codeDepartment",
   },
   {
     title: " ",
@@ -21,14 +15,7 @@ export const columns = [
     key: "icon",
     align: "right" as AlignType,
     render: (text: any, record: any) => (
-      <Link
-        to={{
-          pathname: `/disciplines/${record.id}/competencies`,
-        }}
-        state={{
-          discipline: record,
-        }}
-      >
+      <Link to={`/competencies/${record.id}/indicators`}>
         <img src={SeeMoreIcon} alt="icon" />
       </Link>
     ),

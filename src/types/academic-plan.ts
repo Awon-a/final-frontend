@@ -56,3 +56,11 @@ export interface PlanState {
     plansMeta: Meta;
   };
 }
+
+export const EnumEducationLevelNameMapper = {
+  0: "Бакалавриат",
+  1: "Магистратура",
+  2: "Специалитет",
+} as {
+  [key: string]: string;
+};

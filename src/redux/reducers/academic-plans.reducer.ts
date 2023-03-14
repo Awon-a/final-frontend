@@ -36,7 +36,7 @@ export const planReducer = (state = initialState, action: PlanActionsType) => {
         plansMeta: { ...action.payload.meta },
         loading: false,
       };
-    case PlanActions.GET_PLANS:
+    case PlanActions.GET_PLANS_REQUEST:
       return { ...state, loading: true };
     default:
       return state;

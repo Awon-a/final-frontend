@@ -8,6 +8,7 @@ import {
   requestDisciplineSuccess,
   requestDisciplineFailed,
   GetDisciplinesAction,
+  GetCompetenciesByDisciplineAction,
 } from "../actions/disicplines.actions";
 
 function* createDisciplineSaga(
@@ -49,7 +50,30 @@ function* getDisciplinesSaga(
   }
 }
 
+function* getComptenciesByDiscipline(
+  action: GetCompetenciesByDisciplineAction
+): Generator<Effect, void> {
+  try {
+    const competencies = yield call(
+      DisciplineAPI.getCompetenciesById,
+      action.payload
+    );
+    yield put(
+      requestDisciplineSuccess(
+        DisciplineActions.SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE,
+        competencies
+      )
+    );
+  } catch (error: any) {
+    yield put(requestDisciplineFailed());
+  }
+}
+
 export function* watcherDisciplineSagas(): Generator<Effect, void> {
   yield takeEvery(DisciplineActions.CREATE_DISCIPLINE, createDisciplineSaga);
   yield takeEvery(DisciplineActions.GET_DISCIPLINES, getDisciplinesSaga);
+  yield takeEvery(
+    DisciplineActions.GET_COMPETENCIES_BY_DISCIPLINE,
+    getComptenciesByDiscipline
+  );
 }

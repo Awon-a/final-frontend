@@ -11,7 +11,7 @@ import {
 
 function* getPlansSaga(action: GetPlansAction): Generator<Effect, void> {
   try {
-    // yield put({ type: PlanActions.GET_PLANS });
+    yield put({ type: PlanActions.GET_PLANS_REQUEST });
     const response: any = yield call(PlansAPI.getAll, action.payload);
     console.log({ response });
     yield put(requestPlanSuccess(PlanActions.SUCCESS_GET_PLANS, response));

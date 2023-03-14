@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getPlans } from "../../redux/actions/academic-plan.actions";
-import { GetManyPlans, PlanState } from "../../types/academic-plan";
+import {
+  EnumEducationLevelNameMapper,
+  GetManyPlans,
+  PlanState,
+} from "../../types/academic-plan";
 import { columns } from "./constants/columns.constant";
 import "./PlansList.css";
 import NextPage from "../../common/assets/next-page.svg";
@@ -11,7 +15,9 @@ import PrevPage from "../../common/assets/prev-page.svg";
 import Header from "../Header/Header";
 
 const PlansList = () => {
-  const { plans, plansMeta } = useSelector((state: PlanState) => state.plans);
+  const { plans, plansMeta, loading } = useSelector(
+    (state: PlanState) => state.plans
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   console.log({ plans, plansMeta: plansMeta?.totalItems, currentPage });
@@ -19,7 +25,13 @@ const PlansList = () => {
     dispatch(getPlans());
   }, [dispatch]);
 
-  const data = plans.map((plan) => ({ ...plan, key: plan.id }));
+  const data = plans.map((plan) => {
+    return {
+      ...plan,
+      key: plan.id,
+      educationLevel: EnumEducationLevelNameMapper[plan.educationLevel],
+    };
+  });
 
   const getPlansDispatch = (params: GetManyPlans) => {
     dispatch(getPlans(params));
@@ -40,6 +52,7 @@ const PlansList = () => {
           dataSource={data}
           columns={columns}
           pagination={false}
+          loading={loading}
         ></Table>
       </div>
       <div className="pagination-table">

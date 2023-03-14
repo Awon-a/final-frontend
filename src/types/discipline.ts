@@ -1,4 +1,5 @@
 import { Meta } from "../common/interfaces/pagination.interface.js";
+import { Competency } from "./competencies.js";
 
 export interface Discipline {
   id: string;
@@ -30,5 +31,7 @@ export interface DisciplineState {
     disciplines: Discipline[]; // state в этом редьюсере
     loading: boolean;
     disciplinesMeta: Meta;
+    competencies: Competency[];
+    competenciesMeta: Meta;
   };
 }

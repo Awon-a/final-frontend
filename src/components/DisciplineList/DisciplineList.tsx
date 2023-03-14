@@ -8,6 +8,7 @@ import Header from "../Header/Header";
 import { columns } from "./constants/columns.pagination";
 import NextPage from "../../common/assets/next-page.svg";
 import PrevPage from "../../common/assets/prev-page.svg";
+import "./DisciplineList.css";
 
 const DisciplineList = () => {
   const { disciplines, disciplinesMeta } = useSelector(
@@ -42,7 +43,7 @@ const DisciplineList = () => {
     <>
       <Header currentPath={window.location.pathname} />
       <div className="my-table-container">
-        <div className="table-name">Учебные планы</div>
+        <div className="table-name">Дисциплины</div>
         <Table
           className="my"
           dataSource={data}

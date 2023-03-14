@@ -1,4 +1,5 @@
 import { Meta } from "../../common/interfaces/pagination.interface";
+import { Competency } from "../../types/competencies";
 import { Discipline } from "../../types/discipline";
 import {
   DisciplineActions,
@@ -9,6 +10,10 @@ export const initialState = {
   disciplines: [] as Discipline[],
   loading: false,
   disciplinesMeta: {
+    totalItems: 0,
+  } as Meta,
+  competencies: [] as Competency[],
+  competenciesMeta: {
     totalItems: 0,
   } as Meta,
 };
@@ -44,6 +49,13 @@ export const disciplineReducer = (
       };
     case DisciplineActions.REQUEST_DISCIPLINE_FAILED:
       return state;
+    case DisciplineActions.SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE:
+      return {
+        ...state,
+        loading: false,
+        competencies: action.payload.data,
+        competenciesMeta: action.payload.meta,
+      };
     default:
       return state;
   }
