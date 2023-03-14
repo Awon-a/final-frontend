@@ -1,6 +1,11 @@
 import { AxiosResponse } from "axios";
+import { LIMIT_DEFAULT, PAGE_DEFAULT } from "../common/constants/pagination";
 import { $api } from "../http/http";
-import { CreateDiscipline, Discipline } from "../types/discipline";
+import {
+  CreateDiscipline,
+  Discipline,
+  GetManyDisciplines,
+} from "../types/discipline";
 
 export class DisciplineAPI {
   private static DISICPLINE_URL = "/disciplines";
@@ -12,8 +17,15 @@ export class DisciplineAPI {
     return response.data;
   }
 
-  public static async getAll(): Promise<AxiosResponse<Discipline[]>> {
-    const response = await $api.get(DisciplineAPI.DISICPLINE_URL);
+  public static async getAll(
+    query?: GetManyDisciplines
+  ): Promise<AxiosResponse<Discipline[]>> {
+    const params = {
+      page: PAGE_DEFAULT,
+      limit: LIMIT_DEFAULT,
+      ...query,
+    };
+    const response = await $api.get(DisciplineAPI.DISICPLINE_URL, { params });
     return response.data;
   }
 }

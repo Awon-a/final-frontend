@@ -1,0 +1,44 @@
+.header-line {
+  height: 8vh;
+  background: #6e7ab9;
+}
+
+.menu .ant-menu-light .ant-menu-item-selected {
+  color: #6e7ab9;
+  background-color: #f8f3f3;
+  font-family: "Signika Negative", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.menu
+  .ant-menu-light
+  .ant-menu-item:hover:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  ) {
+  color: #6e7ab9;
+}
+
+.menu .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
+:where(.css-dev-only-do-not-override-ph9edi).ant-menu-light.ant-menu-horizontal
+  > .ant-menu-submenu-selected::after {
+  border-bottom-color: #6e7ab9;
+}
+
+.menu .ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after {
+  border-bottom-color: #6e7ab9;
+}
+
+.menu .ant-menu {
+  color: #505050;
+  background-color: #f8f3f3;
+  font-family: "Signika Negative", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.menu .ant-menu-horizontal {
+  border-bottom: 0px;
+}

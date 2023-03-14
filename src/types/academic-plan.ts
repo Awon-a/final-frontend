@@ -1,3 +1,11 @@
+import { Meta } from "../common/interfaces/pagination.interface.js";
+
+export interface Discipline {
+  id: string;
+  name: string;
+  codeDepartment: string;
+}
+
 export interface Plan {
   id: string;
   userId: string;
@@ -5,6 +13,7 @@ export interface Plan {
   year: number;
   educationLevel: string;
   semCount: number;
+  disciplines: Discipline[];
 }
 
 export interface CreatePlan {
@@ -27,4 +36,23 @@ export interface DeletePlan {
   id: string;
 }
 
-export interface PlanState {}
+export interface GetOnePlan {
+  id: string;
+}
+
+export interface GetManyPlans {
+  page?: number;
+  limit?: number;
+  filter?: {
+    [prop: string]: string;
+  };
+}
+
+export interface PlanState {
+  // имя редьюсера
+  plans: {
+    plans: Plan[]; // state в этом редьюсере
+    loading: boolean;
+    plansMeta: Meta;
+  };
+}

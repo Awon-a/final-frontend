@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { publicRoutes } from './Routes.js'
+import { publicRoutes } from './Routes'
 
 export const AppRouter = () => {
   return (

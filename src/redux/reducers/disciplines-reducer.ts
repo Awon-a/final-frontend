@@ -1,3 +1,4 @@
+import { Meta } from "../../common/interfaces/pagination.interface";
 import { Discipline } from "../../types/discipline";
 import {
   DisciplineActions,
@@ -6,6 +7,10 @@ import {
 
 export const initialState = {
   disciplines: [] as Discipline[],
+  loading: false,
+  disciplinesMeta: {
+    totalItems: 0,
+  } as Meta,
 };
 export const disciplineReducer = (
   state = initialState,
@@ -31,7 +36,14 @@ export const disciplineReducer = (
         ),
       };
     case DisciplineActions.SUCCESS_GET_DISCIPLINES:
-      return { ...state, disciplines: [...state.disciplines, action.payload] };
+      return {
+        ...state,
+        disciplines: action.payload.data,
+        loading: false,
+        disciplinesMeta: action.payload.meta,
+      };
+    case DisciplineActions.REQUEST_DISCIPLINE_FAILED:
+      return state;
     default:
       return state;
   }

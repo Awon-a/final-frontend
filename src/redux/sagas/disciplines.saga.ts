@@ -7,7 +7,7 @@ import {
   DisciplineActions,
   requestDisciplineSuccess,
   requestDisciplineFailed,
-  GetDisciplineAction,
+  GetDisciplinesAction,
 } from "../actions/disicplines.actions";
 
 function* createDisciplineSaga(
@@ -34,10 +34,10 @@ function* createDisciplineSaga(
 }
 
 function* getDisciplinesSaga(
-  action: GetDisciplineAction
+  action: GetDisciplinesAction
 ): Generator<Effect, void> {
   try {
-    const disciplines = yield call(DisciplineAPI.getAll);
+    const disciplines = yield call(DisciplineAPI.getAll, action.payload);
     yield put(
       requestDisciplineSuccess(
         DisciplineActions.SUCCESS_GET_DISCIPLINES,
