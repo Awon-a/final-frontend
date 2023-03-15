@@ -1,4 +1,5 @@
 import { Paths } from "./common/constants/paths";
+import Competencies from "./components/Competencies/Competencies";
 import DisciplineCompetencies from "./components/DisciplineCompetencies/DisciplineCompetencies";
 import DisciplineList from "./components/DisciplineList/DisciplineList";
 import PlanInfo from "./components/PlanInfo/PlanInfo";
@@ -20,5 +21,9 @@ export const publicRoutes = [
   {
     path: Paths.CompetenciesByDiscipline,
     Component: DisciplineCompetencies,
+  },
+  {
+    path: Paths.Competencies,
+    Component: Competencies,
   },
 ];

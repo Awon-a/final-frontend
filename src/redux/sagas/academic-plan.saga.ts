@@ -3,6 +3,7 @@ import { PlansAPI } from "../../apis/academic-plan.api";
 import { CreatePlan } from "../../types/academic-plan";
 import {
   CreatePlanAction,
+  GetOnePlanAction,
   GetPlansAction,
   PlanActions,
   requestPlanFailed,
@@ -15,6 +16,18 @@ function* getPlansSaga(action: GetPlansAction): Generator<Effect, void> {
     const response: any = yield call(PlansAPI.getAll, action.payload);
     console.log({ response });
     yield put(requestPlanSuccess(PlanActions.SUCCESS_GET_PLANS, response));
+  } catch (error: any) {
+    yield put(requestPlanFailed());
+  }
+}
+
+function* getOnePlanSaga(action: GetOnePlanAction): Generator<Effect, void> {
+  try {
+    yield put({ type: PlanActions.GET_ONE_PLAN_REQUEST });
+    const planInfo: any = yield call(PlansAPI.getOne, action.payload.id);
+    yield put(
+      requestPlanSuccess(PlanActions.GET_ONE_PLAN_SUCCESS, planInfo.data)
+    );
   } catch (error: any) {
     yield put(requestPlanFailed());
   }
@@ -35,4 +48,5 @@ function* createPlanSaga(action: CreatePlanAction): Generator<Effect, void> {
 export function* watcherPlanSagas(): Generator<Effect, void> {
   yield takeEvery(PlanActions.GET_PLANS, getPlansSaga);
   yield takeEvery(PlanActions.CREATE_PLAN, createPlanSaga);
+  yield takeEvery(PlanActions.GET_ONE_PLAN, getOnePlanSaga);
 }

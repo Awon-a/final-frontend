@@ -89,3 +89,7 @@
 .pagination-table .ant-pagination .ant-pagination-item-active a {
   color: #6e7ab9;
 }
+
+.table-row-dark {
+  background: #1c1a1a;
+}

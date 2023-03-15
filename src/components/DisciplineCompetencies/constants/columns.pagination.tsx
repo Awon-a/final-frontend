@@ -5,6 +5,11 @@ import SeeMoreIcon from "../../../common/assets/more.svg";
 
 export const columns = [
   {
+    title: "Номер",
+    key: "code",
+    dataIndex: "code",
+  },
+  {
     title: "Название компетенции",
     key: "name",
     dataIndex: "name",

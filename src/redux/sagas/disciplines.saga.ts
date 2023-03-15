@@ -38,6 +38,7 @@ function* getDisciplinesSaga(
   action: GetDisciplinesAction
 ): Generator<Effect, void> {
   try {
+    yield put({ type: DisciplineActions.GET_DISCIPLINES_REQUEST });
     const disciplines = yield call(DisciplineAPI.getAll, action.payload);
     yield put(
       requestDisciplineSuccess(

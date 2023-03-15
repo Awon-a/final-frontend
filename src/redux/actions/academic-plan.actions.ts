@@ -1,9 +1,10 @@
-import { PAGE_DEFAULT } from "../../common/constants/pagination.js";
-import { Meta } from "../../common/interfaces/pagination.interface.js";
+import { Meta } from "../../common/interfaces/pagination.interface";
 import {
   CreatePlan,
   GetManyPlans,
+  GetOnePlan,
   Plan,
+  PlanWithInfo,
   UpdatePlan,
 } from "../../types/academic-plan";
 
@@ -19,6 +20,7 @@ export enum PlanActions {
   SUCCESS_DELETE_PLAN = "SUCCESS_DELETE_PLAN",
   REQUEST_PLAN_FAILED = "REQUEST_PLAN_FAILED",
   GET_ONE_PLAN = "GET_ONE_PLAN",
+  GET_ONE_PLAN_REQUEST = "GET_ONE_PLAN_REQUEST",
   GET_ONE_PLAN_SUCCESS = "GET_ONE_PLAN_SUCCESS",
 }
 
@@ -62,13 +64,30 @@ export interface GetPlansRequestAction {
   type: PlanActions.GET_PLANS_REQUEST;
 }
 
+export interface GetOnePlanAction {
+  type: PlanActions.GET_ONE_PLAN;
+  payload: GetOnePlan;
+}
+
+export interface GetOnePlanRequestAction {
+  type: PlanActions.GET_ONE_PLAN_REQUEST;
+}
+
+export interface GetOnePlanSuccessAction {
+  type: PlanActions.GET_ONE_PLAN_SUCCESS;
+  payload: PlanWithInfo;
+}
+
 export type PlanActionsType =
   | CreatePlanAction
   | UpdatePlanAction
   | GetPlansAction
   | DeletePlanAction
   | GetPlansSuccessAction
-  | GetPlansRequestAction;
+  | GetPlansRequestAction
+  | GetOnePlanAction
+  | GetOnePlanRequestAction
+  | GetOnePlanSuccessAction;
 
 export const updatePlan = (payload: UpdatePlan) => {
   return {
@@ -98,7 +117,7 @@ export const getPlans = (payload?: GetManyPlans) => {
   };
 };
 
-export const getOnePlan = (payload: string) => {
+export const getOnePlan = (payload: GetOnePlan) => {
   return {
     type: PlanActions.GET_ONE_PLAN,
     payload,

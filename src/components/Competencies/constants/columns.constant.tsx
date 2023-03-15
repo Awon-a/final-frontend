@@ -5,21 +5,14 @@ import SeeMoreIcon from "../../../common/assets/more.svg";
 
 export const columns = [
   {
-    title: "Наименование направления",
-    key: "nameDirection",
-    dataIndex: "nameDirection",
-    ellipsis: true,
+    title: "Номер",
+    key: "code",
+    dataIndex: "code",
   },
   {
-    title: "Год набора",
-    key: "year",
-    dataIndex: "year",
-  },
-  {
-    title: "Уровень образования",
-    key: "educationLevel",
-    dataIndex: "educationLevel",
-    ellipsis: true,
+    title: "Название",
+    key: "name",
+    dataIndex: "name",
   },
   {
     title: " ",
@@ -29,7 +22,7 @@ export const columns = [
     render: (text: any, record: any) =>
       record.id && (
         <Link
-          to={`/academic-plans/${record.id}`}
+          to={`/competencies/${record.id}/indicators`}
           state={{
             planName: record.nameDirection,
           }}

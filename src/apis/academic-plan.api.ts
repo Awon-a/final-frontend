@@ -1,7 +1,12 @@
 import { AxiosResponse } from "axios";
 import { LIMIT_DEFAULT, PAGE_DEFAULT } from "../common/constants/pagination";
 import { $api } from "../http/http";
-import { CreatePlan, GetManyPlans, Plan } from "../types/academic-plan";
+import {
+  CreatePlan,
+  GetManyPlans,
+  Plan,
+  PlanWithInfo,
+} from "../types/academic-plan";
 
 export class PlansAPI {
   private static PLANS_URL = "/academic-plans";
@@ -25,7 +30,7 @@ export class PlansAPI {
     return response.data;
   }
 
-  public static async getOne(id: string): Promise<AxiosResponse<Plan>> {
+  public static async getOne(id: string): Promise<AxiosResponse<PlanWithInfo>> {
     const response = await $api.get(PlansAPI.PLANS_URL + `/${id}`);
     return response.data;
   }

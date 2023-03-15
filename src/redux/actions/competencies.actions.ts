@@ -1,106 +1,135 @@
-import { PAGE_DEFAULT } from "../../common/constants/pagination.js";
 import { Meta } from "../../common/interfaces/pagination.interface";
-import {
-  CreatePlan,
-  GetManyPlans,
-  Plan,
-  UpdatePlan,
-} from "../../types/academic-plan";
 
-export enum PlanActions {
+import {
+  Competency,
+  CompetencyIndicators,
+  CreateOneCompetency,
+  GetCompetencyIndicators,
+  GetManyCompetencies,
+  UpdateOneCompetency,
+} from "../../types/competencies";
+
+export enum CompetencyActions {
   CREATE_COMPETENCY = "CREATE_COMPETENCY",
   SUCCESS_CREATE_COMPETENCY = "SUCCESS_CREATE_COMPETENCY",
   UPDATE_COMPETENCY = "UPDATE_COMPETENCY",
   SUCCESS_UPDATE_COMPETENCY = "SUCCESS_UPDATE_COMPETENCY",
-  GET_PLANS = "GET_PLANS",
-  GET_PLANS_REQUEST = "GET_PLANS_REQUEST",
-  SUCCESS_GET_PLANS = "SUCCESS_GET_PLANS",
+  GET_COMPETENCIES = "GET_COMPETENCIES",
+  GET_COMPETENCIES_REQUEST = "GET_COMPETENCIES_REQUEST",
+  SUCCESS_GET_COMPETENCIES = "SUCCESS_GET_COMPETENCIES",
   DELETE_COMPETENCY = "DELETE_COMPETENCY",
   SUCCESS_DELETE_COMPETENCY = "SUCCESS_DELETE_COMPETENCY",
-  REQUEST_COMPETENCY_FAILED = "REQUEST_PLAN_FAILED",
+  REQUEST_COMPETENCY_FAILED = "REQUEST_COMPETENCY_FAILED",
   GET_ONE_COMPETENCY = "GET_ONE_COMPETENCY",
   GET_ONE_COMPETENCY_SUCCESS = "GET_ONE_COMPETENCY_SUCCESS",
+  GET_COMPETENCY_INDICATORS = "GET_COMPETENCY_INDICATORS",
+  GET_COMPETENCY_INDICATORS_REQUEST = "GET_COMPETENCY_INDICATORS_REQUEST",
+  GET_COMPETENCY_INDICATORS_SUCCESS = "GET_COMPETENCY_INDICATORS_SUCCESS",
 }
 
-export const requestPlanSuccess = (type: PlanActions, payload?: any) => ({
+export const requestCompetencySuccess = (
+  type: CompetencyActions,
+  payload?: any
+) => ({
   type,
   payload,
 });
 
-export const requestPlanFailed = () => ({
-  type: PlanActions.REQUEST_COMPETENCY_FAILED,
+export const requestCompetencyFailed = () => ({
+  type: CompetencyActions.REQUEST_COMPETENCY_FAILED,
 });
-export interface CreatePlanAction {
-  type: PlanActions.CREATE_COMPETENCY | PlanActions.SUCCESS_CREATE_COMPETENCY;
-  payload: CreatePlan;
+
+export interface UpdateCompetencyAction {
+  type:
+    | CompetencyActions.UPDATE_COMPETENCY
+    | CompetencyActions.SUCCESS_UPDATE_COMPETENCY;
+  payload: UpdateOneCompetency;
 }
 
-export interface UpdatePlanAction {
-  type: PlanActions.UPDATE_COMPETENCY | PlanActions.SUCCESS_UPDATE_COMPETENCY;
-  payload: UpdatePlan;
-}
-
-export interface DeletePlanAction {
-  type: PlanActions.DELETE_COMPETENCY | PlanActions.SUCCESS_DELETE_COMPETENCY;
+export interface DeleteCompetencyAction {
+  type:
+    | CompetencyActions.DELETE_COMPETENCY
+    | CompetencyActions.SUCCESS_DELETE_COMPETENCY;
   payload: string;
 }
 
-export interface GetPlansAction {
-  type: PlanActions.GET_PLANS;
-  payload?: GetManyPlans;
+export interface GetCompetenciesAction {
+  type: CompetencyActions.GET_COMPETENCIES;
+  payload?: GetManyCompetencies;
 }
 
-export interface GetPlansSuccessAction {
-  type: PlanActions.SUCCESS_GET_PLANS;
+export interface GetCompetenciesSuccessAction {
+  type: CompetencyActions.SUCCESS_GET_COMPETENCIES;
   payload: {
-    data: Plan[];
+    data: Competency[];
     meta: Meta;
   };
 }
 
-export interface GetPlansRequestAction {
-  type: PlanActions.GET_PLANS_REQUEST;
+export interface GetCompetenciesRequestAction {
+  type: CompetencyActions.GET_COMPETENCIES_REQUEST;
 }
 
-export type PlanActionsType =
-  | CreatePlanAction
-  | UpdatePlanAction
-  | GetPlansAction
-  | DeletePlanAction
-  | GetPlansSuccessAction
-  | GetPlansRequestAction;
+export interface GetCompetencyIndicatorsAction {
+  type: CompetencyActions.GET_COMPETENCY_INDICATORS;
+  payload: GetCompetencyIndicators;
+}
 
-export const updatePlan = (payload: UpdatePlan) => {
+export interface GetCompetencyIndicatorsRequestAction {
+  type: CompetencyActions.GET_COMPETENCY_INDICATORS_REQUEST;
+  payload: GetCompetencyIndicators;
+}
+
+export interface GetCompetencyIndicatorsSuccessAction {
+  type: CompetencyActions.GET_COMPETENCY_INDICATORS_SUCCESS;
+  payload: {
+    data: CompetencyIndicators[];
+    meta: Meta;
+  };
+}
+
+export type CompetencyActionsType =
+  | UpdateCompetencyAction
+  | GetCompetenciesAction
+  | DeleteCompetencyAction
+  | GetCompetenciesSuccessAction
+  | GetCompetenciesRequestAction
+  | GetCompetencyIndicatorsAction
+  | GetCompetencyIndicatorsRequestAction
+  | GetCompetencyIndicatorsSuccessAction
+  | GetCompetenciesRequestAction;
+
+export const updateCompetency = (payload: UpdateOneCompetency) => {
   return {
-    type: PlanActions.UPDATE_COMPETENCY,
+    type: CompetencyActions.UPDATE_COMPETENCY,
     payload,
   };
 };
 
-export const deletePlan = (payload: string) => {
+export const deleteCompetency = (payload: string) => {
   return {
-    type: PlanActions.DELETE_COMPETENCY,
+    type: CompetencyActions.DELETE_COMPETENCY,
     payload,
   };
 };
 
-export const createPlan = (payload: CreatePlan) => {
+export const createCompetency = (payload: CreateOneCompetency) => {
   return {
-    type: PlanActions.CREATE_COMPETENCY,
+    type: CompetencyActions.CREATE_COMPETENCY,
     payload,
   };
 };
 
-export const getPlans = (payload?: GetManyPlans) => {
+export const getCompetencies = (payload?: GetManyCompetencies) => {
   return {
-    type: PlanActions.GET_PLANS,
+    type: CompetencyActions.GET_COMPETENCIES,
     payload,
   };
 };
 
-export const getOnePlan = (payload: string) => {
+export const getOneCompetency = (payload: string) => {
   return {
-    type: PlanActions.GET_ONE_COMPETENCY,
+    type: CompetencyActions.GET_ONE_COMPETENCY,
     payload,
   };
 };

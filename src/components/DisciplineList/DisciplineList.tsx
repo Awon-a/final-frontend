@@ -9,18 +9,15 @@ import { columns } from "./constants/columns.pagination";
 import NextPage from "../../common/assets/next-page.svg";
 import PrevPage from "../../common/assets/prev-page.svg";
 import "./DisciplineList.css";
+import { groupBy } from "lodash";
 
 const DisciplineList = () => {
-  const { disciplines, disciplinesMeta } = useSelector(
+  const { disciplines, disciplinesMeta, loading } = useSelector(
     (state: DisciplineState) => state.disciplines
   );
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
-  console.log({
-    disciplines,
-    disciplinesMeta: disciplinesMeta?.totalItems,
-    currentPage,
-  });
+
   useEffect(() => {
     dispatch(getDisciplines());
   }, [dispatch]);
@@ -29,7 +26,6 @@ const DisciplineList = () => {
     ...discipline,
     key: discipline.id,
   }));
-  console.log({ data });
   const getDisciplinesDispatch = (params: GetManyDisciplines) => {
     dispatch(getDisciplines(params));
   };
@@ -49,6 +45,7 @@ const DisciplineList = () => {
           dataSource={data}
           columns={columns}
           pagination={false}
+          loading={loading}
         ></Table>
       </div>
       <div className="pagination-table">

@@ -16,6 +16,7 @@ export enum DisciplineActions {
   UPDATE_DISCIPLINE = "UPDATE_DISCIPLINE",
   SUCCESS_UPDATE_DISCIPLINE = "SUCCESS_UPDATE_DISCIPLINE",
   GET_DISCIPLINES = "GET_DISCIPLINES",
+  GET_DISCIPLINES_REQUEST = "GET_DISCIPLINES_REQUEST",
   SUCCESS_GET_DISCIPLINES = "SUCCESS_GET_DISCIPLINES",
   DELETE_DISCIPLINE = "DELETE_DISCIPLINE",
   SUCCESS_DELETE_DISCIPLINE = "SUCCESS_DELETE_DISCIPLINE",
@@ -67,6 +68,10 @@ export interface GetDisciplinesAction {
   payload?: GetManyDisciplines;
 }
 
+export interface GetDisciplinesRequestAction {
+  type: DisciplineActions.GET_DISCIPLINES_REQUEST;
+}
+
 export interface GetDisciplinesSuccessAction {
   type: DisciplineActions.SUCCESS_GET_DISCIPLINES;
   payload: {
@@ -92,6 +97,7 @@ export type DisciplineActionsType =
   | CreateDisciplineAction
   | UpdateDisciplineAction
   | GetDisciplinesAction
+  | GetDisciplinesRequestAction
   | GetDisciplinesSuccessAction
   | FailedAction
   | DeleteDisciplineAction

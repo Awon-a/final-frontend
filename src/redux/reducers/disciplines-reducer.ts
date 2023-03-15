@@ -40,15 +40,15 @@ export const disciplineReducer = (
           (discipline) => discipline.id !== action.payload
         ),
       };
+    case DisciplineActions.GET_DISCIPLINES_REQUEST:
+      return { ...state, loading: true };
     case DisciplineActions.SUCCESS_GET_DISCIPLINES:
       return {
         ...state,
         disciplines: action.payload.data,
-        loading: false,
         disciplinesMeta: action.payload.meta,
+        loading: false,
       };
-    case DisciplineActions.REQUEST_DISCIPLINE_FAILED:
-      return state;
     case DisciplineActions.SUCCESS_GET_COMPETENCIES_BY_DISCIPLINE:
       return {
         ...state,
@@ -56,6 +56,8 @@ export const disciplineReducer = (
         competencies: action.payload.data,
         competenciesMeta: action.payload.meta,
       };
+    case DisciplineActions.REQUEST_DISCIPLINE_FAILED:
+      return state;
     default:
       return state;
   }

@@ -2,39 +2,37 @@ import { Pagination, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPlans } from "../../redux/actions/academic-plan.actions";
-import {
-  EnumEducationLevelNameMapper,
-  GetManyPlans,
-  PlanState,
-} from "../../types/academic-plan";
-import { columns } from "./constants/columns.constant";
-import "./PlansList.css";
 import NextPage from "../../common/assets/next-page.svg";
 import PrevPage from "../../common/assets/prev-page.svg";
+import { getCompetencies } from "../../redux/actions/competencies.actions";
+import { CompetencyState, GetManyCompetencies } from "../../types/competencies";
 import Header from "../Header/Header";
+import { columns } from "./constants/columns.constant";
 
-const PlansList = () => {
-  const { plans, plansMeta, loading } = useSelector(
-    (state: PlanState) => state.plans
-  );
-  const [currentPage, setCurrentPage] = useState(1);
+const Competencies = () => {
   const dispatch = useDispatch();
-  console.log({ plans, plansMeta: plansMeta?.totalItems, currentPage });
+  const [currentPage, setCurrentPage] = useState(1);
+  const { competencies, competenciesMeta, loading } = useSelector(
+    (state: CompetencyState) => state.competencies
+  );
+  console.log({
+    competencies,
+    competenciesMeta: competenciesMeta?.totalItems,
+    currentPage,
+  });
   useEffect(() => {
-    dispatch(getPlans());
+    dispatch(getCompetencies({ page: currentPage }));
   }, [dispatch]);
 
-  const data = plans.map((plan) => {
+  const data = competencies?.map((competency) => {
     return {
-      ...plan,
-      key: plan.id,
-      educationLevel: EnumEducationLevelNameMapper[plan.educationLevel],
+      ...competency,
+      key: competency.id,
     };
   });
 
-  const getPlansDispatch = (params: GetManyPlans) => {
-    dispatch(getPlans(params));
+  const getPlansDispatch = (params?: GetManyCompetencies) => {
+    dispatch(getCompetencies(params));
   };
 
   const handleGetPage = (page: number) => {
@@ -45,7 +43,7 @@ const PlansList = () => {
     <>
       <Header currentPath={window.location.pathname} />
       <div className="my-table-container">
-        <div className="table-name">Учебные планы</div>
+        <div className="table-name">Компетенции</div>
         <Table
           className="my"
           dataSource={data}
@@ -58,7 +56,7 @@ const PlansList = () => {
         <Pagination
           key="pagination"
           current={currentPage}
-          total={plansMeta.totalItems}
+          total={competenciesMeta.totalItems}
           onChange={handleGetPage}
           nextIcon={<img src={NextPage} alt="icon"></img>}
           prevIcon={<img src={PrevPage} alt="icon"></img>}
@@ -67,5 +65,4 @@ const PlansList = () => {
     </>
   );
 };
-
-export default PlansList;
+export default Competencies;

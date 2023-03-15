@@ -1,40 +1,57 @@
-.my .ant-table-thead > tr > th {
+.plan-info .ant-table-thead > tr > th {
   background: #6e7ab9;
   color: #f8f3f3;
-  line-height: 3.8vh;
+  line-height: 1.5vh;
   padding: 8px 8px;
   font-family: "Signika", sans-serif;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 /* .my .ant-table-cell:before {
   width: 5px;
 } */
 
-.my .ant-table-thead > tr > th:first-child {
+.plan-info .ant-table-thead > tr > th:first-child {
   border-top-left-radius: 0 !important;
 }
 
-.my .ant-table-thead > tr > th:last-child {
+.plan-info .ant-table-thead > tr > th:last-child {
   border-top-right-radius: 0 !important;
 }
 
-.my .ant-table-tbody > tr > td {
+/* .plan-info .ant-table-tbody > tr > td {
   line-height: 2.8vh;
   padding: 8px 8px;
-  background-color: #f8f3f3;
+  background: #f8f3f3;
   font-family: "Signika", sans-serif;
   font-weight: 100;
-  font-size: 20px;
+  font-size: 16px;
   color: #505050;
+} */
+
+.left-column {
+  text-align: left;
 }
 
-.my .ant-table-tbody:hover > tr:hover > td {
+.plan-info .ant-table-tbody:hover > tr:hover > td {
   background-color: #d4d3d3;
 }
 
-.table-name-competency {
+.plan-info .ant-table-body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+.table-plan-name {
   min-width: 307px;
   height: 4vh;
 
@@ -53,7 +70,7 @@
 .my-table-container {
   margin-left: 7%;
   margin-right: 7%;
-  margin-top: 5.1%;
+  margin-top: 2%;
 }
 
 .table-container {
@@ -63,19 +80,14 @@
   width: 1624px;
 }
 
-.pagination-table {
-  position: absolute;
-  margin-left: 7%;
-  bottom: 5.2%;
-  margin-top: 10%;
-}
-
 .pagination-table .ant-pagination {
   color: #505050;
 }
 
 .pagination-table .ant-pagination .ant-pagination-item-active {
   border-color: #6e7ab9;
+  font-weight: 600;
+  background-color: #dcdcdc;
 }
 
 .pagination-table .ant-pagination .ant-pagination-item {
@@ -89,6 +101,22 @@
   color: #6e7ab9;
 }
 
-.table-row-dark {
-  background: #1c1a1a;
+.table-row-block {
+  line-height: 2.8vh;
+  padding: 8px 8px;
+  background: #e1e1e1;
+  font-family: "Signika", sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  color: #505050;
+}
+
+.table-row-default .ant-table-tbody > tr > td {
+  line-height: 2.8vh;
+  padding: 8px 8px;
+  background: #f8f3f3;
+  font-family: "Signika", sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  color: #505050;
 }
