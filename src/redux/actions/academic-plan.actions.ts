@@ -78,6 +78,10 @@ export interface GetOnePlanSuccessAction {
   payload: PlanWithInfo;
 }
 
+export interface FailedAction {
+  type: PlanActions.REQUEST_PLAN_FAILED;
+}
+
 export type PlanActionsType =
   | CreatePlanAction
   | UpdatePlanAction
@@ -87,6 +91,7 @@ export type PlanActionsType =
   | GetPlansRequestAction
   | GetOnePlanAction
   | GetOnePlanRequestAction
+  | FailedAction
   | GetOnePlanSuccessAction;
 
 export const updatePlan = (payload: UpdatePlan) => {

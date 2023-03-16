@@ -88,6 +88,10 @@ export interface GetCompetencyIndicatorsSuccessAction {
   };
 }
 
+export interface FailedAction {
+  type: CompetencyActions.REQUEST_COMPETENCY_FAILED;
+}
+
 export type CompetencyActionsType =
   | UpdateCompetencyAction
   | GetCompetenciesAction
@@ -97,6 +101,7 @@ export type CompetencyActionsType =
   | GetCompetencyIndicatorsAction
   | GetCompetencyIndicatorsRequestAction
   | GetCompetencyIndicatorsSuccessAction
+  | FailedAction
   | GetCompetenciesRequestAction;
 
 export const updateCompetency = (payload: UpdateOneCompetency) => {

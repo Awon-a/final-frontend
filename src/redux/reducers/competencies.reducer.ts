@@ -39,6 +39,8 @@ export const competenciesReducer = (
         indicators: action.payload.data,
         indicatorsMeta: action.payload.meta,
       };
+    case CompetencyActions.REQUEST_COMPETENCY_FAILED:
+      return { ...state, loading: false };
     default:
       return state;
   }

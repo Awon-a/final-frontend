@@ -93,6 +93,10 @@ export interface GetCompetenciesByDisciplineSuccessAction {
   };
 }
 
+export interface FailedAction {
+  type: DisciplineActions.REQUEST_DISCIPLINE_FAILED;
+}
+
 export type DisciplineActionsType =
   | CreateDisciplineAction
   | UpdateDisciplineAction
@@ -102,6 +106,7 @@ export type DisciplineActionsType =
   | FailedAction
   | DeleteDisciplineAction
   | GetCompetenciesByDisciplineAction
+  | FailedAction
   | GetCompetenciesByDisciplineSuccessAction;
 
 export const updateDiscipine = (payload: UpdateDiscipline) => {

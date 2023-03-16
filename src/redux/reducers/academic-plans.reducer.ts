@@ -1,10 +1,10 @@
-import { Meta } from "../../common/interfaces/pagination.interface.js";
+import { Meta } from "../../common/interfaces/pagination.interface";
 import { Plan, PlanWithInfo } from "../../types/academic-plan";
 import { PlanActions, PlanActionsType } from "../actions/academic-plan.actions";
 
 export const initialState = {
   loading: false,
-  plans: [] as Plan[],
+  plans: [] as any as Plan[],
   plansMeta: {
     totalItems: 0,
   } as Meta,
@@ -12,6 +12,7 @@ export const initialState = {
 };
 
 export const planReducer = (state = initialState, action: PlanActionsType) => {
+  console.log({ action });
   switch (action.type) {
     case PlanActions.SUCCESS_CREATE_PLAN:
       return { ...state, plans: [...state.plans, action.payload] };
@@ -43,6 +44,8 @@ export const planReducer = (state = initialState, action: PlanActionsType) => {
       return { ...state, loading: true };
     case PlanActions.GET_ONE_PLAN_SUCCESS:
       return { ...state, plan: action.payload, loading: false };
+    case PlanActions.REQUEST_PLAN_FAILED:
+      return { ...state, loading: false };
     default:
       return state;
   }

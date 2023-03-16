@@ -57,7 +57,7 @@ export const disciplineReducer = (
         competenciesMeta: action.payload.meta,
       };
     case DisciplineActions.REQUEST_DISCIPLINE_FAILED:
-      return state;
+      return { ...state, loading: false };
     default:
       return state;
   }

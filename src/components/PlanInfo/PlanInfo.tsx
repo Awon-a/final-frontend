@@ -42,7 +42,7 @@ const PlanInfo = () => {
       let moduleRow: any = {
         key: "module" + module,
         isBlock: true,
-        name: BlocksNameMapper[module],
+        name: `${Number(module) + 1}. ${BlocksNameMapper[module]}`,
       };
       data = [...data, moduleRow, ...groupedData[module]];
     }

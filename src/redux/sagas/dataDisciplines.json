@@ -1,0 +1,318 @@
+{
+  "disciplines": [
+    {
+      "id": "0095dddc-e89a-4857-a4c8-3990e2090add",
+      "name": "quos repellendus",
+      "codeDepartment": "blanditiis-eveniet",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:20.382Z",
+          "updatedAt": "2023-03-15T12:26:20.382Z",
+          "id": "baad06db-0b74-4396-8e3a-434ecc14af59",
+          "disciplineId": "0095dddc-e89a-4857-a4c8-3990e2090add",
+          "labH": 6,
+          "practiceH": 5,
+          "lectureH": 1,
+          "iwsH": 5,
+          "examPrep": 27,
+          "attestation": 2,
+          "numSemester": 1,
+          "planId": "cab038e5-ce3c-4795-9eb2-b35e47bfc63c",
+          "block": 1
+        }
+      ]
+    },
+    {
+      "id": "01a5ed45-1e4e-4c7c-9c6a-40ae2edf06fe",
+      "name": "numquam modi",
+      "codeDepartment": "quisquam-at",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:21.323Z",
+          "updatedAt": "2023-03-15T12:26:21.323Z",
+          "id": "63765260-fb25-453e-a81f-e7496270356d",
+          "disciplineId": "01a5ed45-1e4e-4c7c-9c6a-40ae2edf06fe",
+          "labH": 5,
+          "practiceH": 1,
+          "lectureH": 4,
+          "iwsH": 5,
+          "examPrep": 41,
+          "attestation": 2,
+          "numSemester": 3,
+          "planId": "12c5fc5f-a89e-4a74-abec-749025e005e6",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "0038570b-6f34-4a02-9b90-f835efc26d31",
+      "name": "sed distinctio",
+      "codeDepartment": "consequuntur-ratione",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:17.414Z",
+          "updatedAt": "2023-03-15T12:26:17.414Z",
+          "id": "7382ced1-1c73-461c-bf7c-8306cbc21d09",
+          "disciplineId": "0038570b-6f34-4a02-9b90-f835efc26d31",
+          "labH": 6,
+          "practiceH": 4,
+          "lectureH": 3,
+          "iwsH": 4,
+          "examPrep": 35,
+          "attestation": 0,
+          "numSemester": 3,
+          "planId": "524565a5-94f6-4577-a0f7-1adda839a549",
+          "block": 2
+        }
+      ]
+    },
+    {
+      "id": "00b12a5e-6a53-4887-bd3c-c50d255161a6",
+      "name": "a recusandae",
+      "codeDepartment": "molestiae-ipsum",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:24.158Z",
+          "updatedAt": "2023-03-15T12:26:24.158Z",
+          "id": "74acb2c3-9095-4d7f-8ed3-37fadd958f52",
+          "disciplineId": "00b12a5e-6a53-4887-bd3c-c50d255161a6",
+          "labH": 6,
+          "practiceH": 4,
+          "lectureH": 1,
+          "iwsH": 3,
+          "examPrep": 35,
+          "attestation": 4,
+          "numSemester": 5,
+          "planId": "f331d147-97fb-4735-aad8-c8bc86dfe813",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "024a187a-e558-4f87-a51a-647312479a0f",
+      "name": "ullam veniam",
+      "codeDepartment": "adipisci-praesentium",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:25.382Z",
+          "updatedAt": "2023-03-15T12:26:25.382Z",
+          "id": "515c1cb7-3489-4c40-bd93-be1df4693169",
+          "disciplineId": "024a187a-e558-4f87-a51a-647312479a0f",
+          "labH": 2,
+          "practiceH": 4,
+          "lectureH": 1,
+          "iwsH": 5,
+          "examPrep": 44,
+          "attestation": 3,
+          "numSemester": 6,
+          "planId": "b9f63c6e-8d46-44f9-a098-db060b3903fe",
+          "block": 2
+        }
+      ]
+    },
+    {
+      "id": "0149c851-262b-4f05-a460-cd4eb3ae1d71",
+      "name": "quaerat aspernatur",
+      "codeDepartment": "saepe-minus",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:22.747Z",
+          "updatedAt": "2023-03-15T12:26:22.747Z",
+          "id": "90e2f563-a336-46f4-98c4-fe7822fb7889",
+          "disciplineId": "0149c851-262b-4f05-a460-cd4eb3ae1d71",
+          "labH": 1,
+          "practiceH": 4,
+          "lectureH": 4,
+          "iwsH": 2,
+          "examPrep": 21,
+          "attestation": 4,
+          "numSemester": 4,
+          "planId": "d6326ab4-6954-4f9f-afae-47569b8bc18d",
+          "block": 2
+        }
+      ]
+    },
+    {
+      "id": "01b1e665-fc8c-4e91-a10a-611d6113303d",
+      "name": "iure ratione",
+      "codeDepartment": "vel-provident",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:24.157Z",
+          "updatedAt": "2023-03-15T12:26:24.157Z",
+          "id": "341e29c3-4fa4-4b03-99c1-572ff8abd6e1",
+          "disciplineId": "01b1e665-fc8c-4e91-a10a-611d6113303d",
+          "labH": 3,
+          "practiceH": 2,
+          "lectureH": 5,
+          "iwsH": 6,
+          "examPrep": 41,
+          "attestation": 3,
+          "numSemester": 4,
+          "planId": "f331d147-97fb-4735-aad8-c8bc86dfe813",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "01ba058b-9c79-4e9f-a35b-e08813ec437a",
+      "name": "nihil voluptas",
+      "codeDepartment": "delectus-perspiciatis",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:24.685Z",
+          "updatedAt": "2023-03-15T12:26:24.685Z",
+          "id": "3b4fab21-27e9-437d-9bcc-6998e574c7ef",
+          "disciplineId": "01ba058b-9c79-4e9f-a35b-e08813ec437a",
+          "labH": 6,
+          "practiceH": 2,
+          "lectureH": 2,
+          "iwsH": 6,
+          "examPrep": 31,
+          "attestation": 0,
+          "numSemester": 4,
+          "planId": "da812842-5780-4e47-817c-50f7ce393bf6",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "01e6bcfa-9372-4b89-b16e-8da282f46a1b",
+      "name": "ad hic",
+      "codeDepartment": "debitis-qui",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:27.625Z",
+          "updatedAt": "2023-03-15T12:26:27.625Z",
+          "id": "342ba012-75fa-42b1-b291-d84c42217d5b",
+          "disciplineId": "01e6bcfa-9372-4b89-b16e-8da282f46a1b",
+          "labH": 6,
+          "practiceH": 4,
+          "lectureH": 2,
+          "iwsH": 1,
+          "examPrep": 27,
+          "attestation": 1,
+          "numSemester": 3,
+          "planId": "21162d42-3a5e-452f-82c9-44f7c7f4a5b7",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "017aab6d-c06e-4766-b8c0-8b2367322a84",
+      "name": "veritatis quidem",
+      "codeDepartment": "in-odio",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:29.328Z",
+          "updatedAt": "2023-03-15T12:26:29.328Z",
+          "id": "1de25bce-e4cd-4894-bd1e-b8da3bc354b6",
+          "disciplineId": "017aab6d-c06e-4766-b8c0-8b2367322a84",
+          "labH": 6,
+          "practiceH": 6,
+          "lectureH": 4,
+          "iwsH": 2,
+          "examPrep": 23,
+          "attestation": 2,
+          "numSemester": 5,
+          "planId": "75cebe70-4cc7-4b7a-9807-50d041976613",
+          "block": 2
+        }
+      ]
+    },
+    {
+      "id": "00e5dd41-1b6a-4ba4-86d1-45464a6bc758",
+      "name": "provident suscipit",
+      "codeDepartment": "voluptate-aliquam",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:26.056Z",
+          "updatedAt": "2023-03-15T12:26:26.056Z",
+          "id": "50bcc64c-a651-43d0-bb2e-d7f75551fde9",
+          "disciplineId": "00e5dd41-1b6a-4ba4-86d1-45464a6bc758",
+          "labH": 3,
+          "practiceH": 1,
+          "lectureH": 3,
+          "iwsH": 1,
+          "examPrep": 39,
+          "attestation": 0,
+          "numSemester": 4,
+          "planId": "4cea567d-6f37-448e-8873-00a5476517dc",
+          "block": 1
+        }
+      ]
+    },
+    {
+      "id": "01f4fc16-425c-440f-a579-206205c1cc28",
+      "name": "sit ex",
+      "codeDepartment": "porro-cum",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:26.544Z",
+          "updatedAt": "2023-03-15T12:26:26.544Z",
+          "id": "2f6b1316-4362-4a58-b731-e862e5245c8a",
+          "disciplineId": "01f4fc16-425c-440f-a579-206205c1cc28",
+          "labH": 6,
+          "practiceH": 2,
+          "lectureH": 6,
+          "iwsH": 2,
+          "examPrep": 40,
+          "attestation": 3,
+          "numSemester": 2,
+          "planId": "e4cdf58a-6f47-4f94-b17b-c285b79c7f30",
+          "block": 1
+        }
+      ]
+    },
+    {
+      "id": "0206a147-1267-42bb-b64f-e6dcc42cca18",
+      "name": "laborum voluptas",
+      "codeDepartment": "beatae-magnam",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:19.219Z",
+          "updatedAt": "2023-03-15T12:26:19.219Z",
+          "id": "52cf0b74-79df-411a-afa6-6fc8adf7535d",
+          "disciplineId": "0206a147-1267-42bb-b64f-e6dcc42cca18",
+          "labH": 5,
+          "practiceH": 2,
+          "lectureH": 4,
+          "iwsH": 4,
+          "examPrep": 31,
+          "attestation": 4,
+          "numSemester": 2,
+          "planId": "bd091c06-6b5c-41b3-bb91-68c907a2d5d4",
+          "block": 1
+        }
+      ]
+    },
+    {
+      "id": "0092fdef-d7d4-4321-a79f-7b00add454b2",
+      "name": "sapiente illum",
+      "codeDepartment": "minus-ipsum",
+      "planDiscipline": [
+        {
+          "createdAt": "2023-03-15T12:26:19.578Z",
+          "updatedAt": "2023-03-15T12:26:19.578Z",
+          "id": "e4f6ff6b-fd1e-490e-a971-29ded181ea3c",
+          "disciplineId": "0092fdef-d7d4-4321-a79f-7b00add454b2",
+          "labH": 3,
+          "practiceH": 6,
+          "lectureH": 5,
+          "iwsH": 6,
+          "examPrep": 16,
+          "attestation": 2,
+          "numSemester": 1,
+          "planId": "3d7ef222-4553-4689-8672-896d3b9c5618",
+          "block": 0
+        }
+      ]
+    },
+    {
+      "id": "00b831de-730f-45de-8447-a284150ca9cd",
+      "name": "laborum laudantium",
+      "codeDepartment": "minus-reiciendis",
+      "planDiscipline": []
+    }
+  ]
+}

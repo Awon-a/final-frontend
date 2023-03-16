@@ -18,6 +18,7 @@ const PlansList = () => {
   const { plans, plansMeta, loading } = useSelector(
     (state: PlanState) => state.plans
   );
+  console.log({ plans });
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   console.log({ plans, plansMeta: plansMeta?.totalItems, currentPage });
