@@ -12,7 +12,6 @@ export const initialState = {
 };
 
 export const planReducer = (state = initialState, action: PlanActionsType) => {
-  console.log({ action });
   switch (action.type) {
     case PlanActions.SUCCESS_CREATE_PLAN:
       return { ...state, plans: [...state.plans, action.payload] };

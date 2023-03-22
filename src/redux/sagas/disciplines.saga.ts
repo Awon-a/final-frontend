@@ -10,7 +10,6 @@ import {
   GetDisciplinesAction,
   GetCompetenciesByDisciplineAction,
 } from "../actions/disicplines.actions";
-import disciplines from "./dataDisciplines.json";
 
 function* createDisciplineSaga(
   action: CreateDisciplineAction
@@ -40,19 +39,11 @@ function* getDisciplinesSaga(
 ): Generator<Effect, void> {
   try {
     yield put({ type: DisciplineActions.GET_DISCIPLINES_REQUEST });
-    // const disciplines = yield call(DisciplineAPI.getAll, action.payload);
-    const offset = ((action.payload?.page || 1) - 1) * 10;
-    const testPlans = [...disciplines.disciplines];
-    const response = {
-      data: testPlans.slice(offset, offset + 10),
-      meta: {
-        totalItems: disciplines.disciplines.length,
-      },
-    };
+    const disciplines = yield call(DisciplineAPI.getAll, action.payload);
     yield put(
       requestDisciplineSuccess(
         DisciplineActions.SUCCESS_GET_DISCIPLINES,
-        response
+        disciplines
       )
     );
   } catch (error: any) {
