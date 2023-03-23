@@ -17,7 +17,7 @@ export const authReducer = (
   switch (action.type) {
     case AuthActions.SIGN_IN_REQUEST:
       console.log("SIGN IN REQUEST", { action });
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null };
     case AuthActions.SIGN_IN_SUCCESS:
       console.log("SIGN IN SUCCESS", { action });
       return {
@@ -26,9 +26,10 @@ export const authReducer = (
         loading: false,
         aToken: action.payload.tokens.atToken,
         rToken: action.payload.tokens.rtToken,
+        error: null,
       };
     case AuthActions.SIGN_UP_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null };
     case AuthActions.SIGN_UP_SUCCESS:
       return {
         ...state,
@@ -36,9 +37,12 @@ export const authReducer = (
         loading: false,
         aToken: action.payload.tokens.atToken,
         rToken: action.payload.tokens.rtToken,
+        error: null,
       };
     case AuthActions.LOGOUT:
-      return { ...state, isAuthenticated: false };
+      return { ...state, isAuthenticated: false, loading: false, error: null };
+    case AuthActions.AUTH_FAILED:
+      return { ...state, error: action.payload, loading: false };
     default:
       return state;
   }

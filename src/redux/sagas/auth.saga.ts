@@ -16,7 +16,7 @@ function* signInSaga(action: SignInAction): Generator<Effect, void> {
     localStorage.setItem("Refresh", response.tokens.rtToken);
     yield put(requestAuthSuccess(AuthActions.SIGN_IN_SUCCESS, response));
   } catch (error: any) {
-    yield put(requestAuthFailed());
+    yield put(requestAuthFailed(error.message));
   }
 }
 

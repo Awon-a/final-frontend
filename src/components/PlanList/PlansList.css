@@ -7,7 +7,9 @@
   font-weight: bold;
   font-size: 22px;
 }
-
+a:hover {
+  text-decoration: none;
+}
 /* .my .ant-table-cell:before {
   width: 5px;
 } */
@@ -77,6 +79,7 @@
 
 .pagination-table .ant-pagination .ant-pagination-item-active {
   border-color: #6e7ab9;
+  text-decoration: none;
 }
 
 .pagination-table .ant-pagination .ant-pagination-item {
@@ -88,6 +91,10 @@
 
 .pagination-table .ant-pagination .ant-pagination-item-active a {
   color: #6e7ab9;
+}
+
+.pagination-table .ant-pagination .ant-pagination-item-active a:hover {
+  text-decoration: none;
 }
 
 .row-is-module .my .ant-table-tbody > tr {

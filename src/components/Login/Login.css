@@ -1,13 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Raleway, sans-serif;
-}
-
-body {
+.body {
   background: linear-gradient(90deg, #c7c5f4, #776bcc);
 }
 
@@ -46,6 +39,14 @@ body {
 .screen__background__shape {
   transform: rotate(45deg);
   position: absolute;
+}
+
+.error-message {
+  color: #8b194e;
+  text-shadow: 0 0 10px rgba(254, 235, 235, 0.5);
+  font-family: Raleway, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 .screen__background__shape1 {
@@ -91,13 +92,14 @@ body {
 }
 
 .login__field {
-  padding: 20px 0px;
+  padding: 1.9vh 0px;
   position: relative;
+  height: 8vh;
 }
 
 .login__icon {
   position: absolute;
-  top: 30px;
+  top: 2.75vh;
   color: #7875b5;
 }
 
@@ -174,6 +176,7 @@ body {
 }
 
 .registration-link {
+  max-height: 2.5vh;
   color: #fff;
   flex: 1;
   align-items: flex-end;

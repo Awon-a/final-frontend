@@ -47,6 +47,10 @@ export interface SignInSuccessAction {
   type: AuthActions.SIGN_IN_SUCCESS;
   payload: SignInResponse;
 }
+export interface FailedAction {
+  type: AuthActions.AUTH_FAILED;
+  payload: any;
+}
 export interface LogoutAction {
   type: AuthActions.LOGOUT;
 }
@@ -58,6 +62,7 @@ export type AuthActionsTypes =
   | SignUpRequestAction
   | SignInRequestAction
   | LogoutAction
+  | FailedAction
   | SignInSuccessAction;
 
 export const signIn = (payload: SignInRequest) => ({
