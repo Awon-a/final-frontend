@@ -1,7 +1,7 @@
 export enum Paths {
   AUTHENTICATION = "auth",
-  Login = "/auth/signIn",
-  Registration = "/auth/signUp",
+  Login = "/auth/sign-in",
+  Registration = "/auth/sign-up",
   AcademicPlans = "/academic-plans",
   PlanInfo = "/academic-plans/:id",
   CompetenciesByDiscipline = "/disciplines/:id/competencies",

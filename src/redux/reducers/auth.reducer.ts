@@ -5,6 +5,8 @@ export const initialState = {
   isAuthenticated: false,
   user: {} as User,
   loading: false,
+  aToken: "",
+  rToken: "",
   error: null,
 };
 
@@ -18,11 +20,23 @@ export const authReducer = (
       return { ...state, loading: true };
     case AuthActions.SIGN_IN_SUCCESS:
       console.log("SIGN IN SUCCESS", { action });
-      return { ...state, isAuthenticated: true, loading: false };
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        aToken: action.payload.tokens.atToken,
+        rToken: action.payload.tokens.rtToken,
+      };
     case AuthActions.SIGN_UP_REQUEST:
       return { ...state, loading: true };
     case AuthActions.SIGN_UP_SUCCESS:
-      return { ...state, isAuthenticated: true, loading: false };
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        aToken: action.payload.tokens.atToken,
+        rToken: action.payload.tokens.rtToken,
+      };
     case AuthActions.LOGOUT:
       return { ...state, isAuthenticated: false };
     default:

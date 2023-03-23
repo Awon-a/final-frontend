@@ -10,7 +10,7 @@ export class AuthAPI {
     dto: SignInRequest
   ): Promise<AxiosResponse<SignInResponse>> {
     const response = await $api.post(AuthAPI.AUTH_URL + "/sign-in", dto);
-    console.log({ cookie: response.headers["Cookie"] });
+    console.log({ headers: response.headers });
     return response.data;
   }
 

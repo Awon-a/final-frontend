@@ -6,13 +6,15 @@ import * as cookie from "cookie";
 import { useSelector } from "react-redux";
 import { AuthState } from "./types/user.js";
 
+function getToken() {
+  return localStorage.getItem("Authorization");
+}
+
 export const AppRouter = () => {
   const { isAuthenticated } = useSelector((state: AuthState) => state.auth);
   const [isAuth, setIsAuth] = useState(isAuthenticated);
   useEffect(() => {
-    const cookies = cookie.parse(document.cookie);
-    const accessToken = cookies["Authorization"];
-    if (accessToken) setIsAuth(true);
+    getToken() && setIsAuth(true);
   }, [isAuthenticated]);
   return (
     <Routes>

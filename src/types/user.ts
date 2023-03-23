@@ -33,6 +33,8 @@ export interface AuthState {
     loading: boolean;
     isAuthenticated: boolean;
     error: any;
+    aToken: string;
+    rToken: string;
     user: User;
   };
 }

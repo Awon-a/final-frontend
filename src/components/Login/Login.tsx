@@ -7,13 +7,16 @@ import * as cookie from "cookie";
 import "./Login.css";
 import { AuthState } from "../../types/user.js";
 
+function getToken() {
+  return localStorage.getItem("Authorization");
+}
+
 const Auth = () => {
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state: AuthState) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    const cookies = cookie.parse(document.cookie);
-    const accessToken = cookies["Authorization"];
+    const accessToken = getToken();
     if (isAuthenticated || accessToken) navigate("/academic-plans");
   }, [isAuthenticated, navigate]);
   const [email, setEmail] = useState("");
