@@ -19,7 +19,7 @@ const Auth = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const accessToken = getToken();
-    if (isAuthenticated || accessToken) navigate("/academic-plans");
+    if (accessToken) navigate("/academic-plans");
   }, [isAuthenticated, navigate]);
   const [email, setEmail] = useState(localStorage.getItem("email") || "");
   const [password, setPassword] = useState(

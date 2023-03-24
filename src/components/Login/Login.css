@@ -15,7 +15,7 @@
   background: linear-gradient(90deg, #5d54a4, #7c78b8);
   position: relative;
   height: 70vh;
-  width: 20vw;
+  width: 25vw;
   box-shadow: 0px 0px 24px #5c5696;
 }
 
@@ -50,10 +50,10 @@
 }
 
 .screen__background__shape1 {
-  height: 55vh;
-  width: 30vw;
+  height: 68vh;
+  width: 45vw;
   background: #fff;
-  top: -5vh;
+  top: -20vh;
   right: 7vw;
   border-radius: 0 72px 0 0;
 }
@@ -107,10 +107,10 @@
   border: none;
   border-bottom: 2px solid #d1d1d4;
   background: none;
-  padding: 10px;
-  padding-left: 24px;
+  padding: 0.95vh;
+  padding-left: 1vw;
   font-weight: 700;
-  width: 75%;
+  width: 100%;
   transition: 0.2s;
 }
 
@@ -124,8 +124,8 @@
 .login__submit {
   background: #fff;
   font-size: 14px;
-  margin-top: 30px;
-  padding: 16px 20px;
+  margin-top: 6vh;
+  padding: 2vh 2vw;
   border-radius: 26px;
   border: 1px solid #d4d3e8;
   text-transform: uppercase;

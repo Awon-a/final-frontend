@@ -1,31 +1,31 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 
-.body {
+.reg-body {
   background: linear-gradient(90deg, #c7c5f4, #776bcc);
 }
 
-.container {
+.reg-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
 }
 
-.screen {
+.reg-screen {
   background: linear-gradient(90deg, #5d54a4, #7c78b8);
   position: relative;
   height: 70vh;
-  width: 20vw;
+  width: 25vw;
   box-shadow: 0px 0px 24px #5c5696;
 }
 
-.screen__content {
+.reg-screen__content {
   z-index: 1;
   position: relative;
   height: 100%;
 }
 
-.error-message {
+.reg-error-message {
   color: #8b194e;
   text-shadow: 0 0 10px rgba(254, 235, 235, 0.5);
   font-family: Raleway, sans-serif;
@@ -33,7 +33,7 @@
   font-size: 16px;
 }
 
-.screen__background {
+.reg-screen__background {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,21 +44,21 @@
   clip-path: inset(0 0 0 0);
 }
 
-.screen__background__shape {
+.reg-screen__background__shape {
   transform: rotate(45deg);
   position: absolute;
 }
 
-.screen__background__shape1 {
-  height: 55vh;
-  width: 30vw;
+.reg-screen__background__shape1 {
+  height: 68vh;
+  width: 45vw;
   background: #fff;
-  top: -5vh;
+  top: -20vh;
   right: 7vw;
   border-radius: 0 72px 0 0;
 }
 
-.screen__background__shape2 {
+.reg-screen__background__shape2 {
   height: 220px;
   width: 220px;
   background: #6c63ac;
@@ -67,7 +67,7 @@
   border-radius: 32px;
 }
 
-.screen__background__shape3 {
+.reg-screen__background__shape3 {
   height: 540px;
   width: 190px;
   background: linear-gradient(270deg, #5d54a4, #6a679e);
@@ -76,7 +76,7 @@
   border-radius: 32px;
 }
 
-.screen__background__shape4 {
+.reg-screen__background__shape4 {
   height: 400px;
   width: 200px;
   background: #7e7bb9;
@@ -85,47 +85,47 @@
   border-radius: 60px;
 }
 
-.login {
+.reg-login {
   width: 90%;
   padding: 2vw;
   padding-top: 18vh;
 }
 
-.login__field {
+.reg-login__field {
   padding: 1.9vh 0px;
   position: relative;
   height: 8vh;
 }
 
-.login__icon {
+.reg-login__icon {
   position: absolute;
   top: 2.75vh;
   color: #7875b5;
 }
 
-.login__input {
+.reg-login__input {
   border: none;
   border-bottom: 2px solid #d1d1d4;
   background: none;
   padding: 0.95vh;
   padding-left: 1vw;
   font-weight: 700;
-  width: 75%;
+  width: 100%;
   transition: 0.2s;
 }
 
-.login__input:active,
-.login__input:focus,
-.login__input:hover {
+.reg-login__input:active,
+.reg-login__input:focus,
+.reg-login__input:hover {
   outline: none;
   border-bottom-color: #6a679e;
 }
 
-.login__submit {
+.reg-login__submit {
   background: #fff;
   font-size: 14px;
-  margin-top: 30px;
-  padding: 16px 20px;
+  margin-top: 6vh;
+  padding: 2vh 2vw;
   border-radius: 26px;
   border: 1px solid #d4d3e8;
   text-transform: uppercase;
@@ -139,20 +139,20 @@
   transition: 0.2s;
 }
 
-.login__submit:active,
-.login__submit:focus,
-.login__submit:hover {
+.reg-login__submit:active,
+.reg-login__submit:focus,
+.reg-login__submit:hover {
   border-color: #6a679e;
   outline: none;
 }
 
-.button__icon {
+.reg-button__icon {
   font-size: 24px;
   margin-left: auto;
   color: #7875b5;
 }
 
-.social-login {
+.reg-social-login {
   position: absolute;
   height: 140px;
   width: 160px;
@@ -162,7 +162,7 @@
   color: #fff;
 }
 
-.login-place {
+.reg-login-place {
   position: absolute;
   display: flex;
   height: 16.5vh;
@@ -175,7 +175,8 @@
   font-weight: bold;
 }
 
-.login-place-link {
+.reg-login-place-link {
+  margin-top: 4vh;
   max-height: 2.5vh;
   color: #fff;
   flex: 1;
@@ -184,23 +185,23 @@
   text-decoration: none;
 }
 
-.login-place-link:hover {
+.reg-login-place-link:hover {
   text-decoration: none;
 }
 
-.social-icons {
+.reg-social-icons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.social-login__icon {
+.reg-social-login__icon {
   padding: 20px 10px;
   color: #fff;
   text-decoration: none;
   text-shadow: 0px 0px 8px #7875b5;
 }
 
-.social-login__icon:hover {
+.reg-social-login__icon:hover {
   transform: scale(1.5);
 }
