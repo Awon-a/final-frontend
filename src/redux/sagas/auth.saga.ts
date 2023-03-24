@@ -12,7 +12,7 @@ function* signInSaga(action: SignInAction): Generator<Effect, void> {
   try {
     yield put({ type: AuthActions.SIGN_IN_REQUEST });
     const response: any = yield call(AuthAPI.signIn, action.payload);
-
+    localStorage.setItem("user", JSON.stringify(response.user));
     localStorage.setItem("Authorization", response.tokens.atToken);
     localStorage.setItem("Refresh", response.tokens.rtToken);
     yield put(requestAuthSuccess(AuthActions.SIGN_IN_SUCCESS, response));
@@ -25,6 +25,7 @@ function* signUpSaga(action: SignUpAction): Generator<Effect, void> {
   try {
     yield put({ type: AuthActions.SIGN_UP_REQUEST });
     const response: any = yield call(AuthAPI.signUp, action.payload);
+    localStorage.setItem("user", JSON.stringify(response.user));
     localStorage.setItem("Authorization", response.tokens.atToken);
     localStorage.setItem("Refresh", response.tokens.rtToken);
     yield put(requestAuthSuccess(AuthActions.SIGN_UP_SUCCESS, response));

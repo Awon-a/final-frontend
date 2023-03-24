@@ -22,10 +22,12 @@ export interface Tokens {
 
 export interface SignUpResponse {
   tokens: Tokens;
+  user: User;
 }
 
 export interface SignInResponse {
   tokens: Tokens;
+  user: User;
 }
 
 export interface AuthState {

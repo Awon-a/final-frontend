@@ -1,6 +1,10 @@
 .header-line {
   height: 8vh;
   background: #6e7ab9;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .menu .ant-menu-light .ant-menu-item-selected {

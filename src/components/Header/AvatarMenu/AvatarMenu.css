@@ -1,0 +1,43 @@
+.avatar-menu {
+  position: relative;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 1vw;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.avatar-menu-list {
+  z-index: 5;
+  background: #fff;
+  width: 8vw;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #000;
+}
+
+.ant-dropdown .ant-dropdown-menu {
+  margin-top: 1.35vw;
+}
+
+.avatar-menu-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.avatar-menu-list li {
+  margin-bottom: 5px;
+}
+
+.avatar-menu-list a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.avatar-menu-list a:hover {
+  text-decoration: underline;
+}

@@ -8,4 +8,6 @@ export enum Paths {
   Disciplines = "/disciplines",
   Competencies = "/competencies",
   LOGOUT = "/auth/logout",
+  ProfileSettings = "/profile/settings",
+  Profile = "/profile",
 }
