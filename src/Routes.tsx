@@ -6,6 +6,7 @@ import DisciplineList from "./components/DisciplineList/DisciplineList";
 import PlanInfo from "./components/PlanInfo/PlanInfo";
 import PlansList from "./components/PlanList/PlansList";
 import Registration from "./components/Registration/Registration";
+import Profile from "./components/Profile/Profile";
 
 export const publicRoutes = [
   {
@@ -38,5 +39,9 @@ export const privateRoutes = [
   {
     path: Paths.Competencies,
     Component: Competencies,
+  },
+  {
+    path: Paths.Profile,
+    Component: Profile,
   },
 ];

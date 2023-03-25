@@ -6,7 +6,9 @@
   justify-content: flex-end;
   align-items: center;
 }
-
+.menu {
+  position: sticky;
+}
 .menu .ant-menu-light .ant-menu-item-selected {
   color: #6e7ab9;
   background-color: #f8f3f3;

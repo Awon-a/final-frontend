@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { Paths } from "../../../common/constants/paths";
 
-export const AvatarMenu = ({ userId }: any) => {
+const AvatarMenu = ({ userId }: any) => {
   const menu = (
     <Menu>
       <Menu.Item key="profile" className="icon">
@@ -30,7 +30,7 @@ export const AvatarMenu = ({ userId }: any) => {
     <Dropdown overlay={menu} trigger={["click"]} placement={"bottomLeft"}>
       <Avatar
         shape="circle"
-        size={64}
+        size={50}
         src={`https://avatars.dicebear.com/api/${sprite}/${userId}.svg`}
         alt="Avatar"
         className="avatar"

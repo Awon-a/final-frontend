@@ -8,8 +8,7 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthState } from "../../types/user";
-import { useEffect, useState } from "react";
-import { isFunctionOrConstructorTypeNode } from "typescript";
+import { useEffect } from "react";
 
 const schema = Yup.object().shape({
   email: Yup.string()
