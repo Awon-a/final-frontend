@@ -1,0 +1,84 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 7%;
+  margin-top: 5.1%;
+  height: 28vh;
+  width: 70%;
+}
+
+.discipline-table-container {
+  max-height: 24vh;
+  overflow-y: scroll;
+}
+
+.disciplines-table {
+  margin-top: 4vh;
+  width: 100%;
+}
+
+.disicplines-table-caption {
+  position: sticky;
+  height: 4vh;
+  top: 0;
+  font-size: 24px;
+  background-color: #f8f3f3;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+}
+
+.disciplines-table-thead {
+  position: sticky;
+  top: 0;
+  background-color: #f8f3f3;
+}
+
+.disciplines-table-header-line {
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  height: 3vh;
+}
+
+::-webkit-scrollbar {
+  width: 0.5vw; /* ширина скроллбара */
+}
+
+/* ползунок */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* цвет ползунка */
+  border-radius: 10px; /* скругление углов ползунка */
+}
+
+/* трек (бар) */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* цвет трека */
+}
+
+/* уголки трека */
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1; /* цвет уголков */
+}
+
+.discipline-table-tr:hover {
+  background: #cfcccc;
+}
+
+.discipline-table-tr:nth-child(even):hover {
+  background: #cfcccc;
+}
+
+.discipline-table-tr:nth-child(even) {
+  height: 4vh;
+  background-color: rgba(110, 122, 185, 0.3);
+}
+
+.discipline-table-tr {
+  height: 4vh;
+}
+
+.disicpline-table-tbody-td {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+}

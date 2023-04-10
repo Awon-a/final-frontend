@@ -90,12 +90,13 @@
 }
 
 .avatar-upload {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 24px;
 }
 
 .password-change {
   margin-bottom: 24px;
-  justify-self: end;
 }
 
 .name-change {

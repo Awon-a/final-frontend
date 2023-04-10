@@ -10,4 +10,5 @@ export enum Paths {
   LOGOUT = "/auth/logout",
   ProfileSettings = "/profile/settings",
   Profile = "/profile",
+  CreateAcademicPlan = "/academic-plan",
 }

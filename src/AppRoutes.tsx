@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound/NotFound";
 import { privateRoutes, publicRoutes } from "./Routes";
-import * as cookie from "cookie";
 import { useSelector } from "react-redux";
 import { AuthState } from "./types/user.js";
 

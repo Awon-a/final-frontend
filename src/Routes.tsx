@@ -7,6 +7,8 @@ import PlanInfo from "./components/PlanInfo/PlanInfo";
 import PlansList from "./components/PlanList/PlansList";
 import Registration from "./components/Registration/Registration";
 import Profile from "./components/Profile/Profile";
+import { Component } from "react";
+import CreatePlan from "./components/CreatePlan/CreatePlan";
 
 export const publicRoutes = [
   {
@@ -19,7 +21,7 @@ export const publicRoutes = [
   },
 ];
 
-export const privateRoutes = [
+export const privateRoutes: { path: Paths; Component: any }[] = [
   {
     path: Paths.AcademicPlans,
     Component: PlansList,
@@ -43,5 +45,9 @@ export const privateRoutes = [
   {
     path: Paths.Profile,
     Component: Profile,
+  },
+  {
+    path: Paths.CreateAcademicPlan,
+    Component: CreatePlan,
   },
 ];
