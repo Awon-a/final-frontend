@@ -1,3 +1,8 @@
+.header-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 .header-line {
   height: 8vh;
   background: #6e7ab9;
@@ -9,6 +14,7 @@
 .menu {
   position: sticky;
 }
+
 .menu .ant-menu-light .ant-menu-item-selected {
   color: #6e7ab9;
   background-color: #f8f3f3;
@@ -42,7 +48,8 @@
   font-family: "Signika Negative", sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 21px;
+  font-size: 2.1vh;
+  line-height: 4vh;
 }
 
 .menu .ant-menu-horizontal {

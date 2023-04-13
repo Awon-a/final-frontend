@@ -1,84 +1,146 @@
-.plan-disciplines-conteiner {
+.plan-blocks-container {
   display: flex;
   flex-direction: column;
   margin-left: 7%;
   margin-top: 2%;
-  height: 28vh;
   width: 70%;
 }
 
-.plan-discipline-table-container {
-  max-height: 24vh;
-  overflow-y: scroll;
+.plan-blocks-caption-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  height: 6vh;
 }
 
-.plan-disciplines-table {
-  margin-top: 4vh;
+.plan-blocks-caption {
   width: 100%;
-}
-
-.plan-disicplines-table-caption {
-  position: sticky;
   height: 4vh;
   top: 0;
-  font-size: 24px;
+  font-size: 2.8vh;
   background-color: #f8f3f3;
   color: #312f31;
   font-family: "Signika", sans-serif;
   font-weight: bold;
 }
 
-.disciplines-table-thead {
-  position: sticky;
-  top: 0;
-  background-color: #f8f3f3;
+.plan-switch-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4vh 0.2vw;
+  height: 3.2vh;
+  width: 4vw;
+  border-radius: 5px;
+  border-top: 1px solid rgba(116, 116, 122, 0.3);
+  border-bottom: 1px solid rgba(116, 116, 122, 0.3);
 }
 
-.disciplines-table-header-line {
-  color: #312f31;
+.plan-switch-buttons-container-item:hover {
+  background-color: rgba(116, 116, 122, 0.12);
+}
+
+.plan-switch-buttons-container-item {
+  padding: 0.2vh 0.2vw;
+  border-radius: 5px;
+}
+
+.plan-switch-buttons-container-item-active {
+  background-color: rgba(116, 116, 122, 0.2);
+  padding: 0.2vh 0.2vw;
+  border-radius: 5px;
+}
+
+.plan-tabs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 4vh;
+  max-width: 100%;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  scrollbar-color: yellow;
+  overflow-y: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.plan-tabs-container-li {
+  /* flex: 0 0 auto; отключаем растягивание элементов */
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-right: 1vw; /* задаем отступ между элементами */
+  list-style-type: none;
+  color: rgba(124, 127, 135, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
+  font-size: 1.5vh;
+  max-width: 16vw;
+  min-width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   height: 3vh;
+  border-radius: 15px;
 }
+
+.plan-tabs-container-li:hover {
+  background-color: rgba(116, 116, 122, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.plan-tabs-container-li-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 1vw; /* задаем отступ между элементами */
+  list-style-type: none;
+  color: rgba(67, 68, 76, 1);
+  font-family: "Signika", sans-serif;
+  font-size: 1.5vh;
+  font-weight: bold;
+  max-width: 16vw;
+  cursor: default;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.plan-tab-icon {
+  height: 2vh;
+  width: 2vh;
+  border-radius: 10px;
+  margin-right: 0.5vw;
+}
+
+.plan-tabs-tab-count-disciplines {
+  border: 1px solid rgba(116, 116, 122, 0.2);
+  border-radius: 15px;
+  width: 1.2vw;
+  height: 1.2vw;
+  line-height: 1.2vw;
+  align-self: center;
+  text-align: center;
+}
+
+.plan-block-tab-content {
+  height: 40vh;
+  margin-bottom: 4vh;
+}
+
+/* .plan-tabs-container-li-active::after {
+  content: "";
+  width: 70%;
+  height: 3px;
+  background-color: #007bff;
+} */
 
 ::-webkit-scrollbar {
-  width: 0.5vw; /* ширина скроллбара */
-}
-
-/* ползунок */
-::-webkit-scrollbar-thumb {
-  background-color: #ccc; /* цвет ползунка */
-  border-radius: 10px; /* скругление углов ползунка */
-}
-
-/* трек (бар) */
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* цвет трека */
-}
-
-/* уголки трека */
-::-webkit-scrollbar-corner {
-  background-color: #f1f1f1; /* цвет уголков */
-}
-
-.discipline-table-tr:hover {
-  background: #cfcccc;
-}
-
-.discipline-table-tr:nth-child(even):hover {
-  background: #cfcccc;
-}
-
-.discipline-table-tr:nth-child(even) {
-  height: 4vh;
-  background-color: rgba(110, 122, 185, 0.3);
-}
-
-.discipline-table-tr {
-  height: 4vh;
-}
-
-.disicpline-table-tbody-td {
-  padding-left: 1vw;
-  line-height: 2.8vh;
+  height: 0.5vh; /* ширина скроллбара */
 }
