@@ -221,11 +221,12 @@ const CreatePlan = () => {
 
   let scrollSpeed = 10;
   const maxScrollSpeed = 100;
-  const vhScrollPLace = 20;
+  const vhScrollPLace = 15;
   const scrollZoneWidth = (vhScrollPLace / 100) * window.innerHeight;
   let scrollInterval: any = null;
 
   function handleDrag(event: any) {
+    event.preventDefault();
     const pageHeight = document.documentElement.clientHeight;
     const mouseY = event.clientY;
     const deltaY =
@@ -291,6 +292,24 @@ const CreatePlan = () => {
   }
 
   document.body.addEventListener("dragover", handleDrag);
+  const handleDragEnd = (event: any) => {
+    event.preventDefault();
+    if (scrollInterval) {
+      window.clearInterval(scrollInterval);
+      scrollInterval = null;
+
+      let topArrow: any = document.getElementById("scroll-top");
+      let bottomArrow: any = document.getElementById("scroll-bottom");
+      if (topArrow) {
+        topArrow.parentNode.removeChild(topArrow);
+      }
+      if (bottomArrow) {
+        bottomArrow.parentNode.removeChild(bottomArrow);
+      }
+    }
+  };
+  document.body.addEventListener("dragend", handleDragEnd);
+  // document.body.addEventListener("dragleave", handleDragEnd);
   return (
     <>
       <div>
@@ -389,6 +408,7 @@ const CreatePlan = () => {
                         planDisciplines={blocks[activeTab].disciplines}
                         onDisciplineDrop={blocks[activeTab].onDrop}
                         deleteDiscipline={blocks[activeTab].onDelete}
+                        tableHeight={"50vh"}
                       />
                     </div>
                   }

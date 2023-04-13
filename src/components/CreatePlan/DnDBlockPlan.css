@@ -5,7 +5,8 @@
   border-radius: 20px;
   border: 2px solid rgb(155, 156, 159, 0.5);
   margin-bottom: 3%;
-  height: 28vh;
+  max-height: 28vh;
+  transition: height 0.3s ease-in-out;
 }
 
 .plan-discipline-table-container {
@@ -50,7 +51,7 @@
 #scroll-bottom {
   position: fixed;
   width: 100%;
-  height: 20vh;
+  height: 15vh;
   background-color: rgba(116, 116, 122, 0.2);
   color: rgb(255, 255, 255);
   text-align: center;
@@ -87,6 +88,13 @@
   font-weight: bold;
   text-align: center;
   align-self: center;
+  border: none; /* убираем границу */
+  outline: none;
+}
+
+.plan-disicplines-table-caption:focus {
+  border: none; /* убираем границу */
+  outline: none;
 }
 
 .plan-disciplines-table-thead {
@@ -196,4 +204,22 @@ html {
 .plan-disciplines-empty-table:hover {
   color: rgba(116, 116, 122, 0.3);
   background-color: rgba(116, 116, 122, 0.3);
+}
+
+.table-enter {
+  opacity: 0;
+}
+
+.table-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.table-exit {
+  opacity: 1;
+}
+
+.table-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }

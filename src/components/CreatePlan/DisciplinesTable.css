@@ -1,10 +1,14 @@
 .table-container {
   display: flex;
   flex-direction: column;
+  justify-content: start;
   margin-left: 7%;
   margin-top: 5.1%;
   height: 28vh;
   width: 70%;
+  padding: 1vw 2vh;
+  border-radius: 20px;
+  border: 2px solid rgb(155, 156, 159, 0.5);
 }
 
 .discipline-table-container {
@@ -18,13 +22,17 @@
 }
 
 .disicplines-table-caption {
-  height: 4vh;
+  height: 3vh;
   top: 0;
-  font-size: 2.8vh;
+  font-size: 2.2vh;
+  margin-right: 0.5vw;
   background-color: #f8f3f3;
-  color: #312f31;
+  color: rgba(51, 51, 51, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
+  align-self: start;
+  border: none; /* убираем границу */
+  outline: none;
 }
 
 .disciplines-table-thead {
