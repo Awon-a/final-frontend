@@ -160,28 +160,49 @@ html {
   color: rgba(77, 83, 95, 1);
   font-family: "Signika", sans-serif;
   font-weight: 300;
+  font-size: 1.5vh;
+  background-color: rgba(212, 208, 208, 0.4);
+}
+
+.plan-disciplines-table-thead-line-td:nth-child(n + 3) {
+  text-align: center;
 }
 
 .plan-discipline-table-tr-td:nth-child(1) {
-  width: 20vw;
+  padding-left: 1vw;
+  width: 13vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .plan-discipline-table-tr-td:nth-child(2) {
-  width: 20vw;
+  width: 13vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .plan-discipline-table-tr-td:nth-child(n + 3) {
-  text-align: right;
-  width: 2vw;
+  text-align: center;
+  width: 3vw;
 }
 
 .plan-discipline-table-tr-td:last-child {
   width: 1.5vw;
 }
 
+.plan-discipline-table-tr-td:nth-last-child(2) {
+  width: 0.3vw;
+}
+
 .plan-discipline-delete {
   height: 2.5vh;
   width: 2.5vh;
+  cursor: pointer;
+}
+
+.plan-discipline-refresh {
+  height: 1.8vh;
+  width: 1.8vh;
   cursor: pointer;
 }
 
@@ -222,4 +243,92 @@ html {
 .table-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+.plan-discipline-table-tr-td-container-credits {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.plan-discipline-table-tr-td-percent {
+  font-family: "Signika", sans-serif;
+  font-weight: 250;
+  font-size: 1.5vh;
+  color: rgba(116, 116, 122, 1);
+  width: 10%;
+}
+
+.plan-discipline-table-tr-td-input-lecture {
+  width: 60%;
+  height: 70%;
+  text-align: left;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  color: rgb(51, 51, 51);
+}
+
+.plan-discipline-table-tr-td-input-lab {
+  text-align: left;
+  width: 60%;
+  height: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  color: rgb(51, 51, 51);
+}
+
+.plan-discipline-table-tr-td-input-practice {
+  text-align: left;
+  width: 60%;
+  height: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  color: rgb(51, 51, 51);
+}
+
+.plan-discipline-table-tr-td-input-iws {
+  text-align: left;
+  width: 60%;
+  height: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  color: rgb(51, 51, 51);
+}
+
+.plan-discipline-table-tr-td-input-prep {
+  text-align: left;
+  width: 60%;
+  height: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  color: rgb(51, 51, 51);
+}
+
+.plan-discipline-table-tr-td-input-attestation {
+  width: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
 }

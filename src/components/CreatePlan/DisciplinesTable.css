@@ -80,13 +80,15 @@
 
 .discipline-table-tr:nth-child(even) {
   height: 4vh;
-  background-color: rgba(110, 122, 185, 0.3);
+  background-color: rgba(212, 208, 208, 0.45);
+  border-bottom: 1px solid #f8f3f3;
 }
 
 .discipline-table-tr {
   height: 4vh;
   font-size: 1.5vh;
-  background-color: #f8f3f3;
+  background-color: rgba(212, 208, 208, 0.45);
+  border-bottom: 3px solid #f8f3f3;
   color: #312f31;
   font-family: "Signika", sans-serif;
   font-weight: 500;
@@ -95,4 +97,8 @@
 .disicpline-table-tbody-td {
   padding-left: 1vw;
   line-height: 2.8vh;
+}
+
+.disicpline-table-tbody-td:first-child {
+  border-radius: 8px 0px 0px 8px;
 }

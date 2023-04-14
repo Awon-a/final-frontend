@@ -98,11 +98,11 @@ export const EnumEducationLevelNameMapper = {
 };
 
 export const AttestationNameMapper = {
-  0: "Экз",
-  1: "3aч",
-  2: "Д/3",
-  3: "K/P",
-  4: "K/П",
+  0: "эк",
+  1: "зч",
+  2: "дзч",
+  3: "кр",
+  4: "кп",
 } as {
   [key: string]: string;
 };
