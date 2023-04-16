@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+  height: 28vh;
   margin-left: 7%;
   margin-top: 5.1%;
-  height: 28vh;
   width: 70%;
   padding: 1vw 2vh;
   border-radius: 20px;
-  border: 2px solid rgb(155, 156, 159, 0.5);
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .discipline-table-container {
@@ -26,8 +27,8 @@
   top: 0;
   font-size: 2.2vh;
   margin-right: 0.5vw;
-  background-color: #f8f3f3;
-  color: rgba(51, 51, 51, 1);
+  background-color: rgba(255, 255, 255);
+  color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
   align-self: start;
@@ -38,12 +39,12 @@
 .disciplines-table-thead {
   position: sticky;
   top: 0;
-  background-color: #f8f3f3;
+  background-color: rgba(255, 255, 255);
 }
 
 .disciplines-table-header-line {
-  border-bottom: 1px solid rgb(155, 156, 159, 0.5);
-  color: rgb(116, 116, 122);
+  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
   font-size: 1.5vh;
@@ -71,25 +72,25 @@
 }
 
 .discipline-table-tr:hover {
-  background: #cfcccc;
+  background: rgba(249, 251, 252, 1);
 }
 
 .discipline-table-tr:nth-child(even):hover {
-  background: #cfcccc;
+  background: rgba(249, 251, 252, 1);
 }
 
 .discipline-table-tr:nth-child(even) {
-  height: 4vh;
-  background-color: rgba(212, 208, 208, 0.45);
-  border-bottom: 1px solid #f8f3f3;
+  height: 5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 3.5px solid rgba(240, 246, 251, 1);
 }
 
 .discipline-table-tr {
-  height: 4vh;
+  height: 5vh;
   font-size: 1.5vh;
-  background-color: rgba(212, 208, 208, 0.45);
-  border-bottom: 3px solid #f8f3f3;
-  color: #312f31;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 3.5px solid rgba(240, 246, 251, 1);
+  color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
   font-weight: 500;
 }

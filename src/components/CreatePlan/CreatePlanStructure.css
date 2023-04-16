@@ -1,9 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 100%;
+  margin-right: 7vw;
+  margin-left: 7vw;
+}
+
 .plan-blocks-container {
   display: flex;
   flex-direction: column;
   margin-left: 7%;
-  margin-top: 2%;
+  margin-top: -2vh;
   width: 70%;
+}
+
+.rigth-tables-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 }
 
 .plan-blocks-caption-container {
@@ -19,7 +34,7 @@
   height: 4vh;
   top: 0;
   font-size: 2.8vh;
-  background-color: #f8f3f3;
+  background-color: rgba(240, 246, 251, 1);
   color: #312f31;
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -29,15 +44,13 @@
   display: flex;
   justify-content: space-between;
   padding: 0.4vh 0.2vw;
-  height: 3.2vh;
-  width: 4vw;
+  height: 3.4vh;
+  width: 4.8vw;
   border-radius: 5px;
-  border-top: 1px solid rgba(116, 116, 122, 0.3);
-  border-bottom: 1px solid rgba(116, 116, 122, 0.3);
 }
 
 .plan-switch-buttons-container-item:hover {
-  background-color: rgba(116, 116, 122, 0.12);
+  background-color: rgba(157, 197, 196, 0.15);
 }
 
 .plan-switch-buttons-container-item {
@@ -46,7 +59,7 @@
 }
 
 .plan-switch-buttons-container-item-active {
-  background-color: rgba(116, 116, 122, 0.2);
+  background-color: rgba(157, 197, 196, 0.3);
   padding: 0.2vh 0.2vw;
   border-radius: 5px;
 }
@@ -124,6 +137,7 @@
   border-radius: 15px;
   width: 1.2vw;
   height: 1.2vw;
+  background-color: rgba(255, 255, 255);
   line-height: 1.2vw;
   align-self: center;
   text-align: center;
@@ -172,4 +186,47 @@
   font-family: "Signika", sans-serif;
   font-size: 1.7vh;
   font-weight: 600;
+}
+
+.plan-struct-back-arrow {
+  position: sticky;
+  top: 50%;
+  height: 7vh;
+  border-radius: 10px;
+  width: 7vh;
+  margin-left: 1vw;
+  z-index: 20;
+  line-height: 7vh;
+  text-align: center;
+  background-color: rgba(240, 246, 251, 1);
+}
+
+.plan-struct-back-arrow-icon {
+  height: 3vh;
+  width: 3vh;
+}
+
+.plan-struct-back-arrow:hover {
+  background-color: rgba(153, 149, 149, 0.3);
+}
+
+.plan-struct-next-arrow:hover {
+  background-color: rgba(153, 149, 149, 0.3);
+}
+
+.plan-struct-next-arrow {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vw;
+  height: 10vh;
+  width: 10vh;
+  line-height: 10vh;
+  text-align: center;
+  background-color: rgba(153, 149, 149, 0.1);
+  transform: scaleX(-1);
+}
+
+.plan-struct-next-arrow-icon {
+  height: 3vh;
+  width: 3vh;
 }

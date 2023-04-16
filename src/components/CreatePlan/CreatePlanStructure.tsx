@@ -4,13 +4,13 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { useDispatch, useSelector } from "react-redux";
 import { getDisciplines } from "../../redux/actions/disicplines.actions";
 import { Discipline, DisciplineState } from "../../types/discipline";
-import Header from "../Header/Header";
 import CreateBlockPlace from "./DnDBlockPlan";
 import DisciplineItem from "./DnDDisciplines";
 import "./DisciplinesTable.css";
 import "./CreatePlanStructure.css";
 import Tabs from "../../common/assets/tabs.svg";
 import List from "../../common/assets/list.svg";
+import ArrowTo from "../../common/assets/arrow-to.svg";
 import Elective from "../../common/assets/elective.svg";
 import Base from "../../common/assets/base.svg";
 import SFE from "../../common/assets/sfe.svg";
@@ -26,199 +26,39 @@ import { Attestations } from "../../types/academic-plan";
 const LOW_BOUND = 240;
 const HIGH_BOUND = 300;
 
-const CreatePlanStructure = () => {
-  const dispatch = useDispatch();
-  let { disciplines: disciplinesState } = useSelector(
-    (state: DisciplineState) => state.disciplines
-  );
-  const [disciplines, setDisciplines]: [DisciplineForPlan[], any] = useState(
-    []
-  );
-  const handleDragStart = (event: any, id: string) => {
-    event.dataTransfer.setData("id", id);
-  };
-  console.log("SCROLL");
-  useEffect(() => {
-    dispatch(getDisciplines());
-  }, [dispatch]);
-  useEffect(() => {
-    const disciplines = disciplinesState.map(
-      (discipline: Discipline) =>
-        ({
-          ...discipline,
-          examPrep: 0,
-          iwsH: 0,
-          labH: 0,
-          lectureH: 0,
-          practiceH: 0,
-          sumH: 0,
-          attestation: Attestations.Exam,
-        } as DisciplineForPlan)
-    );
-    setDisciplines(disciplines as any);
-  }, [disciplinesState]);
-
+const CreatePlanStructure = ({
+  goBack,
+  disciplines,
+  activeTab,
+  viewType,
+  baseDisciplines,
+  electiveDisciplines,
+  sfeDisciplines,
+  practiceDisciplines,
+  showDownArrow,
+  handleChangeBaseDisciplines,
+  handleChangeElectiveDisciplines,
+  handleChangeSfeDisciplines,
+  handleChangePracticeDisciplines,
+  handleBaseDisciplineDrop,
+  handleElectiveDisciplineDrop,
+  handleSfeDisciplineDrop,
+  handlePracticeDisciplineDrop,
+  handleDeleteBaseDisciplines,
+  handleDeleteElectiveDisciplines,
+  handleDeleteSfeDisciplines,
+  handleDeletePracticeDisciplines,
+  toggleViewToListType,
+  toggleViewToTabsType,
+  toggleViewToPreviewType,
+  handleClickTab,
+}: any) => {
   const handleDisciplineMove = (discipline: any) => {
     // setDisciplines(
     //   disciplines.filter((d: Discipline) => d.id !== discipline.id)
     // );
   };
-  const [activeTab, setActiveTab] = useState(0);
-  const [baseDisciplines, setBaseDisciplines]: any = useState([]);
-  const [electiveDisciplines, setElectiveDisciplines]: any = useState([]);
-  const [sfeDisciplines, setSfeDisciplines]: any = useState([]);
-  const [practiceDisciplines, setPracticeDisciplines]: any = useState([]);
-  const [showDownArrow, setShowDownArrow] = useState(false);
 
-  const handleChangeBaseDisciplines = useCallback(
-    (discipline: DisciplineForPlan) => {
-      setBaseDisciplines((prevPlanDisciplines: DisciplineForPlan[]) =>
-        prevPlanDisciplines.map((disc: DisciplineForPlan) => {
-          if (disc.id === discipline.id) {
-            return discipline;
-          }
-          return disc;
-        })
-      );
-    },
-    [setBaseDisciplines]
-  );
-  const handleChangeElectiveDisciplines = useCallback(
-    (discipline: DisciplineForPlan) => {
-      setElectiveDisciplines((prevPlanDisciplines: DisciplineForPlan[]) =>
-        prevPlanDisciplines.map((disc: DisciplineForPlan) => {
-          if (disc.id === discipline.id) {
-            return discipline;
-          }
-          return disc;
-        })
-      );
-    },
-    [setElectiveDisciplines]
-  );
-  const handleChangeSfeDisciplines = useCallback(
-    (discipline: DisciplineForPlan) => {
-      setSfeDisciplines((prevPlanDisciplines: DisciplineForPlan[]) =>
-        prevPlanDisciplines.map((disc: DisciplineForPlan) => {
-          if (disc.id === discipline.id) {
-            return discipline;
-          }
-          return disc;
-        })
-      );
-    },
-    [setSfeDisciplines]
-  );
-  const handleChangePracticeDisciplines = useCallback(
-    (discipline: DisciplineForPlan) => {
-      setPracticeDisciplines((prevPlanDisciplines: DisciplineForPlan[]) =>
-        prevPlanDisciplines.map((disc: DisciplineForPlan) => {
-          if (disc.id === discipline.id) {
-            return discipline;
-          }
-          return disc;
-        })
-      );
-    },
-    [setPracticeDisciplines]
-  );
-
-  const handleBaseDisciplineDrop = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) =>
-        prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-      setBaseDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
-    },
-    [setDisciplines, setBaseDisciplines]
-  );
-  const handleElectiveDisciplineDrop = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) =>
-        prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-      setElectiveDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
-    },
-    [setDisciplines, setElectiveDisciplines]
-  );
-  const handleSfeDisciplineDrop = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) =>
-        prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-      setSfeDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
-    },
-    [setDisciplines, setSfeDisciplines]
-  );
-  const handlePracticeDisciplineDrop = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) =>
-        prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-      setPracticeDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
-    },
-    [setDisciplines, setPracticeDisciplines]
-  );
-  const handleDeleteBaseDisciplines = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) => [
-        ...prevDisciplines,
-        discipline,
-      ]);
-      setBaseDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-    },
-    [setDisciplines, setBaseDisciplines]
-  );
-  const handleDeleteElectiveDisciplines = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) => [
-        ...prevDisciplines,
-        discipline,
-      ]);
-      setElectiveDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-    },
-    [setDisciplines, setElectiveDisciplines]
-  );
-  const handleDeleteSfeDisciplines = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) => [
-        ...prevDisciplines,
-        discipline,
-      ]);
-      setSfeDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-    },
-    [setDisciplines, setSfeDisciplines]
-  );
-  const handleDeletePracticeDisciplines = useCallback(
-    (discipline: Discipline) => {
-      setDisciplines((prevDisciplines: Discipline[]) => [
-        ...prevDisciplines,
-        discipline,
-      ]);
-      setPracticeDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
-    },
-    [setDisciplines, setPracticeDisciplines]
-  );
   const blocks: {
     blockName: string;
     icon: any;
@@ -260,20 +100,7 @@ const CreatePlanStructure = () => {
       onChangeDiscipline: handleChangePracticeDisciplines,
     },
   ];
-  const [viewType, setViewType] = useState("list");
 
-  const toggleViewToListType = () => {
-    setViewType("list");
-  };
-  const toggleViewToTabsType = () => {
-    setViewType("tabs");
-  };
-  const toggleViewToPreviewType = () => {
-    setViewType("preview");
-  };
-  const handleClickTab = (index: number) => {
-    setActiveTab(index);
-  };
   const panelRef: any = useRef(null);
   const handleMouseWheel = (event: any) => {
     event.preventDefault();
@@ -283,19 +110,6 @@ const CreatePlanStructure = () => {
       top: 0,
       left: containerScrollPosition + event.deltaY,
       behavior: "smooth",
-    });
-  };
-  const ref = useRef(null);
-  let scroll = Scroller.animateScroll;
-  const handleScroll = (direction: any) => {
-    console.log("HANDLE ");
-    Scroller.scroller.scrollTo(direction, {
-      duration: 1500,
-      delay: 100,
-      smooth: "easeInOutQuint",
-      offset: 10, // Scrolls to element + 50 pixels down the page
-      horizontal: false,
-      to: direction,
     });
   };
 
@@ -444,123 +258,138 @@ const CreatePlanStructure = () => {
   return (
     <>
       <div>
-        <DndProvider backend={HTML5Backend}>
-          <DisciplineItem
-            disciplines={disciplines}
-            handleDisciplineMove={handleDisciplineMove}
-          />
-          <div className="plan-blocks-container">
-            <div className="plan-blocks-caption-container">
-              <div className="plan-blocks-caption">Учебный план</div>
-
-              <div className="plan-switch-buttons-container">
-                <img
-                  src={List}
-                  alt="icon"
-                  className={
-                    viewType === "list"
-                      ? "plan-switch-buttons-container-item-active"
-                      : "plan-switch-buttons-container-item"
-                  }
-                  onClick={toggleViewToListType}
-                ></img>
-                <img
-                  src={Tabs}
-                  alt="icon"
-                  className={
-                    viewType === "tabs"
-                      ? "plan-switch-buttons-container-item-active"
-                      : "plan-switch-buttons-container-item"
-                  }
-                  onClick={toggleViewToTabsType}
-                ></img>
-                <img
-                  src={PreviewPlan}
-                  alt="icon"
-                  className={
-                    viewType === "preview"
-                      ? "plan-switch-buttons-container-item-active"
-                      : "plan-switch-buttons-container-item"
-                  }
-                  onClick={toggleViewToPreviewType}
-                ></img>
-              </div>
+        <div className="rigth-tables-container">
+          <DndProvider backend={HTML5Backend}>
+            <DisciplineItem
+              disciplines={disciplines}
+              handleDisciplineMove={handleDisciplineMove}
+            />
+            <div className="plan-struct-back-arrow" onClick={goBack}>
+              <img
+                className="plan-struct-back-arrow-icon"
+                src={ArrowTo}
+                alt="icon"
+              />
             </div>
-            {(viewType === "list" &&
-              blocks.map((block: any, index) => (
-                <CreateBlockPlace
-                  key={index}
-                  name={block.blockName}
-                  planDisciplines={block.disciplines}
-                  onDisciplineDrop={block.onDrop}
-                  deleteDiscipline={block.onDelete}
-                  onChangeDiscipline={block.onChangeDiscipline}
-                  icon={block.icon}
-                />
-              ))) ||
-              (viewType === "tabs" && (
-                <div className="">
-                  <ul
-                    className="plan-tabs-container"
-                    onWheel={handleMouseWheel}
-                    ref={panelRef}
-                  >
-                    {blocks.map((block, index) => (
-                      <li
-                        key={index}
-                        className={
-                          index === activeTab
-                            ? "plan-tabs-container-li-active"
-                            : "plan-tabs-container-li"
-                        }
-                        onClick={() => handleClickTab(index)}
-                      >
-                        <div>
-                          <img
-                            src={block.icon}
-                            alt="icon"
-                            className="plan-tab-icon"
-                          />
-                        </div>
-                        <div className="plan-tabs-tab" title={block.blockName}>
-                          {block.blockName}
-                        </div>
-                        <div
-                          className="plan-tabs-tab-count-disciplines"
-                          title="Количество дисциплин"
-                        >
-                          {block.disciplines.length}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                  {
-                    <div key={activeTab} className={activeTab ? "active" : ""}>
-                      <CreateBlockPlace
-                        key="tab-table"
-                        planDisciplines={blocks[activeTab].disciplines}
-                        onDisciplineDrop={blocks[activeTab].onDrop}
-                        deleteDiscipline={blocks[activeTab].onDelete}
-                        onChangeDiscipline={
-                          blocks[activeTab].onChangeDiscipline
-                        }
-                        tableHeight={"50vh"}
-                      />
-                    </div>
-                  }
+            <div className="plan-blocks-container">
+              <div className="plan-blocks-caption-container">
+                <div className="plan-blocks-caption">Учебный план</div>
+
+                <div className="plan-switch-buttons-container">
+                  <img
+                    src={List}
+                    alt="icon"
+                    className={
+                      viewType === "list"
+                        ? "plan-switch-buttons-container-item-active"
+                        : "plan-switch-buttons-container-item"
+                    }
+                    onClick={toggleViewToListType}
+                  ></img>
+                  <img
+                    src={Tabs}
+                    alt="icon"
+                    className={
+                      viewType === "tabs"
+                        ? "plan-switch-buttons-container-item-active"
+                        : "plan-switch-buttons-container-item"
+                    }
+                    onClick={toggleViewToTabsType}
+                  ></img>
+                  <img
+                    src={PreviewPlan}
+                    alt="icon"
+                    className={
+                      viewType === "preview"
+                        ? "plan-switch-buttons-container-item-active"
+                        : "plan-switch-buttons-container-item"
+                    }
+                    onClick={toggleViewToPreviewType}
+                  ></img>
                 </div>
-              )) ||
-              (viewType === "preview" && (
-                <CreatePreviewPlan
-                  key="preview-table"
-                  data={dataForPreviewTable}
-                />
-              ))}
-            {renderWarningCredits(blocks)}
-          </div>
-          {showDownArrow && <div className="arrow-down"></div>}
-        </DndProvider>
+              </div>
+              {(viewType === "list" &&
+                blocks.map((block: any, index) => (
+                  <CreateBlockPlace
+                    key={index}
+                    name={block.blockName}
+                    planDisciplines={block.disciplines}
+                    onDisciplineDrop={block.onDrop}
+                    deleteDiscipline={block.onDelete}
+                    onChangeDiscipline={block.onChangeDiscipline}
+                    icon={block.icon}
+                  />
+                ))) ||
+                (viewType === "tabs" && (
+                  <div className="">
+                    <ul
+                      className="plan-tabs-container"
+                      onWheel={handleMouseWheel}
+                      ref={panelRef}
+                    >
+                      {blocks.map((block, index) => (
+                        <li
+                          key={index}
+                          className={
+                            index === activeTab
+                              ? "plan-tabs-container-li-active"
+                              : "plan-tabs-container-li"
+                          }
+                          onClick={() => handleClickTab(index)}
+                        >
+                          <div>
+                            <img
+                              src={block.icon}
+                              alt="icon"
+                              className="plan-tab-icon"
+                            />
+                          </div>
+                          <div
+                            className="plan-tabs-tab"
+                            title={block.blockName}
+                          >
+                            {block.blockName}
+                          </div>
+                          <div
+                            className="plan-tabs-tab-count-disciplines"
+                            title="Количество дисциплин"
+                          >
+                            {block.disciplines.length}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    {
+                      <div
+                        key={activeTab}
+                        className={activeTab ? "active" : ""}
+                      >
+                        <CreateBlockPlace
+                          key="tab-table"
+                          planDisciplines={blocks[activeTab].disciplines}
+                          onDisciplineDrop={blocks[activeTab].onDrop}
+                          deleteDiscipline={blocks[activeTab].onDelete}
+                          onChangeDiscipline={
+                            blocks[activeTab].onChangeDiscipline
+                          }
+                          tableHeight={"50vh"}
+                        />
+                      </div>
+                    }
+                  </div>
+                )) ||
+                (viewType === "preview" && (
+                  <CreatePreviewPlan
+                    key="preview-table"
+                    data={dataForPreviewTable}
+                  />
+                ))}
+              {renderWarningCredits(blocks)}
+            </div>
+          </DndProvider>
+        </div>
       </div>
+      {showDownArrow && <div className="arrow-down"></div>}
     </>
   );
 };

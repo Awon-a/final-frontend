@@ -1,0 +1,596 @@
+.plan-meta-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.plan-meta-next-arrow {
+  height: 7vh;
+  border-radius: 10px;
+  width: 7vh;
+  line-height: 7vh;
+  margin-top: 38.2vh;
+  margin-right: 1vw;
+  z-index: 20;
+  text-align: center;
+  background-color: rgba(240, 246, 251, 1);
+}
+
+.plan-meta-next-arrow-icon {
+  height: 3vh;
+  width: 3vh;
+  transform: scaleX(-1);
+}
+
+.plan-meta-next-arrow:hover {
+  background-color: rgba(153, 149, 149, 0.3);
+}
+
+.plan-meta-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-left: 15.5%;
+  background-color: rgba(255, 255, 255);
+  height: 60vh;
+  margin-top: 5.1%;
+  width: 70%;
+  padding: 3vh 2vw;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan-meta-tr-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+.plan-meta-reg-num {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.plan-meta-reg-num-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.plan-meta-reg-num-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  outline: none;
+  border: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-plan-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-left: 2vw;
+}
+.plan-meta-plan-name-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.plan-meta-plan-name-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.plan-meta-plan-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 10vw;
+  margin-left: 2vw;
+}
+.plan-meta-plan-status-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-plan-status-select {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none;
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-plan-status-select:focus {
+  border: none;
+  outline: none;
+}
+
+.plan-meta-base-education {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 14vw;
+  margin-left: 2vw;
+}
+
+.plan-meta-base-education-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.plan-meta-base-education-select {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none;
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-base-education:focus {
+  border: none;
+  outline: none;
+}
+
+.plan-meta-specialty {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 4vw;
+}
+.plan-meta-specialty-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-specialty-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-department {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 3.3vw;
+}
+.plan-meta-department-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-department-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-faculty {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 3.3vw;
+}
+.plan-meta-faculty-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-faculty-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-specialization {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 4vw;
+}
+.plan-meta-specialization-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-specialization-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-qualification {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 4vw;
+}
+.plan-meta-qualification-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-qualification-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-training-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 4vw;
+}
+.plan-meta-training-form-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-training-form-select {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none;
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.plan-meta-training-form-select:focus {
+  border: none;
+  outline: none;
+}
+
+.plan-meta-degree {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 4vw;
+}
+.plan-meta-degree-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: 100%;
+  white-space: nowrap;
+}
+.plan-meta-degree-select {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-period {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 25vw;
+  margin-right: 8vw;
+}
+.plan-meta-period-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 1vh;
+}
+.plan-meta-period-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+  height: 2vh;
+  margin-bottom: 0.2vh;
+  width: auto;
+  white-space: nowrap;
+}
+
+.plan-meta-period-start-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 3vw;
+  width: 5vw;
+}
+.plan-meta-period-start-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  height: 2vh;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 0.5vw;
+}
+.plan-meta-period-start-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 3.5vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-period-end-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 1vw;
+  width: 5vw;
+}
+.plan-meta-period-end-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  height: 2vh;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 0.5vw;
+}
+.plan-meta-period-end-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 3.5vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.plan-meta-period-result-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 1vw;
+  width: 5vw;
+}
+.plan-meta-period-years-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  height: 2vh;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 0.5vw;
+  margin-left: 5vw;
+}
+.plan-meta-period-months-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 1vw;
+  width: 5vw;
+}
+.plan-meta-period-months-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 3.5vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-right: 0.5vw;
+}
+.plan-meta-period-months-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  height: 2vh;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 0.5vw;
+}
+.plan-meta-period-courses-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 100%;
+  margin-left: 2vw;
+  width: 5vw;
+}
+.plan-meta-period-courses-input {
+  height: 2.5vh;
+  padding-left: 0.5vw;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border: none; /* убираем границу */
+  outline: none;
+  width: 3.5vw;
+  margin-right: 0.5vw;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.plan-meta-period-courses-label {
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  height: 2vh;
+  width: auto;
+  white-space: nowrap;
+  margin-right: 0.5vw;
+}

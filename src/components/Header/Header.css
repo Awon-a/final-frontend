@@ -5,7 +5,7 @@
 }
 .header-line {
   height: 8vh;
-  background: #6e7ab9;
+  background: rgba(240, 246, 251, 1);
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -18,7 +18,7 @@
 }
 
 .menu .ant-menu-light .ant-menu-item-selected {
-  color: #6e7ab9;
+  color: rgba(93, 170, 172, 1);
   background-color: #f8f3f3;
   font-family: "Signika Negative", sans-serif;
   font-style: normal;
@@ -31,22 +31,22 @@
   .ant-menu-item:hover:not(.ant-menu-item-selected):not(
     .ant-menu-submenu-selected
   ) {
-  color: #6e7ab9;
+  color: rgba(93, 170, 172, 1);
 }
 
 .menu .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
 :where(.css-dev-only-do-not-override-ph9edi).ant-menu-light.ant-menu-horizontal
   > .ant-menu-submenu-selected::after {
-  border-bottom-color: #6e7ab9;
+  border-bottom-color: rgba(93, 170, 172, 1);
 }
 
 .menu .ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after {
-  border-bottom-color: #6e7ab9;
+  border-bottom-color: rgba(93, 170, 172, 1);
 }
 
 .menu .ant-menu {
-  color: #505050;
-  background-color: #f8f3f3;
+  color: rgba(155, 163, 172, 1);
+  background-color: rgba(240, 246, 251, 1);
   font-family: "Signika Negative", sans-serif;
   font-style: normal;
   font-weight: 500;

@@ -1,5 +1,11 @@
 import { Meta } from "../common/interfaces/pagination.interface";
 
+export enum PlanStatus {
+  Formattable,
+  Executable,
+  Archival,
+}
+
 export enum Attestations {
   Exam,
   Credit,
@@ -26,6 +32,7 @@ export interface Discipline {
   attestation: Attestations;
   numSemester: number;
   block: Blocks;
+  competencies: [];
 }
 
 export interface PlanWithInfo {
@@ -112,6 +119,31 @@ export const BlocksNameMapper = {
   1: "Факультативы",
   2: "Практики",
   3: "ГИА",
+} as {
+  [key: string]: string;
+};
+export const PlanStatusMapper = {
+  0: "оформляемый",
+  1: "исполняемый",
+  2: "архивный",
+} as {
+  [key: string]: string;
+};
+export const PlanBaseEduMapper = {
+  0: "среднее (полное) общее",
+  1: "среднее профессиональное",
+  2: "высшее I степени",
+  3: "высшее II степени",
+};
+export const PlanTrainingFromMapper = {
+  0: "очная",
+  1: "очно-заочная",
+  2: "заочная",
+} as { [key: string]: string };
+export const PlanDegreeMapper = {
+  0: "Бакалавриат",
+  1: "Магистратура",
+  2: "Специалитет",
 } as {
   [key: string]: string;
 };

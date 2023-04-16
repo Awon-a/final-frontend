@@ -1,10 +1,11 @@
-import { Meta } from "../common/interfaces/pagination.interface.js";
-import { Competency } from "./competencies.js";
+import { Meta } from "../common/interfaces/pagination.interface";
+import { Competency } from "./competencies";
 
 export interface Discipline {
   id: string;
   name: string;
   codeDepartment: string;
+  competencies: Competency[];
 }
 
 export interface CreateDiscipline {

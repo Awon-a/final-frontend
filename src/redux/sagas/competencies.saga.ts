@@ -15,7 +15,7 @@ function* getManyCompetenciesSaga(
   try {
     yield put({ type: CompetencyActions.GET_COMPETENCIES_REQUEST });
     const competencies: any = yield call(CompetencyAPI.getAll, action.payload);
-
+    console.log("SAGE", { data1: competencies });
     yield put(
       requestCompetencySuccess(
         CompetencyActions.SUCCESS_GET_COMPETENCIES,

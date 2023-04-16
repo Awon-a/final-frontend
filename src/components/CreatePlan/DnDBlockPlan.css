@@ -3,10 +3,12 @@
   flex-direction: column;
   padding: 1vw 2vh;
   border-radius: 20px;
-  border: 2px solid rgb(155, 156, 159, 0.5);
-  margin-bottom: 3%;
+  /* border: 2px solid rgb(155, 156, 159, 0.5); */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2%;
   max-height: 28vh;
   transition: height 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255);
 }
 
 .plan-discipline-table-container {
@@ -82,7 +84,7 @@
   top: 0;
   font-size: 2.2vh;
   margin-right: 0.5vw;
-  background-color: #f8f3f3;
+  background-color: rgba(255, 255, 255);
   color: rgba(51, 51, 51, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -100,7 +102,7 @@
 .plan-disciplines-table-thead {
   position: sticky;
   top: 0;
-  background-color: #f8f3f3;
+  background-color: rgba(255, 255, 255);
 }
 html {
   scroll-snap-type: y mandatory;
@@ -114,7 +116,7 @@ html {
 } */
 
 .plan-disciplines-table-thead-line {
-  border-bottom: 1px solid rgb(155, 156, 159, 0.5);
+  border-bottom: 1px solid rgba(247, 247, 247, 1);
   color: rgb(116, 116, 122);
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -143,11 +145,11 @@ html {
 }
 
 .plan-discipline-table-tr:hover {
-  background: #cfcccc;
+  background: rgba(249, 251, 252, 1);
 }
 
 .plan-discipline-table-tr:nth-child(even):hover {
-  background: #cfcccc;
+  background: rgba(249, 251, 252, 1);
 }
 
 /* .plan-discipline-table-tr:nth-child(even) {
@@ -156,12 +158,13 @@ html {
 } */
 
 .plan-discipline-table-tr {
-  height: 4vh;
-  color: rgba(77, 83, 95, 1);
+  height: 6vh;
+  color: rgba(61, 78, 87, 1);
   font-family: "Signika", sans-serif;
   font-weight: 300;
   font-size: 1.5vh;
-  background-color: rgba(212, 208, 208, 0.4);
+  background-color: rgba(255, 255, 255);
+  border-bottom: 3px solid rgba(240, 246, 251, 1);
 }
 
 .plan-disciplines-table-thead-line-td:nth-child(n + 3) {
@@ -173,6 +176,7 @@ html {
   width: 13vw;
   white-space: nowrap;
   text-overflow: ellipsis;
+  border-bottom: 3px solid rgba(240, 246, 251, 1);
 }
 
 .plan-discipline-table-tr-td:nth-child(2) {
@@ -215,7 +219,7 @@ html {
   text-align: center;
   line-height: 24vh;
   color: rgba(116, 116, 122, 0.5);
-  background-color: rgba(116, 116, 122, 0.1);
+  background-color: rgba(249, 251, 252, 1);
   border-radius: 0px 0px 25px 25px;
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -224,7 +228,7 @@ html {
 
 .plan-disciplines-empty-table:hover {
   color: rgba(116, 116, 122, 0.3);
-  background-color: rgba(116, 116, 122, 0.3);
+  background-color: rgba(249, 251, 252, 0.7);
 }
 
 .table-enter {
@@ -271,6 +275,8 @@ html {
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: rgb(51, 51, 51);
 }
 
@@ -284,6 +290,8 @@ html {
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: rgb(51, 51, 51);
 }
 
@@ -297,6 +305,8 @@ html {
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: rgb(51, 51, 51);
 }
 
@@ -310,6 +320,8 @@ html {
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   color: rgb(51, 51, 51);
 }
 
@@ -323,6 +335,8 @@ html {
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: rgb(51, 51, 51);
 }
 
@@ -330,5 +344,7 @@ html {
   width: 70%;
   border: none; /* убираем границу */
   outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, 1);
 }
