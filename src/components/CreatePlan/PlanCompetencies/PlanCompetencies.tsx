@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import ArrowTo from "../../../common/assets/arrow-to.svg";
-import { getCompetencies } from "../../../redux/actions/competencies.actions";
-import { Competency, CompetencyState } from "../../../types/competencies";
+import AddCompetence from "../../../common/assets/add-competence.svg";
+import { Competency } from "../../../types/competencies";
 import "./PlanCompetencies.css";
 
-const PlanCompetencies = ({ goBack, goNext }: any) => {
-  const dispatch = useDispatch();
-  const { competencies } = useSelector(
-    (state: CompetencyState) => state.competencies
-  );
-  const [selectedCompetencies, setSelectedCompetencies]: [Competency[], any] =
-    useState([]);
-  useEffect(() => {
-    dispatch(getCompetencies({ limit: 100 }));
-  }, [dispatch]);
-  console.log({ competencies });
+const PlanCompetencies = ({
+  goBack,
+  goNext,
+  competencies,
+  selectedCompetencies,
+  handleICompetenciesClick,
+}: any) => {
   return (
     <>
       <div className="container-competencies-plan">
@@ -32,26 +26,42 @@ const PlanCompetencies = ({ goBack, goNext }: any) => {
             <table className="competencies-plan-table">
               <thead className="competencies-plan-table-thead">
                 <tr className="competencies-plan-table-header-line">
-                  <th>Название</th>
-                  <th>Код подразделения</th>
+                  <th className="competencies-plan-table-header-line-td">
+                    Код
+                  </th>
+                  <th className="competencies-plan-table-header-line-td">
+                    Название
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {competencies.map((competencie: Competency) => (
+                {competencies.map((competence: Competency) => (
                   <tr
-                    className="competencies-plan-table-tr"
-                    key={competencie.id}
+                    className={
+                      selectedCompetencies.includes(competence)
+                        ? "competencies-plan-table-tr-active"
+                        : "competencies-plan-table-tr"
+                    }
+                    key={competence.id}
+                    onClick={() => handleICompetenciesClick(competence)}
                   >
                     <td className="competencies-plan-table-tbody-td">
-                      {competencie.code}
+                      {competence.code}
                     </td>
                     <td className="competencies-plan-table-tbody-td">
-                      {competencie.name}
+                      {competence.name}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="competencies-plan-add-competence">
+            <img
+              className="competencies-plan-add-competence-icon"
+              src={AddCompetence}
+              alt="icon"
+            />
           </div>
         </div>
         <div className="plan-competencies-next-arrow" onClick={goNext}>

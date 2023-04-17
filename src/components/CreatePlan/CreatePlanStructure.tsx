@@ -22,6 +22,8 @@ import CreatePreviewPlan from "./PreviewCreatePlan/CreatePreviewPlan";
 import { map, mapKeys } from "lodash";
 import { DisciplineForPlan } from "./types/plan-discipline";
 import { Attestations } from "../../types/academic-plan";
+import { Competency } from "../../types/competencies.js";
+import { CSSTransition } from "react-transition-group";
 
 const LOW_BOUND = 240;
 const HIGH_BOUND = 300;
@@ -31,75 +33,22 @@ const CreatePlanStructure = ({
   disciplines,
   activeTab,
   viewType,
-  baseDisciplines,
-  electiveDisciplines,
-  sfeDisciplines,
-  practiceDisciplines,
+  isPlanStructureCompetenciesCollapsed,
   showDownArrow,
-  handleChangeBaseDisciplines,
-  handleChangeElectiveDisciplines,
-  handleChangeSfeDisciplines,
-  handleChangePracticeDisciplines,
-  handleBaseDisciplineDrop,
-  handleElectiveDisciplineDrop,
-  handleSfeDisciplineDrop,
-  handlePracticeDisciplineDrop,
-  handleDeleteBaseDisciplines,
-  handleDeleteElectiveDisciplines,
-  handleDeleteSfeDisciplines,
-  handleDeletePracticeDisciplines,
+  blocks,
   toggleViewToListType,
   toggleViewToTabsType,
   toggleViewToPreviewType,
   handleClickTab,
+  selectedCompetencies,
+  toggleIsPlanStructureCompetenciesCollapsedCollapse,
+  handleCalcPercentComptenciesOnChange,
 }: any) => {
   const handleDisciplineMove = (discipline: any) => {
     // setDisciplines(
     //   disciplines.filter((d: Discipline) => d.id !== discipline.id)
     // );
   };
-
-  const blocks: {
-    blockName: string;
-    icon: any;
-    disciplines: any[];
-    onDrop: any;
-    onDelete: any;
-    onChangeDiscipline: any;
-  }[] = [
-    {
-      blockName: "Базовая часть",
-      disciplines: baseDisciplines,
-      onDrop: handleBaseDisciplineDrop,
-      icon: Base,
-      onDelete: handleDeleteBaseDisciplines,
-      onChangeDiscipline: handleChangeBaseDisciplines,
-    },
-    {
-      blockName: "Вариативная часть",
-      disciplines: electiveDisciplines,
-      onDrop: handleElectiveDisciplineDrop,
-      icon: Elective,
-      onDelete: handleDeleteElectiveDisciplines,
-      onChangeDiscipline: handleChangeElectiveDisciplines,
-    },
-    {
-      blockName: "ГИА",
-      disciplines: sfeDisciplines,
-      onDrop: handleSfeDisciplineDrop,
-      icon: SFE,
-      onDelete: handleDeleteSfeDisciplines,
-      onChangeDiscipline: handleChangeSfeDisciplines,
-    },
-    {
-      blockName: "Практика",
-      disciplines: practiceDisciplines,
-      onDrop: handlePracticeDisciplineDrop,
-      icon: Practice,
-      onDelete: handleDeletePracticeDisciplines,
-      onChangeDiscipline: handleChangePracticeDisciplines,
-    },
-  ];
 
   const panelRef: any = useRef(null);
   const handleMouseWheel = (event: any) => {
@@ -204,7 +153,7 @@ const CreatePlanStructure = ({
   };
   document.body.addEventListener("dragend", handleDragEnd);
   // document.body.addEventListener("dragleave", handleDragEnd);
-  let dataForPreviewTable = blocks.map((block) =>
+  let dataForPreviewTable = blocks.map((block: any) =>
     mapKeys(block, (value, key: string) => {
       if (key === "blockName") return "titleRow";
       return key;
@@ -255,11 +204,65 @@ const CreatePlanStructure = ({
         </div>
       );
   };
+
   return (
     <>
       <div>
         <div className="rigth-tables-container">
           <DndProvider backend={HTML5Backend}>
+            <div className="plan-structure-selected-competencies-container">
+              <button
+                className="plan-structure-selected-competencies-caption"
+                onClick={toggleIsPlanStructureCompetenciesCollapsedCollapse}
+              >
+                Компетенции
+              </button>
+              <CSSTransition
+                key="competencies-transition"
+                in={!isPlanStructureCompetenciesCollapsed}
+                timeout={300}
+                classNames="competencies"
+                unmountOnExit
+              >
+                <div className="plan-structure-selected-competencies-table-container">
+                  <table className="plan-structure-selected-competencies-table">
+                    <thead className="plan-structure-selected-competencies-table-thead">
+                      <tr className="plan-structure-selected-competencies-table-header-line">
+                        <th className="plan-structure-selected-competencies-table-header-line-td">
+                          Код
+                        </th>
+                        <th className="plan-structure-selected-competencies-table-header-line-td">
+                          Название
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedCompetencies.map(
+                        (competence: Competency & { rateSum: number }) => (
+                          <tr
+                            className="plan-structure-selected-competencies-table-tr"
+                            style={{
+                              backgroundImage: `linear-gradient(to right, rgba(230,250,253,1) ${
+                                competence.rateSum * 100
+                              }%, rgba(255, 255, 255) 0)`,
+                            }}
+                            key={competence.id}
+                          >
+                            <td className="plan-structure-selected-competencies-table-tbody-td">
+                              {competence.code}
+                            </td>
+                            <td className="plan-structure-selected-competencies-table-tbody-td">
+                              {competence.name}
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CSSTransition>
+            </div>
+
             <DisciplineItem
               disciplines={disciplines}
               handleDisciplineMove={handleDisciplineMove}
@@ -309,7 +312,7 @@ const CreatePlanStructure = ({
                 </div>
               </div>
               {(viewType === "list" &&
-                blocks.map((block: any, index) => (
+                blocks.map((block: any, index: number) => (
                   <CreateBlockPlace
                     key={index}
                     name={block.blockName}
@@ -327,7 +330,7 @@ const CreatePlanStructure = ({
                       onWheel={handleMouseWheel}
                       ref={panelRef}
                     >
-                      {blocks.map((block, index) => (
+                      {blocks.map((block: any, index: number) => (
                         <li
                           key={index}
                           className={

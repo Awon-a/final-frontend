@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { getCompetencies } from "../../redux/actions/competencies.actions";
 import { getDisciplines } from "../../redux/actions/disicplines.actions";
 import {
   Attestations,
@@ -10,15 +11,23 @@ import {
   PlanStatusMapper,
   PlanTrainingFromMapper,
 } from "../../types/academic-plan";
+import { Competency, CompetencyState } from "../../types/competencies";
 import { DisciplineState } from "../../types/discipline";
+import Competencies from "../Competencies/Competencies.js";
 import Header from "../Header/Header";
 import CreatePlanStructure from "./CreatePlanStructure";
 import PlanCompetencies from "./PlanCompetencies/PlanCompetencies";
 import PlanMeta from "./PlanMeta/PlanMeta";
 import { PlacesTypes } from "./types/places-types";
 import { DisciplineForPlan } from "./types/plan-discipline";
+import Practice from "../../common/assets/practice.svg";
+import Elective from "../../common/assets/elective.svg";
+import Base from "../../common/assets/base.svg";
+import SFE from "../../common/assets/sfe.svg";
+import { convertToObject } from "typescript";
 
 const CreatePlan = () => {
+  const dispatch = useDispatch();
   const [current, setCurrent] = useState(PlacesTypes.chooseCompetencies);
   const { pathname } = useLocation();
 
@@ -154,7 +163,48 @@ const CreatePlan = () => {
   );
   ////////////////////
 
-  const dispatch = useDispatch();
+  const { competencies: competenciesState } = useSelector(
+    (state: CompetencyState) => state.competencies
+  );
+  const [competencies, setCompetencies] = useState([]);
+  const [selectedCompetencies, setSelectedCompetencies]: [Competency[], any] =
+    useState([]);
+  useEffect(() => {
+    dispatch(getCompetencies({ limit: 100 }));
+  }, [dispatch]);
+  useEffect(() => {
+    console.log("USE EFFECT COMPETENCIES");
+    const newCompetencies = competenciesState?.map((competence) => ({
+      ...competence,
+      rateSum: 0,
+    }));
+    console.log({ competenciesState, newCompetencies });
+    setCompetencies((newCompetencies as any) ?? []);
+  }, [competenciesState]);
+  console.log({ competencies });
+  const handleICompetenciesClick = useCallback(
+    (item: any) => {
+      // Проверяем, есть ли элемент в массиве выбранных элементов
+      const index = selectedCompetencies.findIndex(
+        (selectedItem) => selectedItem.id === item.id
+      );
+
+      if (index === -1) {
+        // Если элемента нет в массиве выбранных элементов, добавляем его туда
+        setSelectedCompetencies(() => [...selectedCompetencies, item]);
+      } else {
+        // Если элемент уже есть в массиве выбранных элементов, удаляем его
+        setSelectedCompetencies(() => [
+          ...selectedCompetencies.slice(0, index),
+          ...selectedCompetencies.slice(index + 1),
+        ]);
+      }
+    },
+    [setSelectedCompetencies, selectedCompetencies]
+  );
+
+  ////////////////////
+
   let { disciplines: disciplinesState } = useSelector(
     (state: DisciplineState) => state.disciplines
   );
@@ -168,12 +218,47 @@ const CreatePlan = () => {
   const [sfeDisciplines, setSfeDisciplines]: any = useState([]);
   const [practiceDisciplines, setPracticeDisciplines]: any = useState([]);
   const [showDownArrow, setShowDownArrow] = useState(false);
+  const [
+    isPlanStructureCompetenciesCollapsed,
+    setSsPlanStructureCompetenciesCollapsed,
+  ] = useState(false);
 
+  const toggleIsPlanStructureCompetenciesCollapsedCollapse = () => {
+    setSsPlanStructureCompetenciesCollapsed(
+      !isPlanStructureCompetenciesCollapsed
+    );
+  };
+  const decreaseCompPercent = (competence: any, discipline: any) => {
+    competence.rateSum -= discipline.competencies.reduce(
+      (sum: number, c: any) =>
+        c.id === competence.id ? Number(sum) + Number(c.rate) : Number(sum),
+      0
+    );
+    return competence;
+  };
+  const increaseCompPercent = (competence: any, discipline: any) => {
+    competence.rateSum += discipline.competencies.reduce(
+      (sum: number, c: any) =>
+        c.id === competence.id ? Number(sum) + Number(c.rate) : Number(sum),
+      0
+    );
+    return competence;
+  };
+  const calcCompetenciesRate = useCallback(
+    (comps: any[], discipline: any, callback = increaseCompPercent) => {
+      console.log("calcCompetenciesRate");
+      const newCompetencies = comps.map((competence: any) =>
+        callback(competence, discipline)
+      );
+      return newCompetencies;
+    },
+    []
+  );
   useEffect(() => {
     dispatch(getDisciplines({ limit: 100 }));
   }, [dispatch]);
   useEffect(() => {
-    const disciplines = disciplinesState.map(
+    const newDisciplines = disciplinesState.map(
       (discipline: any) =>
         ({
           ...discipline,
@@ -183,12 +268,34 @@ const CreatePlan = () => {
           lectureH: 0,
           practiceH: 0,
           sumH: 0,
+          competencies:
+            discipline.competencies?.map((competence: Competency) => ({
+              ...competence,
+              rate: Math.random().toFixed(2),
+            })) ?? [],
           attestation: Attestations.Exam,
         } as DisciplineForPlan)
     );
-    setDisciplines(disciplines as any);
+    newDisciplines.length &&
+      (() =>
+        (newDisciplines[1].competencies = newDisciplines?.[0]?.competencies))();
+    setDisciplines(newDisciplines as any);
   }, [disciplinesState]);
 
+  const handleCalcComptenciesPercent = useCallback(
+    (disc: any, callback = increaseCompPercent) => {
+      console.log("handleCalcComptenciesPercent");
+      setSelectedCompetencies((prevSelectedCompetencies: any[]) => {
+        const newSelectedCompetencies = calcCompetenciesRate(
+          prevSelectedCompetencies,
+          disc,
+          callback
+        );
+        return newSelectedCompetencies;
+      });
+    },
+    [setSelectedCompetencies, calcCompetenciesRate]
+  );
   const handleChangeBaseDisciplines = useCallback(
     (discipline: DisciplineForPlan) => {
       setBaseDisciplines((prevPlanDisciplines: DisciplineForPlan[]) =>
@@ -247,48 +354,55 @@ const CreatePlan = () => {
       setDisciplines((prevDisciplines: Discipline[]) =>
         prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
       );
-      setBaseDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
+      setBaseDisciplines((prevPlanDisciplines: any) => {
+        const newBaseDisciplines = [...prevPlanDisciplines, discipline];
+        handleCalcComptenciesPercent(discipline);
+        return newBaseDisciplines;
+      });
     },
-    [setDisciplines, setBaseDisciplines]
+    [setDisciplines, setBaseDisciplines, handleCalcComptenciesPercent]
   );
   const handleElectiveDisciplineDrop = useCallback(
     (discipline: Discipline) => {
       setDisciplines((prevDisciplines: Discipline[]) =>
         prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
       );
-      setElectiveDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
+      setElectiveDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = [...prevPlanDisciplines, discipline];
+        handleCalcComptenciesPercent(discipline);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setElectiveDisciplines]
+    [setDisciplines, setElectiveDisciplines, handleCalcComptenciesPercent]
   );
   const handleSfeDisciplineDrop = useCallback(
     (discipline: Discipline) => {
       setDisciplines((prevDisciplines: Discipline[]) =>
         prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
       );
-      setSfeDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
+      setSfeDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = [...prevPlanDisciplines, discipline];
+        handleCalcComptenciesPercent(discipline);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setSfeDisciplines]
+    [setDisciplines, setSfeDisciplines, handleCalcComptenciesPercent]
   );
   const handlePracticeDisciplineDrop = useCallback(
     (discipline: Discipline) => {
       setDisciplines((prevDisciplines: Discipline[]) =>
         prevDisciplines.filter((d: Discipline) => d.id !== discipline.id)
       );
-      setPracticeDisciplines((prevPlanDisciplines: any) => [
-        ...prevPlanDisciplines,
-        discipline,
-      ]);
+      setPracticeDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = [...prevPlanDisciplines, discipline];
+        handleCalcComptenciesPercent(discipline);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setPracticeDisciplines]
+    [setDisciplines, setPracticeDisciplines, handleCalcComptenciesPercent]
   );
   const handleDeleteBaseDisciplines = useCallback(
     (discipline: Discipline) => {
@@ -296,11 +410,16 @@ const CreatePlan = () => {
         ...prevDisciplines,
         discipline,
       ]);
-      setBaseDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
+      setBaseDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = prevPlanDisciplines.filter(
+          (d: Discipline) => d.id !== discipline.id
+        );
+        // console.log("delete: ", { newDisciplines });
+        handleCalcComptenciesPercent(discipline, decreaseCompPercent);
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setBaseDisciplines]
+    [setDisciplines, setBaseDisciplines, handleCalcComptenciesPercent]
   );
   const handleDeleteElectiveDisciplines = useCallback(
     (discipline: Discipline) => {
@@ -308,11 +427,16 @@ const CreatePlan = () => {
         ...prevDisciplines,
         discipline,
       ]);
-      setElectiveDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
+      setElectiveDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = prevPlanDisciplines.filter(
+          (d: Discipline) => d.id !== discipline.id
+        );
+        handleCalcComptenciesPercent(discipline, decreaseCompPercent);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setElectiveDisciplines]
+    [setDisciplines, setElectiveDisciplines, handleCalcComptenciesPercent]
   );
   const handleDeleteSfeDisciplines = useCallback(
     (discipline: Discipline) => {
@@ -320,11 +444,16 @@ const CreatePlan = () => {
         ...prevDisciplines,
         discipline,
       ]);
-      setSfeDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
+      setSfeDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = prevPlanDisciplines.filter(
+          (d: Discipline) => d.id !== discipline.id
+        );
+        handleCalcComptenciesPercent(discipline, decreaseCompPercent);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setSfeDisciplines]
+    [setDisciplines, setSfeDisciplines, handleCalcComptenciesPercent]
   );
   const handleDeletePracticeDisciplines = useCallback(
     (discipline: Discipline) => {
@@ -332,11 +461,16 @@ const CreatePlan = () => {
         ...prevDisciplines,
         discipline,
       ]);
-      setPracticeDisciplines((prevPlanDisciplines: any) =>
-        prevPlanDisciplines.filter((d: Discipline) => d.id !== discipline.id)
-      );
+      setPracticeDisciplines((prevPlanDisciplines: any) => {
+        const newDisciplines = prevPlanDisciplines.filter(
+          (d: Discipline) => d.id !== discipline.id
+        );
+        handleCalcComptenciesPercent(discipline, decreaseCompPercent);
+
+        return newDisciplines;
+      });
     },
-    [setDisciplines, setPracticeDisciplines]
+    [setDisciplines, setPracticeDisciplines, handleCalcComptenciesPercent]
   );
   const [viewType, setViewType] = useState("list");
 
@@ -352,6 +486,48 @@ const CreatePlan = () => {
   const handleClickTab = (index: number) => {
     setActiveTab(index);
   };
+  const blocks: {
+    blockName: string;
+    icon: any;
+    disciplines: any[];
+    onDrop: any;
+    onDelete: any;
+    onChangeDiscipline: any;
+  }[] = [
+    {
+      blockName: "Базовая часть",
+      disciplines: baseDisciplines,
+      onDrop: handleBaseDisciplineDrop,
+      icon: Base,
+      onDelete: handleDeleteBaseDisciplines,
+      onChangeDiscipline: handleChangeBaseDisciplines,
+    },
+    {
+      blockName: "Вариативная часть",
+      disciplines: electiveDisciplines,
+      onDrop: handleElectiveDisciplineDrop,
+      icon: Elective,
+      onDelete: handleDeleteElectiveDisciplines,
+      onChangeDiscipline: handleChangeElectiveDisciplines,
+    },
+    {
+      blockName: "ГИА",
+      disciplines: sfeDisciplines,
+      onDrop: handleSfeDisciplineDrop,
+      icon: SFE,
+      onDelete: handleDeleteSfeDisciplines,
+      onChangeDiscipline: handleChangeSfeDisciplines,
+    },
+    {
+      blockName: "Практика",
+      disciplines: practiceDisciplines,
+      onDrop: handlePracticeDisciplineDrop,
+      icon: Practice,
+      onDelete: handleDeletePracticeDisciplines,
+      onChangeDiscipline: handleChangePracticeDisciplines,
+    },
+  ];
+
   return (
     <>
       <Header currentPath={pathname} />
@@ -391,7 +567,13 @@ const CreatePlan = () => {
         />
       )}
       {current === PlacesTypes.chooseCompetencies && (
-        <PlanCompetencies goBack={goToMetaPlan} goNext={goToPlanStruct} />
+        <PlanCompetencies
+          goBack={goToMetaPlan}
+          goNext={goToPlanStruct}
+          competencies={competencies}
+          handleICompetenciesClick={handleICompetenciesClick}
+          selectedCompetencies={selectedCompetencies}
+        />
       )}
       {current === PlacesTypes.structPlan && (
         <CreatePlanStructure
@@ -420,6 +602,14 @@ const CreatePlan = () => {
           sfeDisciplines={sfeDisciplines}
           practiceDisciplines={practiceDisciplines}
           showDownArrow={showDownArrow}
+          blocks={blocks}
+          selectedCompetencies={selectedCompetencies}
+          toggleIsPlanStructureCompetenciesCollapsedCollapse={
+            toggleIsPlanStructureCompetenciesCollapsedCollapse
+          }
+          isPlanStructureCompetenciesCollapsed={
+            isPlanStructureCompetenciesCollapsed
+          }
         />
       )}
     </>

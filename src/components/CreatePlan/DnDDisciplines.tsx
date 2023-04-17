@@ -64,8 +64,10 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
         <table className="disciplines-table">
           <thead className="disciplines-table-thead">
             <tr className="disciplines-table-header-line">
-              <th>Название</th>
-              <th>Код подразделения</th>
+              <th className="disciplines-table-header-line-th">Название</th>
+              <th className="disciplines-table-header-line-th">
+                Код подразделения
+              </th>
             </tr>
           </thead>
           <tbody>

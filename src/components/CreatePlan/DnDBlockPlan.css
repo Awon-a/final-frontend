@@ -170,6 +170,9 @@ html {
 .plan-disciplines-table-thead-line-td:nth-child(n + 3) {
   text-align: center;
 }
+.plan-disciplines-table-thead-line-td:first-child {
+  padding-left: 1vw;
+}
 
 .plan-discipline-table-tr-td:nth-child(1) {
   padding-left: 1vw;

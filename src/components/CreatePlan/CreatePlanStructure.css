@@ -230,3 +230,103 @@
   height: 3vh;
   width: 3vh;
 }
+
+.plan-structure-selected-competencies-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  max-height: 28vh;
+  margin-left: 7%;
+  margin-top: 2%;
+  width: 70%;
+  padding: 1vw 2vh;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: height 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255);
+}
+
+.plan-structure-selected-competencies-caption {
+  height: 3vh;
+  top: 0;
+  font-size: 2.2vh;
+  margin-right: 0.5vw;
+  background-color: rgba(255, 255, 255);
+  color: rgba(51, 51, 51, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  text-align: left;
+  align-self: left;
+  border: none; /* убираем границу */
+  outline: none;
+}
+.plan-structure-selected-competencies-caption:focus {
+  border: none; /* убираем границу */
+  outline: none;
+}
+.plan-structure-selected-competencies-table-container {
+  max-height: 24vh;
+  overflow-y: scroll;
+}
+.plan-structure-selected-competencies-table {
+  width: 100%;
+}
+.plan-structure-selected-competencies-table-thead {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255);
+}
+.plan-structure-selected-competencies-table-header-line {
+  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 3vh;
+}
+.plan-structure-selected-competencies-table-header-line-td {
+  padding-left: 1vw;
+}
+.plan-structure-selected-competencies-table-tr {
+  /* background-image: linear-gradient(
+    to right,
+    rgba(144, 162, 104, 0.3) 10%,
+    rgba(255, 255, 255) 0
+  ); */
+  height: 5vh;
+  font-size: 1.5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 3.5px solid rgba(240, 246, 251, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+
+.plan-structure-selected-competencies-table-tbody-td {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+}
+
+.plan-structure-selected-competencies-table-tbody-td:first-child {
+  border-radius: 10px 0px 0px 10px;
+}
+.plan-structure-selected-competencies-table-tr:hover {
+  background: rgba(249, 251, 252, 1);
+}
+.competencies-enter {
+  opacity: 0;
+}
+.competencies-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.competencies-exit {
+  opacity: 1;
+}
+
+.competencies-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
