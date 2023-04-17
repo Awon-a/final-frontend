@@ -181,8 +181,7 @@ const CreatePlanStructure = ({
           </div>
           <div className="plan-disciplines-credits-bound-warning-content">
             Внимание! Общая трудоемкость УП не соответствует объему
-            образовательной программы (текущая: {creditsSum} <u>&lt;</u> ФГОС:
-            240-300).
+            образовательной программы (текущая: {creditsSum} <u>&lt;</u> 240).
           </div>
         </div>
       );
@@ -198,8 +197,8 @@ const CreatePlanStructure = ({
           </div>
           <div className="plan-disciplines-credits-bound-warning-content">
             Внимание! Общая трудоемкость УП не соответствует объему
-            образовательной программы (текущая: {creditsSum} <u>&gt;</u> ФГОС:
-            240-300).
+            образовательной программы (текущая: {creditsSum} <u>&gt;</u>
+            300).
           </div>
         </div>
       );
@@ -234,6 +233,7 @@ const CreatePlanStructure = ({
                         <th className="plan-structure-selected-competencies-table-header-line-td">
                           Название
                         </th>
+                        <th className="plan-structure-selected-competencies-table-header-line-td"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -253,6 +253,12 @@ const CreatePlanStructure = ({
                             </td>
                             <td className="plan-structure-selected-competencies-table-tbody-td">
                               {competence.name}
+                            </td>
+                            <td className="plan-structure-selected-competencies-table-tbody-td">
+                              {competence.rateSum * 100 >= 100
+                                ? 100
+                                : competence.rateSum * 100}
+                              %
                             </td>
                           </tr>
                         )

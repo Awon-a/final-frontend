@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDrag, useDragLayer } from "react-dnd";
-import * as Scroller from "react-scroll";
+import { Competency } from "../../types/competencies.js";
+import { DisciplineForPlan } from "./types/plan-discipline";
 
 export const DisciplineTypes = {
   Discipline: "Discipline",
@@ -55,32 +56,72 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
   //   }
   // });
 
-  const scrollRef: any = useRef(null);
+  const tableRef: any = useRef(null);
+  const [hiddenDisciplineData, setHiddenDisciplineData]: any = useState(true);
+  const [disciplineData, setDisciplineData]: any = useState(false);
+  const handleShowDisciplineData = (discipline: DisciplineForPlan) => {
+    if (discipline.id === disciplineData.id) {
+      setHiddenDisciplineData(!hiddenDisciplineData);
+    } else {
+      setDisciplineData(discipline);
+      setHiddenDisciplineData(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (tableRef.current && !tableRef.current.contains(event.target)) {
+        hiddenDisciplineData(true);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [tableRef]);
 
   return (
-    <div className="table-container">
-      <div className="disicplines-table-caption">Дисциплины</div>
-      <div className="discipline-table-container">
-        <table className="disciplines-table">
-          <thead className="disciplines-table-thead">
-            <tr className="disciplines-table-header-line">
-              <th className="disciplines-table-header-line-th">Название</th>
-              <th className="disciplines-table-header-line-th">
-                Код подразделения
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {disciplines.map((discipline: any) => (
-              <TableRow
-                key={discipline.id}
-                discipline={discipline}
-                handleDisciplineMove={handleDisciplineMove}
-              />
-            ))}
-          </tbody>
-        </table>
+    <div className="plan-structure-disciplines-with-data">
+      <div className="table-container">
+        <div className="disicplines-table-caption">Дисциплины</div>
+        <div className="discipline-table-container">
+          <table className="disciplines-table" ref={tableRef}>
+            <thead className="disciplines-table-thead">
+              <tr className="disciplines-table-header-line">
+                <th className="disciplines-table-header-line-th">Название</th>
+                <th className="disciplines-table-header-line-th">
+                  Код подразделения
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {disciplines.map((discipline: any) => (
+                <TableRow
+                  key={discipline.id}
+                  discipline={discipline}
+                  handleDisciplineMove={handleDisciplineMove}
+                  handleShowDisciplineData={handleShowDisciplineData}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+      {!hiddenDisciplineData && (
+        <div className="plan-structure-discipline-data-container">
+          <div className="plan-structure-discipline-data-caption">
+            Компетенции
+          </div>
+          {!hiddenDisciplineData &&
+            disciplineData.competencies.map((data: Competency) => (
+              <>
+                <div className="plan-structure-discipline-data-tr">
+                  <b>{data.code}:</b> {data.name}
+                </div>
+              </>
+            ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -112,7 +153,11 @@ export function CustomDragLayer() {
   );
 }
 
-const TableRow = ({ discipline, handleDisciplineMove, scrollRef }: any) => {
+const TableRow = ({
+  discipline,
+  handleDisciplineMove,
+  handleShowDisciplineData,
+}: any) => {
   const [{ opacity }, dragRef] = useDrag(() => ({
     type: DisciplineTypes.Discipline,
     isDragging: (monitor) => !!monitor.isDragging,
@@ -132,6 +177,7 @@ const TableRow = ({ discipline, handleDisciplineMove, scrollRef }: any) => {
       onMouseDown={() => {
         handleDisciplineMove(discipline);
       }}
+      onClick={() => handleShowDisciplineData(discipline, discipline.id)}
     >
       <td className="disicpline-table-tbody-td">{discipline.name}</td>
       <td className="disicpline-table-tbody-td">{discipline.codeDepartment}</td>
