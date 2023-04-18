@@ -32,6 +32,10 @@
 }
 
 .disicplines-table-caption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
   height: 3vh;
   top: 0;
   font-size: 2.2vh;
@@ -43,6 +47,32 @@
   align-self: start;
   border: none; /* убираем границу */
   outline: none;
+}
+.plan-structure-discipline-data-caption {
+  background-color: rgba(255, 249, 233, 1);
+  width: 100%;
+  height: 100%;
+  /* padding-top: 1vh; */
+  padding-left: 0.5vw;
+  position: sticky;
+  top: 0;
+  font-size: 2.2vh;
+  color: rgba(51, 51, 51, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+}
+.plan-structure-discipline-caption {
+  background-color: rgba(255, 255, 255);
+  width: 100%;
+  height: 100%;
+  /* padding-top: 1vh; */
+  padding-left: 0.5vw;
+  position: sticky;
+  top: 0;
+  font-size: 2.2vh;
+  color: rgba(51, 51, 51, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
 }
 
 .disciplines-table-thead {
@@ -106,6 +136,16 @@
   font-weight: 500;
 }
 
+.discipline-table-tr-active {
+  height: 5vh;
+  font-size: 1.5vh;
+  border-bottom: 3.5px solid rgba(240, 246, 251, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  background: rgb(242, 250, 254);
+}
+
 .disicpline-table-tbody-td {
   padding-left: 1vw;
   line-height: 2.8vh;
@@ -131,18 +171,6 @@
   border-radius: 25px;
   align-items: center;
   overflow: auto;
-}
-.plan-structure-discipline-data-caption {
-  background-color: rgba(255, 249, 233, 1);
-  width: 100%;
-  height: 10vh;
-  padding-top: 1vh;
-  position: sticky;
-  top: 0;
-  font-size: 1.8vh;
-  color: rgba(55, 69, 80, 1);
-  font-family: "Signika", sans-serif;
-  font-weight: 700;
 }
 .plan-structure-discipline-data-tr {
   font-size: 1.5vh;

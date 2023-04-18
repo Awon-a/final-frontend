@@ -61,7 +61,8 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
   const [disciplineData, setDisciplineData]: any = useState(false);
   const handleShowDisciplineData = (discipline: DisciplineForPlan) => {
     if (discipline.id === disciplineData.id) {
-      setHiddenDisciplineData(!hiddenDisciplineData);
+      setHiddenDisciplineData(true);
+      setDisciplineData(false);
     } else {
       setDisciplineData(discipline);
       setHiddenDisciplineData(false);
@@ -83,7 +84,9 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
   return (
     <div className="plan-structure-disciplines-with-data">
       <div className="table-container">
-        <div className="disicplines-table-caption">Дисциплины</div>
+        <div className="disicplines-table-caption">
+          <div className="plan-structure-discipline-caption">Дисциплины</div>
+        </div>
         <div className="discipline-table-container">
           <table className="disciplines-table" ref={tableRef}>
             <thead className="disciplines-table-thead">
@@ -99,6 +102,7 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
                 <TableRow
                   key={discipline.id}
                   discipline={discipline}
+                  disciplineData={disciplineData}
                   handleDisciplineMove={handleDisciplineMove}
                   handleShowDisciplineData={handleShowDisciplineData}
                 />
@@ -157,6 +161,7 @@ const TableRow = ({
   discipline,
   handleDisciplineMove,
   handleShowDisciplineData,
+  disciplineData,
 }: any) => {
   const [{ opacity }, dragRef] = useDrag(() => ({
     type: DisciplineTypes.Discipline,
@@ -172,7 +177,11 @@ const TableRow = ({
     <tr
       ref={dragRef}
       style={{ opacity: opacity, cursor: "move" }}
-      className="discipline-table-tr"
+      className={
+        disciplineData?.id === discipline.id
+          ? "discipline-table-tr-active"
+          : "discipline-table-tr"
+      }
       key={discipline.id}
       onMouseDown={() => {
         handleDisciplineMove(discipline);
@@ -185,11 +194,24 @@ const TableRow = ({
   );
 };
 
-function collect(connect: any, monitor: any) {
-  return {
-    connectDragSource: connect.gragSource(),
-    isDragging: monitor.isDragging(),
-  };
+function Select({ valueFrom, mapper, onChange, className }: any) {
+  const keyFromValue = Object.keys(mapper).find(
+    (key) => valueFrom === mapper[key]
+  );
+  const value = mapper[keyFromValue as any];
+  return (
+    <select
+      className={className}
+      value={value}
+      onChange={(event) => onChange(event)}
+    >
+      {Object.keys(mapper).map((key: any) => (
+        <option key={key} value={mapper[key]}>
+          {mapper[key]}
+        </option>
+      ))}
+    </select>
+  );
 }
 
 export default Discipline;
