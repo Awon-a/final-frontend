@@ -4,7 +4,7 @@
   justify-content: start;
   align-items: center;
   width: 100%;
-  height: 32vh;
+  height: 100%;
 }
 
 .table-container {
@@ -31,12 +31,13 @@
   width: 100%;
 }
 
-.disicplines-table-caption {
+.disicplines-table-caption-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: end;
+  align-items: start;
   height: 3vh;
+  width: 100%;
   top: 0;
   font-size: 2.2vh;
   margin-right: 0.5vw;
@@ -51,12 +52,11 @@
 .plan-structure-discipline-data-caption {
   background-color: rgba(255, 249, 233, 1);
   width: 100%;
-  height: 100%;
-  /* padding-top: 1vh; */
-  padding-left: 0.5vw;
+  height: 4.5vh;
+  padding-top: 1vh;
   position: sticky;
   top: 0;
-  font-size: 2.2vh;
+  font-size: 2vh;
   color: rgba(51, 51, 51, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -73,6 +73,25 @@
   color: rgba(51, 51, 51, 1);
   font-family: "Signika", sans-serif;
   font-weight: bold;
+}
+.plan-structure-discipline-caption-select-block {
+  border: none;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  font-size: 1.5vh;
+  color: rgba(51, 51, 51, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  padding-left: 0.5vw;
+  /* height: 100%; */
+  align-self: start;
+}
+.plan-structure-discipline-caption-select-block:focus {
+  border: none;
+  outline: none;
 }
 
 .disciplines-table-thead {
@@ -150,7 +169,13 @@
   padding-left: 1vw;
   line-height: 2.8vh;
 }
-
+.disicpline-table-tbody-td-checkbox {
+  line-height: 2.8vh;
+  text-align: center;
+}
+.disicpline-table-tbody-td-checkbox:hover {
+  cursor: pointer;
+}
 .disicpline-table-tbody-td:first-child {
   border-radius: 8px 0px 0px 8px;
 }
@@ -160,14 +185,14 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  margin-top: 2%;
+  margin-top: 1%;
   margin-left: 2vw;
   padding: 0vh 1vw;
   height: 28vh;
   width: 15vw;
   overflow-y: scroll;
   background-color: rgba(255, 249, 233, 1);
-  border: 1px solid rgba(250, 196, 52, 1);
+  box-shadow: 0 0 5px rgba(250, 196, 52, 1);
   border-radius: 25px;
   align-items: center;
   overflow: auto;

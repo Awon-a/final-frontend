@@ -11,6 +11,7 @@ import {
 
 export enum CompetencyActions {
   CREATE_COMPETENCY = "CREATE_COMPETENCY",
+  CREATE_COMPETENCY_REQUEST = "CREATE_COMPETENCY_REQUEST",
   SUCCESS_CREATE_COMPETENCY = "SUCCESS_CREATE_COMPETENCY",
   UPDATE_COMPETENCY = "UPDATE_COMPETENCY",
   SUCCESS_UPDATE_COMPETENCY = "SUCCESS_UPDATE_COMPETENCY",
@@ -21,6 +22,7 @@ export enum CompetencyActions {
   SUCCESS_DELETE_COMPETENCY = "SUCCESS_DELETE_COMPETENCY",
   REQUEST_COMPETENCY_FAILED = "REQUEST_COMPETENCY_FAILED",
   GET_ONE_COMPETENCY = "GET_ONE_COMPETENCY",
+  GET_ONE_COMPETENCY_REQUEST = "GET_ONE_COMPETENCY_REQUEST",
   GET_ONE_COMPETENCY_SUCCESS = "GET_ONE_COMPETENCY_SUCCESS",
   GET_COMPETENCY_INDICATORS = "GET_COMPETENCY_INDICATORS",
   GET_COMPETENCY_INDICATORS_REQUEST = "GET_COMPETENCY_INDICATORS_REQUEST",
@@ -45,7 +47,19 @@ export interface UpdateCompetencyAction {
     | CompetencyActions.SUCCESS_UPDATE_COMPETENCY;
   payload: UpdateOneCompetency;
 }
-
+export interface CreateCompetencyAction {
+  type: CompetencyActions.CREATE_COMPETENCY;
+  payload: CreateOneCompetency;
+}
+export interface CreateCompetencyRequestAction {
+  type: CompetencyActions.CREATE_COMPETENCY_REQUEST;
+}
+export interface CreateCompetencySuccessAction {
+  type: CompetencyActions.SUCCESS_CREATE_COMPETENCY;
+  payload: {
+    id: string;
+  };
+}
 export interface DeleteCompetencyAction {
   type:
     | CompetencyActions.DELETE_COMPETENCY
@@ -87,6 +101,17 @@ export interface GetCompetencyIndicatorsSuccessAction {
     meta: Meta;
   };
 }
+export interface GetOneCompetencyAction {
+  type: CompetencyActions.GET_ONE_COMPETENCY;
+  payload: string;
+}
+export interface GetOneCompetencyRequestAction {
+  type: CompetencyActions.GET_ONE_COMPETENCY_REQUEST;
+}
+export interface GetOneCompetencySuccessAction {
+  type: CompetencyActions.GET_ONE_COMPETENCY_SUCCESS;
+  payload: Competency;
+}
 
 export interface FailedAction {
   type: CompetencyActions.REQUEST_COMPETENCY_FAILED;
@@ -94,10 +119,16 @@ export interface FailedAction {
 
 export type CompetencyActionsType =
   | UpdateCompetencyAction
+  | GetOneCompetencyAction
+  | GetOneCompetencyRequestAction
+  | GetOneCompetencySuccessAction
   | GetCompetenciesAction
   | DeleteCompetencyAction
-  | GetCompetenciesSuccessAction
+  | CreateCompetencyAction
+  | CreateCompetencyRequestAction
+  | CreateCompetencySuccessAction
   | GetCompetenciesRequestAction
+  | GetCompetenciesSuccessAction
   | GetCompetencyIndicatorsAction
   | GetCompetencyIndicatorsRequestAction
   | GetCompetencyIndicatorsSuccessAction

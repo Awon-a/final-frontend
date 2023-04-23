@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getCompetencies } from "../../redux/actions/competencies.actions";
+import {
+  getCompetencies,
+  getOneCompetency,
+} from "../../redux/actions/competencies.actions";
 import { getDisciplines } from "../../redux/actions/disicplines.actions";
 import {
   Attestations,
@@ -28,7 +31,7 @@ import { convertToObject } from "typescript";
 
 const CreatePlan = () => {
   const dispatch = useDispatch();
-  const [current, setCurrent] = useState(PlacesTypes.chooseCompetencies);
+  const [current, setCurrent] = useState(PlacesTypes.planMeta);
   const { pathname } = useLocation();
 
   const goToMetaPlan = useCallback(() => {
@@ -163,24 +166,38 @@ const CreatePlan = () => {
   );
   ////////////////////
 
-  const { competencies: competenciesState } = useSelector(
-    (state: CompetencyState) => state.competencies
-  );
-  const [competencies, setCompetencies] = useState([]);
+  const {
+    competencies: competenciesState,
+    createId,
+    competency,
+  }: any = useSelector((state: CompetencyState) => state.competencies);
+  const [competencies, setCompetencies]: any = useState([]);
+  const [createdCompetence, setCreatedCompetence]: any = useState({});
   const [selectedCompetencies, setSelectedCompetencies]: [Competency[], any] =
     useState([]);
   useEffect(() => {
     dispatch(getCompetencies({ limit: 100 }));
   }, [dispatch]);
   useEffect(() => {
-    console.log("USE EFFECT COMPETENCIES");
-    const newCompetencies = competenciesState?.map((competence) => ({
+    const newCompetencies = competenciesState?.map((competence: any) => ({
       ...competence,
       rateSum: 0,
     }));
-    console.log({ competenciesState, newCompetencies });
     setCompetencies((newCompetencies as any) ?? []);
   }, [competenciesState]);
+  // useEffect(() => {
+  //   console.log({ createId });
+  //   dispatch(getOneCompetency(createId));
+  // }, [createId]);
+  // useEffect(() => {
+  //   console.log("compe: ", { competency });
+  //   setCreatedCompetence(competency);
+  // }, [competency]);
+  // useEffect(() => {
+  //   console.log("created: ", createdCompetence);
+  //   setCompetencies([...competencies, createdCompetence]);
+  //   setSelectedCompetencies([...selectedCompetencies, createdCompetence]);
+  // }, [createdCompetence]);
   console.log({ competencies });
   const handleICompetenciesClick = useCallback(
     (item: any) => {
@@ -213,6 +230,7 @@ const CreatePlan = () => {
     []
   );
   const [activeTab, setActiveTab] = useState(0);
+  const [planStructurePartsTab, setPlanStructurePartsTab] = useState(0);
   const [baseDisciplines, setBaseDisciplines]: any = useState([]);
   const [electiveDisciplines, setElectiveDisciplines]: any = useState([]);
   const [sfeDisciplines, setSfeDisciplines]: any = useState([]);
@@ -234,6 +252,7 @@ const CreatePlan = () => {
         c.id === competence.id ? Number(sum) + Number(c.rate) : Number(sum),
       0
     );
+    if (competence.rateSum < 0) competence.rateSum = 0;
     return competence;
   };
   const increaseCompPercent = (competence: any, discipline: any) => {
@@ -246,7 +265,6 @@ const CreatePlan = () => {
   };
   const calcCompetenciesRate = useCallback(
     (comps: any[], discipline: any, callback = increaseCompPercent) => {
-      console.log("calcCompetenciesRate");
       const newCompetencies = comps.map((competence: any) =>
         callback(competence, discipline)
       );
@@ -284,7 +302,6 @@ const CreatePlan = () => {
 
   const handleCalcComptenciesPercent = useCallback(
     (disc: any, callback = increaseCompPercent) => {
-      console.log("handleCalcComptenciesPercent");
       setSelectedCompetencies((prevSelectedCompetencies: any[]) => {
         const newSelectedCompetencies = calcCompetenciesRate(
           prevSelectedCompetencies,
@@ -486,6 +503,9 @@ const CreatePlan = () => {
   const handleClickTab = (index: number) => {
     setActiveTab(index);
   };
+  const handleClickPlanStructurePartsTab = (index: number) => {
+    setPlanStructurePartsTab(index);
+  };
   const blocks: {
     blockName: string;
     icon: any;
@@ -528,6 +548,14 @@ const CreatePlan = () => {
     },
   ];
 
+  const blockNames: string[] = blocks.map((block: any) => block.blockName);
+  const blockMapper = Object.fromEntries(
+    blockNames.map((name: any, index: number) => [index, name])
+  );
+  const [blockName, setBlockName] = useState(blockNames[0]);
+  const handleDisciplinesCurrentBlockChange = (event: any) => {
+    setBlockName(event.target.value);
+  };
   return (
     <>
       <Header currentPath={pathname} />
@@ -594,6 +622,10 @@ const CreatePlan = () => {
           toggleViewToTabsType={toggleViewToTabsType}
           toggleViewToPreviewType={toggleViewToPreviewType}
           handleClickTab={handleClickTab}
+          handleDisciplinesCurrentBlockChange={
+            handleDisciplinesCurrentBlockChange
+          }
+          handleClickPlanStructurePartsTab={handleClickPlanStructurePartsTab}
           disciplines={disciplines}
           activeTab={activeTab}
           viewType={viewType}
@@ -603,6 +635,9 @@ const CreatePlan = () => {
           practiceDisciplines={practiceDisciplines}
           showDownArrow={showDownArrow}
           blocks={blocks}
+          blockNames={blockNames}
+          currentBlockName={blockName}
+          disciplinesBlockMapper={blockMapper}
           selectedCompetencies={selectedCompetencies}
           toggleIsPlanStructureCompetenciesCollapsedCollapse={
             toggleIsPlanStructureCompetenciesCollapsedCollapse
@@ -610,6 +645,7 @@ const CreatePlan = () => {
           isPlanStructureCompetenciesCollapsed={
             isPlanStructureCompetenciesCollapsed
           }
+          activePlanStructurePartsTab={planStructurePartsTab}
         />
       )}
     </>

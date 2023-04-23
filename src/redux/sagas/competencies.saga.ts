@@ -3,6 +3,7 @@ import { call, Effect, put, takeEvery } from "redux-saga/effects";
 import { CompetencyAPI } from "../../apis/competency.api";
 import {
   CompetencyActions,
+  CreateCompetencyAction,
   GetCompetenciesAction,
   GetCompetencyIndicatorsAction,
   requestCompetencyFailed,
@@ -47,10 +48,26 @@ function* getCompetencyIndicatorsSaga(
   }
 }
 
+function* createOneCompetenceSaga(
+  action: CreateCompetencyAction
+): Generator<Effect, void> {
+  try {
+    yield put({ type: CompetencyActions.CREATE_COMPETENCY_REQUEST });
+    const result: any = yield call(CompetencyAPI.createOne, action.payload);
+    yield put({
+      type: CompetencyActions.SUCCESS_CREATE_COMPETENCY,
+      payload: result.id,
+    });
+  } catch (error: any) {
+    yield put(requestCompetencyFailed());
+  }
+}
+
 export function* watcherCompetencySagas(): Generator<Effect, void> {
   yield takeEvery(CompetencyActions.GET_COMPETENCIES, getManyCompetenciesSaga);
   yield takeEvery(
     CompetencyActions.GET_COMPETENCY_INDICATORS,
     getCompetencyIndicatorsSaga
   );
+  yield takeEvery(CompetencyActions.CREATE_COMPETENCY, createOneCompetenceSaga);
 }

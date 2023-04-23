@@ -57,6 +57,8 @@ export interface CompetencyState {
     competencies: Competency[];
     loading: boolean;
     competenciesMeta: Meta;
+    competency: Competency;
+    createId: string;
     indicators: CompetencyIndicators[];
     indicatorsMeta: Meta;
   };

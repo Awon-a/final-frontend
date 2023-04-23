@@ -60,14 +60,14 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 
 .plan-meta-reg-num-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -89,7 +89,7 @@
   margin-left: 2vw;
 }
 .plan-meta-plan-name-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -106,7 +106,7 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
@@ -125,13 +125,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-plan-status-select {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -163,14 +163,14 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 
 .plan-meta-base-education-select {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -201,13 +201,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-specialty-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -233,13 +233,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-department-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -265,13 +265,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-faculty-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -297,13 +297,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-specialization-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -329,13 +329,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-qualification-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -361,13 +361,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-training-form-select {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -397,13 +397,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: 100%;
   white-space: nowrap;
 }
 .plan-meta-degree-select {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -436,7 +436,7 @@
   font-family: "Signika", sans-serif;
   font-weight: 600;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   margin-bottom: 0.2vh;
   width: auto;
   white-space: nowrap;
@@ -456,13 +456,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   width: auto;
   white-space: nowrap;
   margin-right: 0.5vw;
 }
 .plan-meta-period-start-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -489,13 +489,13 @@
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   width: auto;
   white-space: nowrap;
   margin-right: 0.5vw;
 }
 .plan-meta-period-end-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -522,7 +522,7 @@
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   width: auto;
   white-space: nowrap;
   margin-right: 0.5vw;
@@ -538,7 +538,7 @@
   width: 5vw;
 }
 .plan-meta-period-months-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;
@@ -556,7 +556,7 @@
   font-family: "Signika", sans-serif;
   font-weight: 400;
   font-size: 1.5vh;
-  height: 2vh;
+  height: 3vh;
   width: auto;
   white-space: nowrap;
   margin-right: 0.5vw;
@@ -571,7 +571,7 @@
   width: 5vw;
 }
 .plan-meta-period-courses-input {
-  height: 2.5vh;
+  height: 3vh;
   padding-left: 0.5vw;
   color: rgba(55, 69, 80, 1);
   font-family: "Signika", sans-serif;

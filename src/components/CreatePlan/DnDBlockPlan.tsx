@@ -77,7 +77,6 @@ function CreateBlockPlace({
     const foundKey: any = Object.keys(AttestationNameMapper).find(
       (key) => AttestationNameMapper[key] === selectValue
     )!;
-    console.log();
     const discipline = planDisciplines.find(
       (discipline: DisciplineForPlan) => discipline.id === id
     );
@@ -145,16 +144,10 @@ function CreateBlockPlace({
                     Дисциплина
                   </th>
                   <th
-                    title="Код подразделения"
-                    className="plan-disciplines-table-thead-line-td"
-                  >
-                    Код подразделения
-                  </th>
-                  <th
                     title="Зачетные единицы"
                     className="plan-disciplines-table-thead-line-td"
                   >
-                    З.Е.
+                    ЗЕТ
                   </th>
                   <th
                     title="Лекции"
@@ -192,6 +185,12 @@ function CreateBlockPlace({
                   >
                     Атт
                   </th>
+                  <th
+                    title="Код подразделения"
+                    className="plan-disciplines-table-thead-line-td"
+                  >
+                    Код подразделения
+                  </th>
                   <th> </th>
                   <th> </th>
                 </tr>
@@ -210,10 +209,6 @@ function CreateBlockPlace({
                     <td className="plan-discipline-table-tr-td">
                       {discipline.name}
                     </td>
-                    <td className="plan-discipline-table-tr-td">
-                      {discipline.codeDepartment}
-                    </td>
-
                     <td
                       className="plan-discipline-table-tr-td"
                       title="Зачетные единицы"
@@ -363,6 +358,9 @@ function CreateBlockPlace({
                         discipline={discipline}
                         onChange={handleAttestationSelect}
                       />
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.codeDepartment}
                     </td>
                     <td
                       className="plan-discipline-table-tr-td"

@@ -7,7 +7,14 @@ export const DisciplineTypes = {
   Discipline: "Discipline",
 };
 
-function Discipline({ disciplines, handleDisciplineMove }: any) {
+function Discipline({
+  disciplines,
+  handleDisciplineMove,
+  blockNames,
+  currentBlockName,
+  disciplinesBlockMapper,
+  handleDisciplinesCurrentBlockChange,
+}: any) {
   // let scrollTimeout: any;
   // let scrollVelocity = 0;
 
@@ -84,13 +91,22 @@ function Discipline({ disciplines, handleDisciplineMove }: any) {
   return (
     <div className="plan-structure-disciplines-with-data">
       <div className="table-container">
-        <div className="disicplines-table-caption">
-          <div className="plan-structure-discipline-caption">Дисциплины</div>
+        <div className="disicplines-table-caption-container">
+          {/* <div className="plan-structure-discipline-caption">Дисциплины</div> */}
+          <div style={{ height: "3vh" }}></div>
+          <Select
+            valueFrom={currentBlockName}
+            mapper={disciplinesBlockMapper}
+            blockNames={blockNames}
+            onChange={handleDisciplinesCurrentBlockChange}
+            className="plan-structure-discipline-caption-select-block"
+          />
         </div>
         <div className="discipline-table-container">
           <table className="disciplines-table" ref={tableRef}>
             <thead className="disciplines-table-thead">
               <tr className="disciplines-table-header-line">
+                <th></th>
                 <th className="disciplines-table-header-line-th">Название</th>
                 <th className="disciplines-table-header-line-th">
                   Код подразделения
@@ -188,6 +204,18 @@ const TableRow = ({
       }}
       onClick={() => handleShowDisciplineData(discipline, discipline.id)}
     >
+      <td className="disicpline-table-tbody-td-checkbox">
+        <label
+          style={{
+            height: "2.8vh",
+            width: "100%",
+            lineHeight: "2.8vh",
+            marginBottom: "0",
+          }}
+        >
+          <input type="checkbox" />
+        </label>
+      </td>
       <td className="disicpline-table-tbody-td">{discipline.name}</td>
       <td className="disicpline-table-tbody-td">{discipline.codeDepartment}</td>
     </tr>

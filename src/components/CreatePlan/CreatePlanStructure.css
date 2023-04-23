@@ -12,7 +12,7 @@
   flex-direction: column;
   margin-left: 7%;
   margin-top: -2vh;
-  width: 70%;
+  width: 87vw;
 }
 
 .rigth-tables-container {
@@ -23,14 +23,15 @@
 
 .plan-blocks-caption-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   flex-direction: row;
   align-items: center;
   height: 6vh;
+  width: 100%;
 }
 
 .plan-blocks-caption {
-  width: 100%;
+  width: auto;
   height: 4vh;
   top: 0;
   font-size: 2.8vh;
@@ -38,14 +39,34 @@
   color: #312f31;
   font-family: "Signika", sans-serif;
   font-weight: bold;
+  margin-right: 1vw;
+  white-space: nowrap;
+}
+.plan-blocks-caption-settings {
+  border: none;
+  outline: none;
+  height: 3vh;
+  width: 3vh;
+  line-height: 2vh;
+  margin-right: 69vw;
+  background-color: rgba(240, 246, 251, 1);
+  align-self: center;
 }
 
+.plan-blocks-caption-settings:focus {
+  border: none;
+  outline: none;
+}
+.plan-blocks-caption-settings-icon {
+  height: 3vh;
+  width: 3vh;
+}
 .plan-switch-buttons-container {
   display: flex;
   justify-content: space-between;
   padding: 0.4vh 0.2vw;
   height: 3.4vh;
-  width: 4.8vw;
+  width: 5.5vw;
   border-radius: 5px;
 }
 
@@ -79,6 +100,7 @@
   overflow-y: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-bottom: 1.85vh;
 }
 
 .plan-tabs-container-li {
@@ -114,15 +136,16 @@
   justify-content: space-between;
   margin-right: 1vw; /* задаем отступ между элементами */
   list-style-type: none;
-  color: rgba(67, 68, 76, 1);
+  color: rgba(43, 152, 153, 0.9);
   font-family: "Signika", sans-serif;
-  font-size: 1.5vh;
+  font-size: 1.55vh;
   font-weight: bold;
   max-width: 16vw;
   cursor: default;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  position: relative;
 }
 
 .plan-tab-icon {
@@ -137,10 +160,36 @@
   border-radius: 15px;
   width: 1.2vw;
   height: 1.2vw;
+  color: rgba(67, 68, 76, 1);
   background-color: rgba(255, 255, 255);
   line-height: 1.2vw;
   align-self: center;
   text-align: center;
+  margin-left: 0.2vw;
+}
+.plan-tabs-tab {
+  color: rgba(124, 127, 135, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+}
+.plan-tabs-tab-active {
+  color: rgba(43, 152, 153, 0.9);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  position: relative;
+}
+.plan-tabs-tab-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(43, 152, 153, 0.9);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  height: 2px;
+  border-radius: 15px;
 }
 
 .plan-block-tab-content {
@@ -214,8 +263,24 @@
   background-color: rgba(153, 149, 149, 0.3);
 }
 
+.plan-struct-settings-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1vw 2vh;
+  border-radius: 20px;
+  /* border: 2px solid rgb(155, 156, 159, 0.5); */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2%;
+  height: 0vh;
+  transition: height 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255);
+}
+.plan-struct-settings-block-container {
+}
+
 .plan-struct-next-arrow {
-  position: absolute;
+  position: sticky;
+  top: 50%;
   bottom: 2vh;
   right: 2vw;
   height: 10vh;
@@ -231,13 +296,97 @@
   width: 3vh;
 }
 
+.plan-structure-selected-competencies-tabs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  height: 4vh;
+  margin-top: 5.1%;
+  margin-left: 7vw;
+  margin-bottom: 0;
+  width: 70%;
+  padding-left: 0vw;
+  padding-right: 0.5vw;
+  /* overflow-x: scroll; */
+  scrollbar-width: none;
+  overflow-y: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.plan-structure-selected-competencies-tabs-container-li {
+  /* flex: 0 0 auto; отключаем растягивание элементов */
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-right: 1vw;
+  list-style-type: none;
+  color: rgba(124, 127, 135, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 100%;
+  max-width: 16vw;
+  min-width: auto;
+  padding: 0 0.5vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 7px 15px 0 0;
+  background-color: rgba(240, 246, 251, 1);
+}
+
+.plan-structure-selected-competencies-tabs-container-li:hover {
+  background-color: rgba(116, 116, 122, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.plan-structure-selected-competencies-tabs-container-li-active {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-right: 1vw;
+  list-style-type: none;
+  color: rgba(43, 152, 153, 0.9);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.62vh;
+  max-width: 16vw;
+  min-width: auto;
+  padding: 0 0.5vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 100%;
+  /* box-shadow: 3px 0px 1px rgba(0, 0, 0, 0.1); */
+  border-radius: 7px 15px 0 0;
+  z-index: 1;
+  background-color: rgba(240, 246, 251, 1);
+  /* border-bottom: 4px solid rgba(43, 152, 153, 0.9); */
+  position: relative;
+}
+.plan-structure-selected-competencies-tabs-container-li-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(43, 152, 153, 0.9);
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 15px;
+}
+
 .plan-structure-selected-competencies-container {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  max-height: 28vh;
+  height: 28vh;
   margin-left: 7%;
-  margin-top: 2%;
+  margin-top: 1%;
   width: 70%;
   padding: 1vw 2vh;
   border-radius: 20px;
@@ -329,4 +478,90 @@
 .competencies-exit-active {
   opacity: 0;
   transition: opacity 300ms;
+}
+
+.plan-structure-settings-modal {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.plan-structure-settings-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: rgba(255, 255, 255);
+  margin: 10% auto;
+  padding: 1vh 1vh;
+  width: 25%;
+  height: 60%;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+.plan-structure-settings-modal-caption-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.plan-structure-settings-modal-caption {
+  font-size: 1.75vh;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 700;
+}
+.plan-structure-settings-modal-close {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  color: #aaa;
+  top: 1vh;
+  right: 1vw;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.plan-structure-settings-modal-table-container {
+  max-height: 80%;
+  overflow-y: scroll;
+  width: 85%;
+}
+
+.plan-structure-settings-modal-table {
+  /* margin-top: 4vh; */
+  width: 100%;
+}
+.plan-structure-settings-modal-table-td-input {
+  border: none;
+  outline: none;
+  padding-left: 0.5vw;
+  border-radius: 8px;
+  width: 55%;
+  font-size: 1.5vh;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.plan-structure-settings-modal-table-tbody-td-label {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+  width: 70%;
+}
+.plan-structure-settings-modal-table-tbody-td-input {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+  width: 30%;
+}
+.plan-structure-settings-modal-table-td-input:focus {
+  border: none;
+  outline: none;
 }

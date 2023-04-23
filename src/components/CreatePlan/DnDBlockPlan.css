@@ -173,6 +173,10 @@
 .plan-disciplines-table-thead-line-td:first-child {
   padding-left: 1vw;
 }
+/* .plan-disciplines-table-thead-line-td:nth-child(1), */
+.plan-disciplines-table-thead-line-td:nth-child(2) {
+  text-align: center;
+}
 
 .plan-discipline-table-tr-td:nth-child(1) {
   padding-left: 1vw;
@@ -183,9 +187,10 @@
 }
 
 .plan-discipline-table-tr-td:nth-child(2) {
-  width: 13vw;
+  width: 3vw;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .plan-discipline-table-tr-td:nth-child(n + 3) {

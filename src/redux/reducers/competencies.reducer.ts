@@ -11,6 +11,8 @@ export const initialState = {
     totalItems: 0,
   } as Meta,
   loading: false,
+  competency: {} as Competency,
+  createId: "",
   indicators: [] as CompetencyIndicators[],
 };
 
@@ -39,6 +41,14 @@ export const competenciesReducer = (
         indicators: action.payload.data,
         indicatorsMeta: action.payload.meta,
       };
+    case CompetencyActions.GET_ONE_COMPETENCY_REQUEST:
+      return { ...state, loading: true };
+    case CompetencyActions.GET_ONE_COMPETENCY_SUCCESS:
+      return { ...state, loading: false, competency: action.payload };
+    case CompetencyActions.CREATE_COMPETENCY_REQUEST:
+      return { ...state, loading: true };
+    case CompetencyActions.SUCCESS_CREATE_COMPETENCY:
+      return { ...state, loading: false, createId: action.payload };
     case CompetencyActions.REQUEST_COMPETENCY_FAILED:
       console.log("FAILED");
       return { ...state, loading: false };
