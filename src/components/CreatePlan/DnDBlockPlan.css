@@ -362,3 +362,456 @@
   background-color: rgba(255, 255, 255, 1);
   text-align: center;
 }
+
+.plan-structure-discipline-data-modal {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.plan-structure-discipline-data-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: rgba(255, 255, 255);
+  margin: 7% auto;
+  padding: 1vh 1vh;
+  width: 85%;
+  height: 70%;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+.plan-structure-discipline-data-modal-content-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 0;
+  align-self: center;
+  width: 95%;
+}
+.plan-structure-discipline-data-modal-content-info-block {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+.plan-structure-discipline-data-modal-content-info-block-label {
+  width: 5.5vw;
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  margin-right: 1vw;
+}
+.plan-structure-discipline-data-modal-content-info-block-name {
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+}
+.plan-structure-discipline-data-modal-content-info-discipline {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+.plan-structure-discipline-data-modal-content-info-discipline-label {
+  width: 5.5vw;
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  margin-right: 1vw;
+}
+.plan-structure-discipline-data-modal-content-info-discipline-name {
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vh;
+}
+.plan-structure-discipline-data-modal-content-info-panel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-top: 3vh;
+  margin-bottom: 0.5vh;
+}
+.plan-structure-discipline-data-modal-content-info-panel-add {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 0.5vw;
+  width: 5.8vw;
+  height: 3vh;
+  margin-right: 2vw;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+}
+.plan-structure-discipline-data-modal-content-info-panel-add:focus {
+  border: none;
+  outline: none;
+}
+.plan-structure-discipline-data-modal-content-info-panel-add:hover {
+  cursor: pointer;
+  background-color: rgba(153, 149, 149, 0.3);
+}
+.plan-structure-discipline-data-modal-content-info-panel-add-content {
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 300;
+  font-size: 1.5vh;
+}
+.plan-structure-discipline-data-modal-content-info-panel-add-icon {
+  height: 2.4vh;
+  width: 2.4vh;
+  border-radius: 10px;
+  line-height: 2.4vh;
+  margin-right: 0.5vw;
+  text-align: center;
+}
+.plan-structure-discipline-data-modal-content-info-panel-delete {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 0.5vw;
+  height: 3vh;
+  width: 5.8vw;
+  margin-right: 1vw;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+}
+.plan-structure-discipline-data-modal-content-info-panel-delete:hover {
+  background-color: rgba(153, 149, 149, 0.3);
+  cursor: pointer;
+}
+.plan-structure-discipline-data-modal-content-info-panel-delete:focus {
+  border: none;
+  outline: none;
+}
+.plan-structure-discipline-data-modal-content-info-panel-delete-icon {
+  height: 2.5vh;
+  width: 2.5vh;
+  border-radius: 10px;
+  margin-right: 0.5vw;
+}
+.plan-structure-discipline-data-modal-content-info-panel-delete-content {
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 300;
+  font-size: 1.5vh;
+}
+.plan-structure-discipline-data-modal-caption-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.plan-structure-discipline-data-modal-caption {
+  font-size: 1.75vh;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 700;
+}
+.plan-structure-discipline-data-modal-close {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  color: #aaa;
+  top: 1vh;
+  right: 1vw;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.plan-structure-discipline-data-modal-table-container {
+  /* margin-top: 3vh; */
+  max-height: 80%;
+  height: 55%;
+  max-width: 95%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  /* width: 80%; */
+}
+.plan-structure-discipline-data-modal-table {
+  /* margin-top: 4vh; */
+  width: 100%;
+  table-layout: fixed;
+}
+.plan-structure-discipline-data-modal-table-thead {
+  position: sticky;
+  top: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.plan-structure-discipline-data-modal-table-header-line {
+  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 3vh;
+}
+.plan-structure-discipline-data-modal-table-header-line-th-load {
+  width: 15vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-data-modal-table-header-line-th {
+  /* padding-left: 1vw; */
+  width: 20vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-data-modal-table-header-line-th-sub {
+  /* padding-left: 1vw; */
+  width: 8vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-data-modal-table-header-line-th:nth-child(1) {
+  width: 7vw;
+}
+.plan-structure-discipline-data-modal-table-tr:hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-discipline-data-modal-table-tr:nth-child(even):hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-discipline-data-modal-table-tr:nth-child(even) {
+  height: 5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+}
+
+.plan-structure-discipline-data-modal-table-tr {
+  height: 5vh;
+  font-size: 1.5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+.plan-structure-discipline-data-modal-table-tr-active {
+  background-color: rgb(242, 250, 254);
+  height: 5vh;
+  font-size: 1.5vh;
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+
+.plan-structure-discipline-data-modal-table-tbody-td {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+  text-align: left;
+  /* border: 1px solid rgba(247, 247, 247, 1); */
+}
+.plan-structure-discipline-data-modal-table-tbody-td:nth-child(n + 2) {
+  padding-left: 0vw;
+  line-height: 2.8vh;
+  text-align: center;
+}
+.plan-structure-discipline-data-modal-table-tbody-td-input {
+  text-align: left;
+  width: 60%;
+  height: 70%;
+  border: none; /* убираем границу */
+  outline: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 400;
+  font-size: 1.5vh;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: rgb(51, 51, 51);
+}
+
+.plan-structure-add-load-modal {
+  position: fixed;
+  z-index: 110;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.plan-structure-add-load-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: rgba(255, 255, 255);
+  margin: 7.5% auto;
+  padding: 1vh 1vh;
+  width: 15%;
+  height: 50%;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+.plan-structure-add-load-modal-caption-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4vh;
+}
+.plan-structure-add-load-modal-caption {
+  font-size: 1.75vh;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 700;
+}
+.plan-structure-add-load-modal-close {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  color: #aaa;
+  top: 1vh;
+  right: 1vw;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.plan-structure-add-load-modal-table-container {
+  /* margin-top: 3vh; */
+  max-height: 90%;
+  height: 70%;
+  max-width: 90%;
+  overflow-y: scroll;
+  /* overflow-x: scroll; */
+  /* width: 80%; */
+}
+.plan-structure-add-load-modal-table {
+  /* margin-top: 4vh; */
+  width: 100%;
+  /* table-layout: fixed; */
+}
+.plan-structure-add-load-modal-table-thead {
+  position: sticky;
+  top: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.plan-structure-add-load-modal-table-header-line {
+  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 3vh;
+}
+.plan-structure-add-load-modal-table-header-line-th {
+  /* padding-left: 1vw; */
+  width: 20vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-add-load-modal-table-tr:hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-add-load-modal-table-tr:nth-child(even):hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-add-load-modal-table-tr:nth-child(even) {
+  height: 5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+}
+
+.plan-structure-add-load-modal-table-tr {
+  height: 5vh;
+  font-size: 1.5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+.plan-structure-add-load-modal-table-tr-active {
+  background-color: rgb(242, 250, 254);
+  height: 5vh;
+  font-size: 1.5vh;
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+
+.plan-structure-add-load-modal-table-tbody-td {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+  text-align: left;
+  /* border: 1px solid rgba(247, 247, 247, 1); */
+}
+.plan-structure-add-load-modal-content-add {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 0.5vw;
+  width: 5.8vw;
+  height: 3vh;
+  margin-top: 4vh;
+  margin-left: 6vw;
+  /* margin-right: 1vw; */
+  background-color: rgb(255, 255, 255);
+  border: none;
+  outline: none;
+}
+.plan-structure-add-load-modal-content-add:focus {
+  border: none;
+  outline: none;
+}
+.plan-structure-add-load-modal-content-add:hover {
+  cursor: pointer;
+  background-color: rgba(153, 149, 149, 0.3);
+  /* border-radius: 6px; */
+}
+.plan-structure-add-load-modal-content-add-content {
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 300;
+  font-size: 1.5vh;
+}
+.plan-structure-add-load-modal-content-add-icon {
+  height: 2.4vh;
+  width: 2.4vh;
+  border-radius: 10px;
+  line-height: 2.4vh;
+  margin-right: 0.5vw;
+  text-align: center;
+}

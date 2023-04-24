@@ -4,7 +4,9 @@ import { DisciplineTypes } from "./DnDDisciplines";
 import "./DnDBlockPlan.css";
 import Bucket from "../../common/assets/bucket.svg";
 import Refresh from "../../common/assets/refresh-discipline.svg";
-import { useState } from "react";
+import AddLoad from "../../common/assets/add-load-for-disc.svg";
+import DeleteLoad from "../../common/assets/delete-load-for-disc.svg";
+import { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { DisciplineForPlan } from "./types/plan-discipline";
 import { AttestationNameMapper, Attestations } from "../../types/academic-plan";
@@ -19,12 +21,13 @@ function CreateBlockPlace({
   planDisciplines,
   onDisciplineDrop,
   deleteDiscipline,
+  courses,
   onChangeDiscipline,
+  disciplineLoads,
   icon = null,
   tableHeight = "40vh",
 }: any) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -53,23 +56,37 @@ function CreateBlockPlace({
     };
     onChangeDiscipline(newDiscipline);
   };
-  const handleInputData = (event: any, id: string, key: string) => {
+  const handleInputData = (
+    event: any,
+    id: string,
+    key: string,
+    semNum?: number
+  ) => {
     const discipline = planDisciplines.find(
       (discipline: DisciplineForPlan) => discipline.id === id
     );
     let newDiscipline: DisciplineForPlan = {
       ...discipline,
-      [key]: +event.target.value,
+      semesters: discipline.semesters.map((sem: any, index: number) => {
+        if (index === semNum) {
+          return {
+            ...sem,
+            [key]: +event.target.value,
+          };
+        }
+        return sem;
+      }),
+      // [key]: +event.target.value,
     };
-    newDiscipline = {
-      ...newDiscipline,
-      sumH:
-        newDiscipline.lectureH +
-        newDiscipline.practiceH +
-        newDiscipline.labH +
-        newDiscipline.iwsH +
-        newDiscipline.examPrep,
-    };
+    // newDiscipline = {
+    //   ...newDiscipline,
+    //   sumH:
+    //     newDiscipline.lectureH +
+    //     newDiscipline.practiceH +
+    //     newDiscipline.labH +
+    //     newDiscipline.iwsH +
+    //     newDiscipline.examPrep,
+    // };
     onChangeDiscipline(newDiscipline);
   };
   const handleAttestationSelect = (event: any, id: string) => {
@@ -95,9 +112,315 @@ function CreateBlockPlace({
     };
     onChangeDiscipline(newDiscipline);
   };
-  console.log({ planDisciplines });
+  const [isShowDisciplineData, setIsShowDisciplineData] = useState(false);
+  const [disciplineToFill, setDisciplineToFill]: [any, any] = useState(false);
+  useEffect(() => {
+    if (disciplineToFill) {
+      setDisciplineToFill(
+        planDisciplines.find((el: any) => el.id === disciplineToFill.id)
+      );
+    }
+  }, [planDisciplines, disciplineToFill]);
+  console.log("FILL", disciplineToFill);
+  // useEffect(() => {
+  //   // setDisciplineLoad(disciplineToFill.credits);
+  //   const discipline = planDisciplines.find(
+  //     (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+  //   );
+  //   const newDiscipline = {
+  //     ...discipline,
+  //     credits: disciplineLoad,
+  //   };
+  //   onChangeDiscipline(newDiscipline);
+  // }, [disciplineLoad, disciplineToFill, planDisciplines, onChangeDiscipline]);
+  const [pickedLoad, setPickedLoad]: [any, any] = useState(false);
+  const [selectedLoad, setSelectedLoad]: [any, any] = useState(false);
+  const [isShowLoadData, setIsShowLoadData] = useState(false);
+  const coursesNames = [
+    "Первый курс",
+    "Второй курс",
+    "Третий курс",
+    "Четвертый курс",
+    "Пятый курс",
+  ];
+  const semestersNames = [
+    "Первый семестр",
+    "Второй семестр",
+    "Третий семестр",
+    "Четвертый семестр",
+    "Пятый семестр",
+    "Шестой семестр",
+    "Седьмой семестр",
+    "Восьмой семестр",
+    "Девятый семестр",
+    "Десятый семестр",
+  ];
+  const handleDoubleClickOnDisciplineInBlock = (
+    discipline: DisciplineForPlan
+  ) => {
+    setDisciplineToFill(discipline as any);
+    setIsShowDisciplineData(true);
+  };
+  const handleCloseDisciplineData = () => {
+    setDisciplineToFill(false);
+    setIsShowDisciplineData(false);
+  };
+  const handleOnClickLoad = (load: any) => {
+    if (pickedLoad && pickedLoad.index === load.index) {
+      setPickedLoad(false);
+    } else {
+      setPickedLoad(load);
+    }
+  };
+  const handleOnClickSelectLoad = (load: { name: string }) => {
+    if (selectedLoad && selectedLoad.name === load.name) {
+      setSelectedLoad(false);
+    } else {
+      setSelectedLoad(load);
+    }
+  };
+  const handleAddLoadButton = () => {
+    setIsShowLoadData(true);
+  };
+  const handleHideLoadData = () => {
+    setIsShowLoadData(false);
+    setSelectedLoad(false);
+  };
+  const handleDeleteLoadButton = (pickedLoad: any) => {
+    if (pickedLoad) {
+      const discipline = planDisciplines.find(
+        (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+      );
+      const newDiscipline = {
+        ...discipline,
+        credits: discipline.credits.filter(
+          (load: any, index: number) => index !== pickedLoad.index
+        ),
+      };
+      onChangeDiscipline(newDiscipline);
+    }
+  };
+  const handleAddSelectedLoad = (load: any) => {
+    if (load) {
+      const discipline = planDisciplines.find(
+        (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+      );
+      const newDiscipline = {
+        ...discipline,
+        credits: [...discipline.credits, load],
+      };
+      onChangeDiscipline(newDiscipline);
+      // setDisciplineLoad([...disciplineLoad, load]);
+      handleHideLoadData();
+    }
+  };
+  console.log("PLAN DISCS: ", planDisciplines);
   return (
     <>
+      {!!isShowLoadData && (
+        <div className="plan-structure-add-load-modal">
+          <div className="plan-structure-add-load-modal-content-container">
+            <div className="plan-structure-add-load-modal-caption-container">
+              <div className="plan-structure-add-load-modal-caption">
+                Виды нагрузки
+              </div>
+            </div>
+            <div className="plan-structure-add-load-modal-table-container">
+              <table className="plan-structure-add-load-modal-table">
+                <thead className="plan-structure-add-load-modal-table-thead">
+                  <tr className="plan-structure-add-load-modal-table-header-line">
+                    <th className="plan-structure-add-load-modal-table-header-line-th">
+                      Наименование
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {disciplineLoads.map((load: any) => (
+                    <tr
+                      className={
+                        selectedLoad && selectedLoad.name === load.name
+                          ? "plan-structure-add-load-modal-table-tr-active"
+                          : "plan-structure-add-load-modal-table-tr"
+                      }
+                      onClick={() => handleOnClickSelectLoad(load)}
+                    >
+                      <td className="plan-structure-add-load-modal-table-tbody-td">
+                        {load.name}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <button
+              className="plan-structure-add-load-modal-content-add"
+              onClick={() => handleAddSelectedLoad(selectedLoad)}
+            >
+              <img
+                className="plan-structure-add-load-modal-content-add-icon"
+                src={AddLoad}
+                alt="icon"
+              />
+              <div className="plan-structure-add-load-modal-content-add-content">
+                Добавить
+              </div>
+            </button>
+            <span
+              className="plan-structure-add-load-modal-close"
+              onClick={handleHideLoadData}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      )}
+      {!!isShowDisciplineData && (
+        <div className="plan-structure-discipline-data-modal">
+          <div className="plan-structure-discipline-data-modal-content-container">
+            <div className="plan-structure-discipline-data-modal-caption-container">
+              <div className="plan-structure-discipline-data-modal-caption">
+                Нагрузка дисциплины
+              </div>
+            </div>
+            <div className="plan-structure-discipline-data-modal-content-info">
+              <div className="plan-structure-discipline-data-modal-content-info-block">
+                <div className="plan-structure-discipline-data-modal-content-info-block-label">
+                  Блок:
+                </div>
+                <div className="plan-structure-discipline-data-modal-content-info-block-name">
+                  {name}
+                </div>
+              </div>
+              <div className="plan-structure-discipline-data-modal-content-info-discipline">
+                <div className="plan-structure-discipline-data-modal-content-info-discipline-label">
+                  Дисциплина:
+                </div>
+                <div className="plan-structure-discipline-data-modal-content-info-discipline-name">
+                  {disciplineToFill.name}
+                </div>
+              </div>
+              <div className="plan-structure-discipline-data-modal-content-info-panel">
+                <button
+                  className="plan-structure-discipline-data-modal-content-info-panel-add"
+                  onClick={handleAddLoadButton}
+                >
+                  <img
+                    className="plan-structure-discipline-data-modal-content-info-panel-add-icon"
+                    src={AddLoad}
+                    alt="icon"
+                  />
+                  <div className="plan-structure-discipline-data-modal-content-info-panel-add-content">
+                    Добавить
+                  </div>
+                </button>
+                <button
+                  className="plan-structure-discipline-data-modal-content-info-panel-delete"
+                  onClick={() => handleDeleteLoadButton(pickedLoad)}
+                >
+                  <img
+                    className="plan-structure-discipline-data-modal-content-info-panel-delete-icon"
+                    src={DeleteLoad}
+                    alt="icon"
+                  />
+                  <div className="plan-structure-discipline-data-modal-content-info-panel-delete-content">
+                    Удалить
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div className="plan-structure-discipline-data-modal-table-container">
+              <table className="plan-structure-discipline-data-modal-table">
+                <thead className="plan-structure-discipline-data-modal-table-thead">
+                  <tr className="plan-structure-discipline-data-modal-table-header-line">
+                    <th
+                      rowSpan={2}
+                      className="plan-structure-discipline-data-modal-table-header-line-th-load"
+                    >
+                      Вид нагрузки
+                    </th>
+                    {[...new Array(+courses || 0)].map(
+                      (el: any, index: number) => (
+                        <th
+                          colSpan={2}
+                          className="plan-structure-discipline-data-modal-table-header-line-th"
+                        >
+                          {coursesNames[index]}
+                        </th>
+                      )
+                    )}
+                  </tr>
+                  <tr className="plan-structure-discipline-data-modal-table-header-line">
+                    {[...new Array(+courses || 0)].map(
+                      (el: any, index: number) => (
+                        <>
+                          <th className="plan-structure-discipline-data-modal-table-header-line-th-sub">
+                            {semestersNames[2 * index]}
+                          </th>
+                          <th className="plan-structure-discipline-data-modal-table-header-line-th-sub">
+                            {semestersNames[2 * index + 1]}
+                          </th>
+                        </>
+                      )
+                    )}
+                    {/* <th className="plan-structure-discipline-data-modal-table-header-line-th-sub"></th> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {disciplineToFill.credits.map((load: any, index: number) => (
+                    <tr
+                      className={
+                        pickedLoad && pickedLoad.index === index
+                          ? "plan-structure-discipline-data-modal-table-tr-active"
+                          : "plan-structure-discipline-data-modal-table-tr"
+                      }
+                      onClick={() => handleOnClickLoad({ ...load, index })}
+                    >
+                      <td className="plan-structure-discipline-data-modal-table-tbody-td">
+                        {load.name}
+                      </td>
+                      {[...new Array(+courses * 2 || 0)].map(
+                        (el: any, index: number) => (
+                          <td className="plan-structure-discipline-data-modal-table-tbody-td">
+                            <input
+                              type="number"
+                              min={0}
+                              // pattern="[0-9]+"
+                              value={
+                                !!disciplineToFill.semesters[index]?.[
+                                  load.disciplineKey
+                                ]
+                                  ? disciplineToFill.semesters[index][
+                                      load.disciplineKey
+                                    ]
+                                  : ""
+                              }
+                              onChange={(event) =>
+                                handleInputData(
+                                  event,
+                                  disciplineToFill.id,
+                                  load.disciplineKey,
+                                  index
+                                )
+                              }
+                              className="plan-structure-discipline-data-modal-table-tbody-td-input"
+                            ></input>
+                          </td>
+                        )
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <span
+              className="plan-structure-discipline-data-modal-close"
+              onClick={handleCloseDisciplineData}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      )}
       <div
         ref={drop}
         className="plan-disciplines-conteiner"
@@ -174,7 +497,7 @@ function CreateBlockPlace({
                     Срс/%
                   </th>
                   <th
-                    title="Подготовка"
+                    title="Контроль самостоятельной работы"
                     className="plan-disciplines-table-thead-line-td"
                   >
                     Кср/%
@@ -205,7 +528,13 @@ function CreateBlockPlace({
                   </tr>
                 )}
                 {planDisciplines.map((discipline: DisciplineForPlan) => (
-                  <tr key={discipline.id} className="plan-discipline-table-tr">
+                  <tr
+                    key={discipline.id}
+                    className="plan-discipline-table-tr"
+                    onDoubleClick={() =>
+                      handleDoubleClickOnDisciplineInBlock(discipline)
+                    }
+                  >
                     <td className="plan-discipline-table-tr-td">
                       {discipline.name}
                     </td>
@@ -323,7 +652,7 @@ function CreateBlockPlace({
                       </div>
                     </td>
                     <td
-                      title="Подготовка"
+                      title="Контроль самостоятельной работы"
                       className="plan-discipline-table-tr-td"
                     >
                       <div className="plan-discipline-table-tr-td-container-credits">
@@ -395,7 +724,6 @@ function CreateBlockPlace({
 
 function Select({ discipline, onChange }: any) {
   const value = AttestationNameMapper[discipline.attestation];
-  console.log({ value, att: discipline.attestation });
   return (
     <select
       className="plan-discipline-table-tr-td-input-attestation"

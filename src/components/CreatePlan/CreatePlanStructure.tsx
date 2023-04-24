@@ -24,6 +24,7 @@ const CreatePlanStructure = ({
   disciplines,
   activeTab,
   viewType,
+  courses,
   isPlanStructureCompetenciesCollapsed,
   showDownArrow,
   blocks,
@@ -36,6 +37,7 @@ const CreatePlanStructure = ({
   toggleViewToPreviewType,
   handleClickTab,
   selectedCompetencies,
+  disciplineLoads,
   toggleIsPlanStructureCompetenciesCollapsedCollapse,
   handleDisciplinesCurrentBlockChange,
   handleClickPlanStructurePartsTab,
@@ -489,11 +491,13 @@ const CreatePlanStructure = ({
                   <CreateBlockPlace
                     key={index}
                     name={block.blockName}
+                    courses={courses}
                     planDisciplines={block.disciplines}
                     onDisciplineDrop={block.onDrop}
                     deleteDiscipline={block.onDelete}
                     onChangeDiscipline={block.onChangeDiscipline}
                     icon={block.icon}
+                    disciplineLoads={disciplineLoads}
                   />
                 ))) ||
                 (viewType === "tabs" && (
@@ -546,6 +550,8 @@ const CreatePlanStructure = ({
                       >
                         <CreateBlockPlace
                           key="tab-table"
+                          name={blocks[activeTab].blockName}
+                          courses={courses}
                           planDisciplines={blocks[activeTab].disciplines}
                           onDisciplineDrop={blocks[activeTab].onDrop}
                           deleteDiscipline={blocks[activeTab].onDelete}
@@ -553,6 +559,7 @@ const CreatePlanStructure = ({
                             blocks[activeTab].onChangeDiscipline
                           }
                           tableHeight={"50vh"}
+                          disciplineLoads={disciplineLoads}
                         />
                       </div>
                     }

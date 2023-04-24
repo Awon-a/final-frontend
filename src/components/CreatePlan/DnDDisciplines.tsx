@@ -79,7 +79,8 @@ function Discipline({
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
       if (tableRef.current && !tableRef.current.contains(event.target)) {
-        hiddenDisciplineData(true);
+        setHiddenDisciplineData(true);
+        setDisciplineData(false);
       }
     };
     document.addEventListener("mousedown", handleOutsideClick);

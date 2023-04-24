@@ -59,6 +59,10 @@ const CreatePlan = () => {
   const [endYear, setEndYear] = useState("");
   const [months, setMonthsYear] = useState("");
   const [courses, setCoursesYear] = useState("");
+  useEffect(() => {
+    if (startYear && endYear && endYear > startYear)
+      setCoursesYear(Number(endYear) - Number(startYear) + "");
+  }, [startYear, endYear]);
   const handlePlanStatusChange = useCallback(
     (event: any) => {
       const statusValue = event.target.value;
@@ -272,6 +276,44 @@ const CreatePlan = () => {
     },
     []
   );
+  const disciplineLoads = [
+    {
+      name: "Лекции (Лк)",
+      disciplineKey: "lectureH",
+    },
+    {
+      name: "Практики (Пр)",
+      disciplineKey: "practiceH",
+    },
+    {
+      name: "Лабораторные работы (Лр)",
+      disciplineKey: "labH",
+    },
+    {
+      name: "СРС",
+      disciplineKey: "iwsH",
+    },
+    {
+      name: "Зачет",
+      disciplineKey: "examH",
+    },
+    {
+      name: "Дифф. зачет",
+      disciplineKey: "creditH",
+    },
+    {
+      name: "Экзамен",
+      disciplineKey: "diffCreditH",
+    },
+    {
+      name: "Курсовая работа",
+      disciplineKey: "courseWorkH",
+    },
+    {
+      name: "Курсовой проект",
+      disciplineKey: "courseProjectH",
+    },
+  ];
   useEffect(() => {
     dispatch(getDisciplines({ limit: 100 }));
   }, [dispatch]);
@@ -286,6 +328,21 @@ const CreatePlan = () => {
           lectureH: 0,
           practiceH: 0,
           sumH: 0,
+          semesters: [...new Array(+courses * 2 || 0)].map((el: any) => ({
+            // examPrep: 0,
+            iwsH: 0,
+            labH: 0,
+            lectureH: 0,
+            practiceH: 0,
+            sumH: 0,
+            examH: 0,
+            creditH: 0,
+            diffCreditH: 0,
+            courseWorkH: 0,
+            courseProjectH: 0,
+            attestation: Attestations.Exam,
+          })),
+          credits: disciplineLoads.slice(0, 3),
           competencies:
             discipline.competencies?.map((competence: Competency) => ({
               ...competence,
@@ -298,7 +355,7 @@ const CreatePlan = () => {
       (() =>
         (newDisciplines[1].competencies = newDisciplines?.[0]?.competencies))();
     setDisciplines(newDisciplines as any);
-  }, [disciplinesState]);
+  }, [disciplinesState, courses]);
 
   const handleCalcComptenciesPercent = useCallback(
     (disc: any, callback = increaseCompPercent) => {
@@ -556,6 +613,8 @@ const CreatePlan = () => {
   const handleDisciplinesCurrentBlockChange = (event: any) => {
     setBlockName(event.target.value);
   };
+  console.log({ courses });
+
   return (
     <>
       <Header currentPath={pathname} />
@@ -636,6 +695,7 @@ const CreatePlan = () => {
           showDownArrow={showDownArrow}
           blocks={blocks}
           blockNames={blockNames}
+          courses={courses}
           currentBlockName={blockName}
           disciplinesBlockMapper={blockMapper}
           selectedCompetencies={selectedCompetencies}
@@ -646,6 +706,7 @@ const CreatePlan = () => {
             isPlanStructureCompetenciesCollapsed
           }
           activePlanStructurePartsTab={planStructurePartsTab}
+          disciplineLoads={disciplineLoads}
         />
       )}
     </>
