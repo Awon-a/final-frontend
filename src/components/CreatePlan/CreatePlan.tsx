@@ -295,15 +295,15 @@ const CreatePlan = () => {
     },
     {
       name: "Зачет",
-      disciplineKey: "examH",
-    },
-    {
-      name: "Дифф. зачет",
       disciplineKey: "creditH",
     },
     {
-      name: "Экзамен",
+      name: "Дифф. зачет",
       disciplineKey: "diffCreditH",
+    },
+    {
+      name: "Экзамен",
+      disciplineKey: "examH",
     },
     {
       name: "Курсовая работа",
@@ -340,8 +340,21 @@ const CreatePlan = () => {
             diffCreditH: 0,
             courseWorkH: 0,
             courseProjectH: 0,
-            attestation: Attestations.Exam,
+            examPrepSumH: 0,
+            attestation: -1,
           })),
+          totalLectureH: 0,
+          totalPracticeH: 0,
+          totalLabH: 0,
+          totalAudH: 0,
+          totalIwsH: 0,
+          totalExamPrepH: 0,
+          totalHours: 0,
+          totalCredits: 0,
+          totalExamH: 0,
+          examSemestersNums: "",
+          creditsSemestersNums: "",
+          coursesSemestersNums: "",
           credits: disciplineLoads.slice(0, 3),
           competencies:
             discipline.competencies?.map((competence: Competency) => ({

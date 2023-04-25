@@ -7,18 +7,22 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2%;
   max-height: 28vh;
+  max-width: 100%;
   transition: height 0.3s ease-in-out;
   background-color: rgba(255, 255, 255);
 }
 
 .plan-discipline-table-container {
   max-height: 24vh;
+  max-width: 100%;
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .plan-disciplines-table {
   /* margin-top: 4vh; */
   width: 100%;
+  table-layout: fixed;
 }
 
 .plan-disciplines-table-caption-container {
@@ -169,41 +173,89 @@
 
 .plan-disciplines-table-thead-line-td:nth-child(n + 3) {
   text-align: center;
+  font-weight: 500;
 }
 .plan-disciplines-table-thead-line-td:first-child {
   padding-left: 1vw;
+  width: 15vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
 }
 /* .plan-disciplines-table-thead-line-td:nth-child(1), */
 .plan-disciplines-table-thead-line-td:nth-child(2) {
   text-align: center;
+  border: 1px solid rgba(240, 246, 251, 1);
 }
-
 .plan-discipline-table-tr-td:nth-child(1) {
   padding-left: 1vw;
   width: 13vw;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  /* overflow-wrap: break-word; */
+  /* text-overflow: ellipsis; */
   border-bottom: 3px solid rgba(240, 246, 251, 1);
+  border: 1px solid rgba(247, 247, 247, 1);
 }
-
+.plan-discipline-table-tr-td:nth-child(5) {
+  text-align: center;
+  width: 4vw;
+  background-color: rgb(231, 233, 234);
+  border: 1px solid rgba(247, 247, 247, 1);
+}
 .plan-discipline-table-tr-td:nth-child(2) {
   width: 3vw;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-discipline-table-tr-td:nth-child(3) {
+  width: 3vw;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-discipline-table-tr-td:nth-child(4) {
+  width: 3vw;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-discipline-table-tr-td-input-semesters-nums {
+  width: 100%;
+  writing-mode: vertical-lr;
+  white-space: pre-wrap;
+  /* height: 6vh; */
+  outline: none;
+  border: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   text-align: center;
 }
-
+.plan-discipline-table-tr-td-input-semesters-nums:focus {
+  outline: none;
+  border: none;
+}
 .plan-discipline-table-tr-td:nth-child(n + 3) {
   text-align: center;
-  width: 3vw;
+  width: 4vw;
+  border: 1px solid rgba(247, 247, 247, 1);
 }
 
 .plan-discipline-table-tr-td:last-child {
   width: 1.5vw;
+  border: 1px solid rgba(247, 247, 247, 1);
 }
 
 .plan-discipline-table-tr-td:nth-last-child(2) {
   width: 0.3vw;
+  border: 1px solid rgba(247, 247, 247, 1);
 }
 
 .plan-discipline-delete {
@@ -814,4 +866,216 @@
   line-height: 2.4vh;
   margin-right: 0.5vw;
   text-align: center;
+}
+.plan-structure-discipline-data-modal-table-header-line-th-attest {
+  width: 8vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-attest {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  /* white-space: pre-line; */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.plan-structure-discipline-data-modal-table-header-line-th-common-hours {
+  width: 8vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-credits {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-hours-exam {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-hours {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-data-modal-table-header-line-th-aud-in-hours {
+  width: 10vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours-total {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub {
+  /* padding-left: 1vw; */
+  width: 4vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  /* white-space: nowrap; */
+}
+.plan-structure-discipline-block-modal-table-header-line-th {
+  /* padding-left: 1vw; */
+  width: 20vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-iws {
+  width: 5vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-iws-total {
+  width: 5vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-iws-control {
+  width: 2vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-tr-td {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 0;
+  align-items: center;
+}
+.plan-structure-discipline-block-modal-table-tr-td-aud-hours {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+.plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell {
+  width: 33%;
+  height: 2.8vh;
+  text-align: center;
+  padding: 0;
+  border: 1px dashed rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-tr-td-iws-hours {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+.plan-structure-discipline-block-modal-table-tr-td-iws-hours-cell {
+  width: 50%;
+  height: 2.8vh;
+  text-align: center;
+  padding: 0;
+  background-color: rgb(255, 255, 255);
+  border: 1px dashed rgba(247, 247, 247, 1);
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-code {
+  /* padding-left: 1vw; */
+  width: 9vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-refresh {
+  /* padding-left: 1vw; */
+  width: 3vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
+}
+.plan-structure-discipline-block-modal-table-header-line-th-sub-delete {
+  /* padding-left: 1vw; */
+  width: 3vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.5vh;
+  border: 1px solid rgba(247, 247, 247, 1);
+  white-space: nowrap;
 }

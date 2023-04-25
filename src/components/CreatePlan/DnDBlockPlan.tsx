@@ -9,13 +9,18 @@ import DeleteLoad from "../../common/assets/delete-load-for-disc.svg";
 import { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { DisciplineForPlan } from "./types/plan-discipline";
-import { AttestationNameMapper, Attestations } from "../../types/academic-plan";
+import {
+  AttestationNameMapper,
+  Attestations,
+  PlanAttestationToSymbolsMapper,
+  PlanLoadsToAttestationMapper,
+} from "../../types/academic-plan";
 
 function calcPercentDiscCredits(credits: number, sum: number) {
   const percent = (credits / sum) * 100;
   return percent.toFixed(0);
 }
-
+const HOURS_PER_CREDITS = 36;
 function CreateBlockPlace({
   name,
   planDisciplines,
@@ -65,6 +70,10 @@ function CreateBlockPlace({
     const discipline = planDisciplines.find(
       (discipline: DisciplineForPlan) => discipline.id === id
     );
+    const loadName: string = disciplineLoads.find(
+      (load: { disciplineKey: string; name: string }) =>
+        load.disciplineKey === key
+    ).name;
     let newDiscipline: DisciplineForPlan = {
       ...discipline,
       semesters: discipline.semesters.map((sem: any, index: number) => {
@@ -72,12 +81,47 @@ function CreateBlockPlace({
           return {
             ...sem,
             [key]: +event.target.value,
+            attestation: Object.keys(PlanLoadsToAttestationMapper).includes(
+              loadName
+            )
+              ? PlanLoadsToAttestationMapper[loadName]
+              : sem.attestation,
           };
         }
         return sem;
       }),
       // [key]: +event.target.value,
     };
+    newDiscipline = {
+      ...newDiscipline,
+      semesters: newDiscipline.semesters.map(
+        (sem: DisciplineForPlan["semesters"][number]) => ({
+          ...sem,
+          examPrepSumH:
+            sem.courseProjectH +
+            sem.courseWorkH +
+            sem.creditH +
+            sem.diffCreditH +
+            sem.examH,
+        })
+      ),
+    };
+    newDiscipline = {
+      ...newDiscipline,
+      totalLectureH: calcTotalLectureH(newDiscipline),
+      totalPracticeH: calcTotalPracticeH(newDiscipline),
+      totalLabH: calcTotalLabH(newDiscipline),
+      totalAudH: calcTotalAudH(newDiscipline),
+      totalExamH: calcTotalExamH(newDiscipline),
+      totalIwsH: calcTotalIws(newDiscipline),
+      totalExamPrepH: calcTotalExamPrepHForDiscipline(newDiscipline),
+      totalHours: calcTotalHoursForDiscipline(newDiscipline),
+      totalCredits: calcTotalCreditsForDiscipline(newDiscipline),
+      examSemestersNums: getExamSemestersNums(newDiscipline),
+      creditsSemestersNums: getCreditSemesterSymbols(newDiscipline),
+      coursesSemestersNums: getCoursesSemesterSymbols(newDiscipline),
+    };
+
     // newDiscipline = {
     //   ...newDiscipline,
     //   sumH:
@@ -191,13 +235,52 @@ function CreateBlockPlace({
       const discipline = planDisciplines.find(
         (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
       );
-      const newDiscipline = {
+      const semesters = discipline.semesters.map(
+        (sem: DisciplineForPlan["semesters"][number]) => ({
+          ...sem,
+          [pickedLoad.disciplineKey]: 0,
+        })
+      );
+      console.log("pickedLoad.disciplineKey", pickedLoad.disciplineKey);
+      let newDiscipline = {
         ...discipline,
         credits: discipline.credits.filter(
           (load: any, index: number) => index !== pickedLoad.index
         ),
+        semesters,
+      };
+      newDiscipline = {
+        ...newDiscipline,
+        semesters: newDiscipline.semesters.map(
+          (sem: DisciplineForPlan["semesters"][number]) => ({
+            ...sem,
+            examPrepSumH:
+              sem.courseProjectH +
+              sem.courseWorkH +
+              sem.creditH +
+              sem.diffCreditH +
+              sem.examH,
+            attestation: -1,
+          })
+        ),
+      };
+      newDiscipline = {
+        ...newDiscipline,
+        totalLectureH: calcTotalLectureH(newDiscipline),
+        totalPracticeH: calcTotalPracticeH(newDiscipline),
+        totalLabH: calcTotalLabH(newDiscipline),
+        totalAudH: calcTotalAudH(newDiscipline),
+        totalIwsH: calcTotalIws(newDiscipline),
+        totalExamH: calcTotalExamH(newDiscipline),
+        totalExamPrepH: calcTotalExamPrepHForDiscipline(newDiscipline),
+        totalHours: calcTotalHoursForDiscipline(newDiscipline),
+        totalCredits: calcTotalCreditsForDiscipline(newDiscipline),
+        examSemestersNums: getExamSemestersNums(newDiscipline),
+        creditsSemestersNums: getCreditSemesterSymbols(newDiscipline),
+        coursesSemestersNums: getCoursesSemesterSymbols(newDiscipline),
       };
       onChangeDiscipline(newDiscipline);
+      setPickedLoad(false);
     }
   };
   const handleAddSelectedLoad = (load: any) => {
@@ -214,7 +297,188 @@ function CreateBlockPlace({
       handleHideLoadData();
     }
   };
-  console.log("PLAN DISCS: ", planDisciplines);
+  const calcExamPrepHoursForDisciplineInSem = (
+    discipline: DisciplineForPlan,
+    semNum: number
+  ) => {
+    const semester = discipline.semesters[semNum];
+    const examPrepSumH =
+      semester.examH +
+      semester.diffCreditH +
+      semester.creditH +
+      semester.courseWorkH +
+      semester.courseProjectH;
+    return examPrepSumH;
+  };
+  const calcTotalLectureH = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.lectureH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalPracticeH = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.practiceH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalLabH = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.labH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalAudH = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.labH + curSem.lectureH + curSem.practiceH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalIws = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.iwsH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalExamPrepHForDiscipline = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + curSem.examPrepSumH;
+      },
+      0
+    );
+    return sumH;
+  };
+  const calcTotalExamH = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return prevSum + +!!curSem.examH;
+      },
+      0
+    );
+    return sumH * 36;
+  };
+  const calcTotalHoursForDiscipline = (discipline: DisciplineForPlan) => {
+    const sumH = discipline.semesters.reduce(
+      (
+        prevSum: number,
+        curSem: DisciplineForPlan["semesters"][number],
+        index: number
+      ) => {
+        if (index > courses * 2 - 1) return prevSum;
+        return (
+          prevSum +
+          curSem.lectureH +
+          curSem.labH +
+          curSem.practiceH +
+          curSem.iwsH
+        );
+      },
+      0
+    );
+    const examSumH = calcTotalExamH(discipline);
+    return sumH + examSumH;
+  };
+  const calcTotalCreditsForDiscipline = (discipline: DisciplineForPlan) => {
+    const sumCredits = (
+      calcTotalHoursForDiscipline(discipline) / HOURS_PER_CREDITS
+    ).toFixed(0);
+    return +sumCredits;
+  };
+  const getExamSemestersNums = (discipline: DisciplineForPlan) => {
+    const semesters: number[] = [];
+    discipline.semesters.forEach(
+      (sem: DisciplineForPlan["semesters"][number], index: number) => {
+        if (index > courses * 2 - 1) return;
+        if (sem.attestation === Attestations.Exam) semesters.push(index + 1);
+      }
+    );
+    return semesters.join(",");
+  };
+  const getCreditSemesterSymbols = (discipline: DisciplineForPlan) => {
+    const symbols: string[] = [];
+    discipline.semesters.forEach(
+      (sem: DisciplineForPlan["semesters"][number], index: number) => {
+        if (index > courses * 2 - 1) return;
+        if (sem.attestation === Attestations.DiffCredit)
+          symbols.push(
+            index + 1 + PlanAttestationToSymbolsMapper[sem.attestation]
+          );
+        if (sem.attestation === Attestations.Credit)
+          symbols.push(
+            index + 1 + PlanAttestationToSymbolsMapper[sem.attestation]
+          );
+      }
+    );
+    return symbols.join(",");
+  };
+  const getCoursesSemesterSymbols = (discipline: DisciplineForPlan) => {
+    const symbols: string[] = [];
+    discipline.semesters.forEach(
+      (sem: DisciplineForPlan["semesters"][number], index: number) => {
+        if (index > courses * 2 - 1) return;
+        if (sem.attestation === Attestations.CourseProject)
+          symbols.push(
+            index + 1 + PlanAttestationToSymbolsMapper[sem.attestation]
+          );
+        if (sem.attestation === Attestations.CourseWork)
+          symbols.push(
+            index + 1 + PlanAttestationToSymbolsMapper[sem.attestation]
+          );
+      }
+    );
+    return symbols.join(",");
+  };
   return (
     <>
       {!!isShowLoadData && (
@@ -459,70 +723,150 @@ function CreateBlockPlace({
           >
             <table className="plan-disciplines-table">
               <thead className="plan-disciplines-table-thead">
-                <tr className="plan-disciplines-table-thead-line">
+                <tr className="plan-structure-discipline-data-modal-table-header-line">
                   <th
-                    title="Дисциплина"
+                    rowSpan={2}
                     className="plan-disciplines-table-thead-line-td"
                   >
                     Дисциплина
                   </th>
                   <th
-                    title="Зачетные единицы"
-                    className="plan-disciplines-table-thead-line-td"
+                    colSpan={3}
+                    className="plan-structure-discipline-data-modal-table-header-line-th-attest"
                   >
-                    ЗЕТ
+                    Аттест.
                   </th>
                   <th
-                    title="Лекции"
-                    className="plan-disciplines-table-thead-line-td"
+                    colSpan={3}
+                    className="plan-structure-discipline-data-modal-table-header-line-th-common-hours"
                   >
-                    Лк/%
+                    Всего объем
                   </th>
                   <th
-                    title="Лабораторные работы"
-                    className="plan-disciplines-table-thead-line-td"
+                    colSpan={4}
+                    className="plan-structure-discipline-data-modal-table-header-line-th-aud-in-hours"
                   >
-                    Лр/%
+                    Ауд., час
                   </th>
                   <th
-                    title="Практики"
-                    className="plan-disciplines-table-thead-line-td"
+                    colSpan={2}
+                    className="plan-structure-discipline-block-modal-table-header-line-th-iws"
                   >
-                    Пр/%
+                    СРС
                   </th>
+                  {/* {[...new Array(+courses || 0)].map(
+                    (el: any, index: number) => (
+                      <th
+                        colSpan={2}
+                        className="plan-structure-discipline-block-modal-table-header-line-th"
+                      >
+                        {coursesNames[index]}
+                      </th>
+                    )
+                  )} */}
+                  {planDisciplines.length
+                    ? [...new Array(+courses || 0)].map(
+                        (el: any, index: number) => (
+                          <>
+                            <th
+                              rowSpan={2}
+                              className="plan-structure-discipline-block-modal-table-header-line-th-sub"
+                            >
+                              {semestersNames[2 * index]}
+                            </th>
+                            <th
+                              rowSpan={2}
+                              className="plan-structure-discipline-block-modal-table-header-line-th-sub"
+                            >
+                              {semestersNames[2 * index + 1]}
+                            </th>
+                          </>
+                        )
+                      )
+                    : ""}
                   <th
-                    title="Самостоятельная работа"
-                    className="plan-disciplines-table-thead-line-td"
-                  >
-                    Срс/%
-                  </th>
-                  <th
-                    title="Контроль самостоятельной работы"
-                    className="plan-disciplines-table-thead-line-td"
-                  >
-                    Кср/%
-                  </th>
-                  <th
-                    title="Форма аттестации"
-                    className="plan-disciplines-table-thead-line-td"
-                  >
-                    Атт
-                  </th>
-                  <th
-                    title="Код подразделения"
-                    className="plan-disciplines-table-thead-line-td"
+                    rowSpan={2}
+                    className="plan-structure-discipline-block-modal-table-header-line-th-sub-code"
                   >
                     Код подразделения
                   </th>
-                  <th> </th>
-                  <th> </th>
+                  <th
+                    rowSpan={2}
+                    className="plan-structure-discipline-block-modal-table-header-line-th-sub-refresh"
+                  >
+                    {" "}
+                  </th>
+                  <th
+                    rowSpan={2}
+                    className="plan-structure-discipline-block-modal-table-header-line-th-sub-delete"
+                  >
+                    {" "}
+                  </th>
+                </tr>
+                <tr className="plan-structure-discipline-data-modal-table-header-line">
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-attest">
+                    Экз.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-attest">
+                    Зач., дз(*)
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-attest">
+                    КР(р), КП(п)
+                  </th>
+                  <th
+                    className="plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-credits"
+                    style={{
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    ЗЕ
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-hours">
+                    Час.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-common-amount-hours-exam">
+                    Час/Экз.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours-total">
+                    Всего
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours">
+                    лек.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours">
+                    пр.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-aud-in-hours">
+                    лаб.
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-iws-total">
+                    Всего
+                  </th>
+                  <th className="plan-structure-discipline-block-modal-table-header-line-th-sub-iws-control">
+                    КСР
+                  </th>
+                  {/* <th className="plan-structure-discipline-data-modal-table-header-line-th-sub"></th>
+                  <th className="plan-structure-discipline-data-modal-table-header-line-th-sub"></th> */}
+                  {/* {[...new Array(+courses || 0)].map(
+                    (el: any, index: number) => (
+                      <>
+                        <th className="plan-structure-discipline-block-modal-table-header-line-th-sub">
+                          {semestersNames[2 * index]}
+                        </th>
+                        <th className="plan-structure-discipline-block-modal-table-header-line-th-sub">
+                          {semestersNames[2 * index + 1]}
+                        </th>
+                      </>
+                    )
+                  )} */}
+                  {/* <th className="plan-structure-discipline-data-modal-table-header-line-th-sub"></th> */}
                 </tr>
                 <div className="plan-disciplines-table-thead-separator"></div>
               </thead>
               <tbody className="plan-disicpline-table-tbody">
                 {!planDisciplines.length && (
                   <tr key="empty">
-                    <td colSpan={9} className="plan-disciplines-empty-table">
+                    <td colSpan={16} className="plan-disciplines-empty-table">
                       Разместите дисциплины здесь
                     </td>
                   </tr>
@@ -538,15 +882,85 @@ function CreateBlockPlace({
                     <td className="plan-discipline-table-tr-td">
                       {discipline.name}
                     </td>
-                    <td
+                    <td className="plan-discipline-table-tr-td">
+                      {/* <input
+                        type="text"
+                        pattern="[0-9]+(,[0-9]+)?$"
+                        className="plan-discipline-table-tr-td-input-semesters-nums"
+                        // value={getExamSemestersNums(discipline)}
+                      /> */}
+                      {discipline.examSemestersNums}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.creditsSemestersNums}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.coursesSemestersNums}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalCredits || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalHours || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalExamH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalAudH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalLectureH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalPracticeH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalLabH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalIwsH || ""}
+                    </td>
+                    <td className="plan-discipline-table-tr-td">
+                      {discipline.totalExamPrepH || ""}
+                    </td>
+                    {[...new Array(+courses * 2 || 0)].map(
+                      (el: any, index: number) => (
+                        <td
+                          className="plan-discipline-table-tr-td"
+                          style={{ padding: "0" }}
+                        >
+                          <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours">
+                            <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
+                              {discipline.semesters[index].lectureH || ""}
+                            </div>
+                            <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
+                              {discipline.semesters[index].practiceH || ""}
+                            </div>
+                            <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
+                              {discipline.semesters[index].labH || ""}
+                            </div>
+                          </div>
+                          <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours">
+                            <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours-cell">
+                              {discipline.semesters[index].iwsH || ""}
+                            </div>
+                            <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours-cell">
+                              {discipline.semesters[index].examPrepSumH || ""}
+                            </div>
+                          </div>
+                        </td>
+                      )
+                    )}
+                    {/* <td
                       className="plan-discipline-table-tr-td"
                       title="Зачетные единицы"
                     >
                       <div className="plan-discipline-table-tr-td-input-credits">
                         {discipline.sumH}
                       </div>
-                    </td>
-                    <td title="Лекции" className="plan-discipline-table-tr-td">
+                    </td> */}
+                    {/* <td title="Лекции" className="plan-discipline-table-tr-td">
                       <div className="plan-discipline-table-tr-td-container-credits">
                         <input
                           type="number"
@@ -687,7 +1101,7 @@ function CreateBlockPlace({
                         discipline={discipline}
                         onChange={handleAttestationSelect}
                       />
-                    </td>
+                    </td> */}
                     <td className="plan-discipline-table-tr-td">
                       {discipline.codeDepartment}
                     </td>

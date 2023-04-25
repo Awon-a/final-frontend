@@ -227,6 +227,14 @@ const CreatePlanStructure = ({
       value: 35,
     },
   ];
+  const allDisciplinesCredits = blocks
+    .flatMap((block: any) => block.disciplines)
+    .reduce(
+      (accCredits: any[], curDisc: any) => accCredits.concat(curDisc.credits),
+      []
+    );
+  const uniqueDisciplinesCredits = Array.from(new Set(allDisciplinesCredits));
+  console.log("ALL CREDITS", uniqueDisciplinesCredits);
   return (
     <>
       {showModal && (

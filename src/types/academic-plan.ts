@@ -147,3 +147,19 @@ export const PlanDegreeMapper = {
 } as {
   [key: string]: string;
 };
+export const PlanLoadsToAttestationMapper = {
+  Зачет: Attestations.Credit,
+  "Дифф. зачет": Attestations.DiffCredit,
+  Экзамен: Attestations.Exam,
+  "Курсовая работа": Attestations.CourseWork,
+  "Курсовой проект": Attestations.CourseProject,
+} as unknown as {
+  [key: string]: string;
+};
+export const PlanAttestationToSymbolsMapper = {
+  [Attestations.DiffCredit]: "*",
+  [Attestations.Credit]: "",
+  [Attestations.Exam]: "",
+  [Attestations.CourseWork]: "р",
+  [Attestations.CourseProject]: "п",
+};
