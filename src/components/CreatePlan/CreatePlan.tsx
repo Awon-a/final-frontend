@@ -28,7 +28,263 @@ import Elective from "../../common/assets/elective.svg";
 import Base from "../../common/assets/base.svg";
 import SFE from "../../common/assets/sfe.svg";
 import { convertToObject } from "typescript";
-
+const testDisciplines = [
+  {
+    name: "История",
+    codeDepartment: "ФГ.КИФСК",
+    competencies: [],
+  },
+  {
+    name: "Иностранный язык",
+    codeDepartment: "ФГ.КИЯ",
+    competencies: [],
+  },
+  {
+    name: "Практика речевой деятельности",
+    codeDepartment: "ФГ.КИФСК",
+    competencies: [],
+  },
+  {
+    name: "Философия",
+    codeDepartment: "ФГ.КИФСК",
+    competencies: [],
+  },
+  {
+    name: "Безопасность жизнедеятельности",
+    codeDepartment: "ИНХ.КПЭБ",
+    competencies: [],
+  },
+  {
+    name: "Правовое обеспечение профессиональной деятельности",
+    codeDepartment: "ФГ.КГМУ",
+    competencies: [],
+  },
+  {
+    name: "Психология профессионального взаимодействия и саморазвития",
+    codeDepartment: "ФГ.КПТОП",
+    competencies: [],
+  },
+  {
+    name: "Технологическое предпринимательство",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Проектная деятельность",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Математический анализ",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Дополнительные главы математического анализа",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Дискретная математика",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Алгебра",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Геометрия",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Теория чисел",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Математическая логика и теория алгоритмов",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Оптимизация и принятие решений",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Теория вероятностей и математическая статистика",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Дифференциальные уравнения",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Численные методы",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Практикум по программированию",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Алгоритмизация и программирование",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Компьютерные сети",
+    codeDepartment: "ФРТ.ККЗИ",
+    competencies: [],
+  },
+  {
+    name: "Операционные системы",
+    codeDepartment: "ФИ.КИВТ",
+    competencies: [],
+  },
+  {
+    name: "Базы данных",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Web-технологии",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Физическая культура и спорт",
+    codeDepartment: "ФГ.КФВС",
+    competencies: [],
+  },
+  {
+    name: "Объектно-ориентированный анализ и проектирование",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Машинное обучение",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Программная инженерия",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "SQL и получение данных",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Системы управления базами данных",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Большие данные",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Администрирование баз данных",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Продвинутые методы работы с данными",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Тестирование программного обеспечения",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Научно-исследовательская работа",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "BI решения и многомерная модель данных",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Прикладные задачи анализа данных (А)",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Физическая культура и спорт (элективная дисциплина)",
+    codeDepartment: "ФГ.КФВС",
+    competencies: [],
+  },
+  {
+    name: "Учебная практика (научно-исследовательская работа (получение первичных навыков научно-исследовательской работы))",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Производственная практика (научно-исследовательская работа)",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Учебная практика (технологическая (проектно-технологичкская) практика)",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Производственная практика (технологическая (проектно-технологическая) праткика)",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Подготовка к процедуре защиты и защита выпускной квалификационной работы",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Олимпиадные задачи по математике и программированию",
+    codeDepartment: "ФИ.КПМ",
+    competencies: [],
+  },
+  {
+    name: "Инновационная экономика и технологическое предпринимательство",
+    codeDepartment: "80_ДО",
+    competencies: [],
+  },
+  {
+    name: "Проектное управление инновациями",
+    codeDepartment: "80_ДО",
+    competencies: [],
+  },
+  {
+    name: "Цикл факультативных дисциплин по военной подготоке",
+    codeDepartment: "ЦВУ",
+    competencies: [],
+  },
+  {
+    name: "Военная подготовка сержантов запаса",
+    codeDepartment: "ЦВУ",
+    competencies: [],
+  },
+  {
+    name: "Военная подготовка солдат запаса",
+    codeDepartment: "ЦВУ",
+    competencies: [],
+  },
+];
 const CreatePlan = () => {
   const dispatch = useDispatch();
   const [current, setCurrent] = useState(PlacesTypes.planMeta);
@@ -46,6 +302,7 @@ const CreatePlan = () => {
 
   const [regNum, setRegNum] = useState("");
   const [planName, setPlanName] = useState("");
+  const [planDirectionName, setPlanDirectionName] = useState("");
   const [status, setStatus] = useState(PlanStatusMapper[0]);
   const [baseEdu, setBaseEdu] = useState(PlanBaseEduMapper[0]);
   const [specialty, setSpecialty] = useState("");
@@ -70,19 +327,19 @@ const CreatePlan = () => {
     },
     [setStatus]
   );
-  const handleRegNumChange = useCallback(
+  const handlePlanDirectionNameChange = useCallback(
     (event: any) => {
       const regNumValue = event.target.value;
-      setRegNum(regNumValue);
+      setPlanDirectionName(regNumValue);
     },
-    [setRegNum]
+    [setPlanDirectionName]
   );
-  const handlePlanNameChange = useCallback(
+  const handlePlanSpecializationNameChange = useCallback(
     (event: any) => {
       const planNameValue = event.target.value;
-      setPlanName(planNameValue);
+      setSpecialization(planNameValue);
     },
-    [setPlanName]
+    [setSpecialization]
   );
   const handleTrainingFormChange = useCallback(
     (event: any) => {
@@ -583,30 +840,19 @@ const CreatePlan = () => {
     onDrop: any;
     onDelete: any;
     onChangeDiscipline: any;
+    shortcut: string;
+    minCreditsSum?: number;
+    maxCreditsSum?: number;
   }[] = [
     {
-      blockName: "Базовая часть",
+      blockName: "Дисциплины",
       disciplines: baseDisciplines,
       onDrop: handleBaseDisciplineDrop,
       icon: Base,
       onDelete: handleDeleteBaseDisciplines,
       onChangeDiscipline: handleChangeBaseDisciplines,
-    },
-    {
-      blockName: "Вариативная часть",
-      disciplines: electiveDisciplines,
-      onDrop: handleElectiveDisciplineDrop,
-      icon: Elective,
-      onDelete: handleDeleteElectiveDisciplines,
-      onChangeDiscipline: handleChangeElectiveDisciplines,
-    },
-    {
-      blockName: "ГИА",
-      disciplines: sfeDisciplines,
-      onDrop: handleSfeDisciplineDrop,
-      icon: SFE,
-      onDelete: handleDeleteSfeDisciplines,
-      onChangeDiscipline: handleChangeSfeDisciplines,
+      shortcut: "Б1",
+      minCreditsSum: 160,
     },
     {
       blockName: "Практика",
@@ -615,6 +861,28 @@ const CreatePlan = () => {
       icon: Practice,
       onDelete: handleDeletePracticeDisciplines,
       onChangeDiscipline: handleChangePracticeDisciplines,
+      shortcut: "Б2",
+      minCreditsSum: 20,
+    },
+    {
+      blockName: "ГИА",
+      disciplines: sfeDisciplines,
+      onDrop: handleSfeDisciplineDrop,
+      icon: SFE,
+      onDelete: handleDeleteSfeDisciplines,
+      onChangeDiscipline: handleChangeSfeDisciplines,
+      shortcut: "Б3",
+      minCreditsSum: 6,
+      maxCreditsSum: 9,
+    },
+    {
+      blockName: "Факультативы",
+      disciplines: electiveDisciplines,
+      onDrop: handleElectiveDisciplineDrop,
+      icon: Elective,
+      onDelete: handleDeleteElectiveDisciplines,
+      onChangeDiscipline: handleChangeElectiveDisciplines,
+      shortcut: "Ф",
     },
   ];
 
@@ -649,9 +917,12 @@ const CreatePlan = () => {
           specialization={specialization}
           departnment={departnment}
           qualificaion={qualificaion}
-          handleRegNumChange={handleRegNumChange}
+          planDirectionName={planDirectionName}
+          handlePlanDirectionNameChange={handlePlanDirectionNameChange}
           handlePlanStatusChange={handlePlanStatusChange}
-          handlePlanNameChange={handlePlanNameChange}
+          handlePlanSpecializationNameChange={
+            handlePlanSpecializationNameChange
+          }
           handlePlanBaseEdu={handlePlanBaseEdu}
           handleTrainingFormChange={handleTrainingFormChange}
           handleDegreeChange={handleDegreeChange}

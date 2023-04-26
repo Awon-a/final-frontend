@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDrag, useDragLayer } from "react-dnd";
 import { Competency } from "../../types/competencies.js";
 import { DisciplineForPlan } from "./types/plan-discipline";
+import AddDiscipline from "../../common/assets/add-competence.svg";
 
 export const DisciplineTypes = {
   Discipline: "Discipline",
@@ -88,62 +89,138 @@ function Discipline({
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [tableRef]);
-
+  const [showModalCreateDisc, setShowModalCreateDisc] = useState(false);
+  const handleButtonClickCreateDisc = () => {
+    setShowModalCreateDisc(true);
+  };
+  const handleCloseModalCreateDisc = () => {
+    setShowModalCreateDisc(false);
+  };
+  const handleCreateDisc = (event: any) => {
+    event.preventDefault();
+    // Запрос на сервер на добавление дисциплины
+  };
   return (
-    <div className="plan-structure-disciplines-with-data">
-      <div className="table-container">
-        <div className="disicplines-table-caption-container">
-          {/* <div className="plan-structure-discipline-caption">Дисциплины</div> */}
-          <div style={{ height: "3vh" }}></div>
-          <Select
-            valueFrom={currentBlockName}
-            mapper={disciplinesBlockMapper}
-            blockNames={blockNames}
-            onChange={handleDisciplinesCurrentBlockChange}
-            className="plan-structure-discipline-caption-select-block"
-          />
-        </div>
-        <div className="discipline-table-container">
-          <table className="disciplines-table" ref={tableRef}>
-            <thead className="disciplines-table-thead">
-              <tr className="disciplines-table-header-line">
-                <th></th>
-                <th className="disciplines-table-header-line-th">Название</th>
-                <th className="disciplines-table-header-line-th">
-                  Код подразделения
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {disciplines.map((discipline: any) => (
-                <TableRow
-                  key={discipline.id}
-                  discipline={discipline}
-                  disciplineData={disciplineData}
-                  handleDisciplineMove={handleDisciplineMove}
-                  handleShowDisciplineData={handleShowDisciplineData}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {!hiddenDisciplineData && (
-        <div className="plan-structure-discipline-data-container">
-          <div className="plan-structure-discipline-data-caption">
-            Компетенции
+    <>
+      {showModalCreateDisc && (
+        <div className="plan-meta-add-competencies-modal">
+          <div className="plan-discipline-add-new-discipline-modal-content-container">
+            <div className="plan-meta-add-competencies-modal-caption-container">
+              <div className="plan-meta-add-competencies-modal-caption">
+                Добавление дисциплины
+              </div>
+            </div>
+            <span
+              className="plan-meta-add-competencies-modal-close"
+              onClick={handleCloseModalCreateDisc}
+            >
+              &times;
+            </span>
+            <div className="plan-discipline-add-new-discipline-modal-content-line-caption">
+              <div className="plan-discipline-add-new-discipline-modal-content-line-name-caption">
+                Наименование
+              </div>
+              <div className="plan-discipline-add-new-discipline-modal-content-line-code-caption">
+                Код подразделения
+              </div>
+            </div>
+            <div className="plan-discipline-add-new-discipline-modal-content-line">
+              <input
+                type="text"
+                className="plan-discipline-add-new-discipline-modal-content-line-name-input"
+                // value={createName}
+                // onChange={handleCreateCompetenceNameChange}
+                // onChange={handleCreateCompetenceNameChange}
+              />
+              <input
+                type="text"
+                className="plan-discipline-add-new-discipline-modal-content-line-code-input"
+                // value={createCode}
+                // onChange={handleCreateCompetenceCodeChange}
+              />
+            </div>
+            <div className="plan-discipline-add-new-discipline-modal-content-line-caption-competencies">
+              Компетенции
+            </div>
+            <div className="plan-discipline-add-new-discipline-modal-content-competencies-container"></div>
+            <div className="plan-meta-add-competencies-modal-content-line-create-button">
+              <button
+                className="plan-meta-add-competencies-modal-create-button"
+                onClick={handleCreateDisc}
+              >
+                Создать
+              </button>
+            </div>
           </div>
-          {!hiddenDisciplineData &&
-            disciplineData.competencies.map((data: Competency) => (
-              <>
-                <div className="plan-structure-discipline-data-tr">
-                  <b>{data.code}:</b> {data.name}
-                </div>
-              </>
-            ))}
         </div>
       )}
-    </div>
+      <div className="plan-structure-disciplines-with-data">
+        <div className="table-container">
+          <div className="disicplines-table-caption-container">
+            {/* <div className="plan-structure-discipline-caption">Дисциплины</div> */}
+            <div style={{ height: "3vh" }}></div>
+            <Select
+              valueFrom={currentBlockName}
+              mapper={disciplinesBlockMapper}
+              blockNames={blockNames}
+              onChange={handleDisciplinesCurrentBlockChange}
+              className="plan-structure-discipline-caption-select-block"
+            />
+          </div>
+          <div className="discipline-table-container">
+            <table className="disciplines-table" ref={tableRef}>
+              <thead className="disciplines-table-thead">
+                <tr className="disciplines-table-header-line">
+                  <th></th>
+                  <th className="disciplines-table-header-line-th">Название</th>
+                  <th className="disciplines-table-header-line-th">
+                    Код подразделения
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {disciplines.map((discipline: any) => (
+                  <TableRow
+                    key={discipline.id}
+                    discipline={discipline}
+                    disciplineData={disciplineData}
+                    handleDisciplineMove={handleDisciplineMove}
+                    handleShowDisciplineData={handleShowDisciplineData}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="plan-discipline-add-new-discipline">
+            <button
+              className="plan-discipline-add-new-discipline-add-field"
+              onClick={handleButtonClickCreateDisc}
+            >
+              <img
+                src={AddDiscipline}
+                alt="icon"
+                className="plan-discipline-add-new-discipline-add-field-icon"
+              />
+            </button>
+          </div>
+        </div>
+        {!hiddenDisciplineData && (
+          <div className="plan-structure-discipline-data-container">
+            <div className="plan-structure-discipline-data-caption">
+              Компетенции
+            </div>
+            {!hiddenDisciplineData &&
+              disciplineData.competencies.map((data: Competency) => (
+                <>
+                  <div className="plan-structure-discipline-data-tr">
+                    <b>{data.code}:</b> {data.name}
+                  </div>
+                </>
+              ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

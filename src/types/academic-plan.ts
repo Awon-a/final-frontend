@@ -136,9 +136,9 @@ export const PlanBaseEduMapper = {
   3: "высшее II степени",
 };
 export const PlanTrainingFromMapper = {
-  0: "очная",
-  1: "очно-заочная",
-  2: "заочная",
+  0: "Очная форма обучения",
+  1: "Очно-заочная форма обучения",
+  2: "Заочная форма обучения",
 } as { [key: string]: string };
 export const PlanDegreeMapper = {
   0: "Бакалавриат",

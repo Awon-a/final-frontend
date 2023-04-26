@@ -15,9 +15,9 @@ import CreatePreviewPlan from "./PreviewCreatePlan/CreatePreviewPlan";
 import { mapKeys } from "lodash";
 import { DisciplineForPlan } from "./types/plan-discipline";
 import { Competency } from "../../types/competencies.js";
+import { measureMemory } from "vm";
 
-const LOW_BOUND = 240;
-const HIGH_BOUND = 300;
+const BOUND_H = 240;
 
 const CreatePlanStructure = ({
   goBack,
@@ -168,46 +168,68 @@ const CreatePlanStructure = ({
   const renderWarningCredits = (
     blocks: { disciplines: DisciplineForPlan[] }[]
   ) => {
+    const messages: string[] = [];
     const creditsSum = blocks.reduce((prev, block) => {
       const blockSum = block.disciplines.reduce(
-        (prev, current) => prev + current.sumH,
+        (prev, current) => prev + current.totalCredits,
         0
       );
       return prev + blockSum;
     }, 0);
-    if (creditsSum < LOW_BOUND)
-      return (
-        <div className="plan-disciplines-credits-bound-warning-container">
-          <div>
-            <img
-              className="plan-disciplines-credits-bound-warning-icon"
-              src={WarningCredits}
-              alt="icon"
-            ></img>
-          </div>
-          <div className="plan-disciplines-credits-bound-warning-content">
-            Внимание! Общая трудоемкость УП не соответствует объему
-            образовательной программы (текущая: {creditsSum} <u>&lt;</u> 240).
-          </div>
-        </div>
+    blocks.forEach((block: any) => {
+      const totalCredits = block.disciplines.reduce(
+        (sum: number, curDisc: DisciplineForPlan) => sum + curDisc.totalCredits,
+        0
       );
-    if (creditsSum > HIGH_BOUND)
-      return (
-        <div className="plan-disciplines-credits-bound-warning-container">
-          <div>
-            <img
-              className="plan-disciplines-credits-bound-warning-icon"
-              src={WarningCredits}
-              alt="icon"
-            ></img>
-          </div>
-          <div className="plan-disciplines-credits-bound-warning-content">
-            Внимание! Общая трудоемкость УП не соответствует объему
-            образовательной программы (текущая: {creditsSum} <u>&gt;</u>
-            300).
-          </div>
-        </div>
+      if (
+        block.minCreditsSum &&
+        !block.maxCreditsSum &&
+        block.minCreditsSum > totalCredits
+      )
+        messages.push(
+          `Блок: ${block.blockName}: ЗЕТ не соответствует минимальному объему ${block.minCreditsSum}.`
+        );
+      else if (
+        block.minCreditsSum &&
+        block.maxCreditsSum &&
+        (totalCredits < block.minCreditsSum ||
+          totalCredits > block.maxCreditsSum)
+      )
+        messages.push(
+          `Блок: ${block.blockName}: ЗЕТ не соответствует ограничению по объему ${block.minCreditsSum}-${block.maxCreditsSum}.`
+        );
+    });
+    if (creditsSum < BOUND_H || creditsSum > BOUND_H)
+      messages.push(
+        `Общая трудоемкость УП не соответствует установленному объему ${BOUND_H} (текущая: ${creditsSum}).`
       );
+    return (
+      <>
+        {messages.length ? (
+          <div className="plan-disciplines-credits-bound-warning-container">
+            <div>
+              <img
+                className="plan-disciplines-credits-bound-warning-icon"
+                src={WarningCredits}
+                alt="icon"
+              ></img>
+            </div>
+            <div className="plan-disciplines-credits-bound-warning-content">
+              Внимание!
+            </div>
+            <div className="plan-disciplines-credits-bound-warning-content-msgs">
+              {messages.map((msg: string) => (
+                <div className="plan-disciplines-credits-bound-warning-content-msg">
+                  {msg}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </>
+    );
   };
   const parameters = [
     {
@@ -219,12 +241,20 @@ const CreatePlanStructure = ({
       value: 240,
     },
     {
-      name: "Кол-во ЗЕТ в году",
-      value: 60,
+      name: 'Мин. кол-во ЗЕТ в блоке "Дисциплины"',
+      value: 160,
     },
     {
-      name: "Кол-во ЗЕТ в семестре",
-      value: 35,
+      name: 'Мин. кол-во ЗЕТ в блоке "Практика"',
+      value: 20,
+    },
+    {
+      name: 'Мин. кол-во ЗЕТ в блоке "ГИА"',
+      value: 6,
+    },
+    {
+      name: 'Макс. кол-во ЗЕТ в блоке "ГИА"',
+      value: 9,
     },
   ];
   const allDisciplinesCredits = blocks
@@ -577,8 +607,35 @@ const CreatePlanStructure = ({
                   <CreatePreviewPlan
                     key="preview-table"
                     data={dataForPreviewTable}
+                    courses={courses}
                   />
                 ))}
+              <div className="plan-structure-explain-plan-semester-cell-container">
+                <div className="plan-structure-explain-plan-semester-cell-info">
+                  Объем нагрузок в семестре по дисциплине представлен в виде:
+                </div>
+                <div className="plan-structure-explain-plan-semester-cell">
+                  <div className="plan-structure-explain-plan-semester-cell-aud-row">
+                    <div className="plan-structure-explain-plan-semester-cell-aud-row-cell">
+                      Лекции
+                    </div>
+                    <div className="plan-structure-explain-plan-semester-cell-aud-row-cell">
+                      Пр. занятия
+                    </div>
+                    <div className="plan-structure-explain-plan-semester-cell-aud-row-cell-last">
+                      Лаб. работы
+                    </div>
+                  </div>
+                  <div className="plan-structure-explain-plan-semester-cell-iws-row">
+                    <div className="plan-structure-explain-plan-semester-cell-iws-row-cell">
+                      СРС (практики, ГИА)
+                    </div>
+                    <div className="plan-structure-explain-plan-semester-cell-iws-row-cell-last">
+                      КСР
+                    </div>
+                  </div>
+                </div>
+              </div>
               {renderWarningCredits(blocks)}
             </div>
           </DndProvider>

@@ -30,7 +30,7 @@ function CreateBlockPlace({
   onChangeDiscipline,
   disciplineLoads,
   icon = null,
-  tableHeight = "40vh",
+  tableHeight = "44vh",
 }: any) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleCollapse = () => {

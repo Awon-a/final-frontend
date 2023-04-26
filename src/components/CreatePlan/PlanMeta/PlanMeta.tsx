@@ -28,6 +28,9 @@ const PlanMeta = ({
   handlePlanNameChange,
   handlePlanStatusChange,
   handlePlanBaseEdu,
+  handlePlanDirectionNameChange,
+  planDirectionName,
+  handlePlanSpecializationNameChange,
   handleTrainingFormChange,
   handleDegreeChange,
   handleStartYearChange,
@@ -44,7 +47,7 @@ const PlanMeta = ({
     <>
       <div className="plan-meta-container">
         <div className="plan-meta-content-container">
-          <div className="plan-meta-tr-container">
+          {/* <div className="plan-meta-tr-container">
             <div className="plan-meta-reg-num">
               <div className="plan-meta-reg-num-label">Рег. номер</div>
               <input
@@ -153,7 +156,7 @@ const PlanMeta = ({
           </div>
           <div className="plan-meta-tr-container">
             <div className="plan-meta-degree">
-              <div className="plan-meta-degree-label">Степень</div>
+              <div className="plan-meta-degree-label">Уровень образования</div>
               <Select
                 className={"plan-meta-degree-select"}
                 valueFrom={degree}
@@ -218,6 +221,94 @@ const PlanMeta = ({
                     />
                     <div className="plan-meta-period-courses-label">курсов</div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="plan-meta-direction-tr">
+            <div className="plan-meta-direction-tr-label">
+              Направление подготовки (специальность):
+            </div>
+            <input
+              type="text"
+              className="plan-meta-direction-tr-input"
+              placeholder="Введите направление"
+              value={planDirectionName}
+              onChange={handlePlanDirectionNameChange}
+            />
+          </div>
+          <div className="plan-meta-specialization-tr">
+            <div className="plan-meta-specialization-tr-label">
+              Направленность (специализация/профиль):
+            </div>
+            <input
+              type="text"
+              className="plan-meta-specialization-tr-input"
+              placeholder="Введите направленность"
+              value={specialization}
+              onChange={handlePlanSpecializationNameChange}
+            />
+          </div>
+          <div className="plan-meta-form-and-level-education-tr">
+            <Select
+              className={"plan-meta-form-and-level-education-tr-form-select"}
+              valueFrom={trainingForm}
+              mapper={PlanTrainingFromMapper}
+              onChange={handleTrainingFormChange}
+            />
+            <div className="plan-meta-form-and-level-education-tr-level">
+              <div className="plan-meta-form-and-level-education-tr-level-label">
+                Квалификация:
+              </div>
+              <Select
+                className={
+                  "plan-meta-form-and-level-education-tr-level-select "
+                }
+                valueFrom={degree}
+                mapper={PlanDegreeMapper}
+                onChange={handleDegreeChange}
+              />
+            </div>
+          </div>
+          <div className="plan-meta-period-education-tr">
+            <div className="plan-meta-period-education-tr-container">
+              <div className="plan-meta-period-education-tr-container-label">
+                Срок обучения:
+              </div>
+              <div className="plan-meta-period-education-tr-container-row">
+                <div className="plan-meta-period-education-tr-container-row-start-label">
+                  с
+                </div>
+                <input
+                  type="number"
+                  className="plan-meta-period-education-tr-container-row-start-input"
+                  value={startYear}
+                  onChange={handleStartYearChange}
+                />
+                <div className="plan-meta-period-education-tr-container-row-end-label">
+                  по
+                </div>
+                <input
+                  type="number"
+                  className="plan-meta-period-education-tr-container-row-end-input"
+                  value={endYear}
+                  onChange={handleEndYearChange}
+                />
+                <input
+                  type="number"
+                  className="plan-meta-period-education-tr-container-row-courses-input"
+                  value={
+                    !courses &&
+                    startYear &&
+                    endYear &&
+                    Number(endYear) >= Number(startYear)
+                      ? Number(endYear) - Number(startYear)
+                      : courses
+                  }
+                  onChange={handleCoursesChange}
+                />
+                <div className="plan-meta-period-education-tr-container-row-courses-label">
+                  курсов
                 </div>
               </div>
             </div>

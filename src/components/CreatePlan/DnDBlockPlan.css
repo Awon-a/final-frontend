@@ -6,14 +6,14 @@
   /* border: 2px solid rgb(155, 156, 159, 0.5); */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2%;
-  max-height: 28vh;
+  max-height: 32vh;
   max-width: 100%;
   transition: height 0.3s ease-in-out;
   background-color: rgba(255, 255, 255);
 }
 
 .plan-discipline-table-container {
-  max-height: 24vh;
+  max-height: 28vh;
   max-width: 100%;
   overflow-y: scroll;
   overflow-x: scroll;
@@ -30,7 +30,7 @@
   justify-content: start;
   align-items: center;
   height: 4vh;
-  max-width: 20vw;
+  max-width: auto;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -96,6 +96,7 @@
   align-self: center;
   border: none; /* убираем границу */
   outline: none;
+  width: auto;
 }
 
 .plan-disicplines-table-caption:focus {
@@ -249,7 +250,7 @@
 }
 
 .plan-discipline-table-tr-td:last-child {
-  width: 1.5vw;
+  width: 0.3vw;
   border: 1px solid rgba(247, 247, 247, 1);
 }
 
@@ -903,6 +904,7 @@
   font-family: "Signika", sans-serif;
   font-weight: bolder;
   text-align: center;
+  background-color: rgb(231, 233, 234);
   font-size: 1.5vh;
   border: 1px solid rgba(247, 247, 247, 1);
   white-space: nowrap;
@@ -1059,7 +1061,7 @@
 }
 .plan-structure-discipline-block-modal-table-header-line-th-sub-refresh {
   /* padding-left: 1vw; */
-  width: 3vw;
+  width: 1.3vw;
   color: rgba(61, 78, 87, 0.8);
   font-family: "Signika", sans-serif;
   font-weight: 500;
@@ -1070,7 +1072,7 @@
 }
 .plan-structure-discipline-block-modal-table-header-line-th-sub-delete {
   /* padding-left: 1vw; */
-  width: 3vw;
+  width: 1.3vw;
   color: rgba(61, 78, 87, 0.8);
   font-family: "Signika", sans-serif;
   font-weight: 500;

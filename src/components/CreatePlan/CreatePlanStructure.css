@@ -94,9 +94,9 @@
   max-width: 100%;
   padding-left: 0.5vw;
   padding-right: 0.5vw;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   scrollbar-width: none;
-  scrollbar-color: yellow;
+  /* scrollbar-color: rgb(255, 25, 0); */
   overflow-y: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -215,7 +215,7 @@
   align-items: start;
   padding: 2vh 1vw;
   width: 100%;
-  height: 10vh;
+  height: auto;
   background-color: rgba(253, 237, 238, 1);
   margin-bottom: 20vh;
   border-radius: 15px;
@@ -230,6 +230,24 @@
 
 .plan-disciplines-credits-bound-warning-content {
   height: 5vh;
+  width: auto;
+  color: rgba(67, 68, 76, 1);
+  font-family: "Signika", sans-serif;
+  font-size: 1.7vh;
+  font-weight: 600;
+  margin-right: 1vw;
+}
+.plan-disciplines-credits-bound-warning-content-msgs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: rgba(67, 68, 76, 1);
+  font-family: "Signika", sans-serif;
+  font-size: 1.7vh;
+  font-weight: 600;
+}
+.plan-disciplines-credits-bound-warning-content-msg {
+  height: 2vh;
   width: 100%;
   color: rgba(67, 68, 76, 1);
   font-family: "Signika", sans-serif;
@@ -498,8 +516,8 @@
   background-color: rgba(255, 255, 255);
   margin: 10% auto;
   padding: 1vh 1vh;
-  width: 25%;
-  height: 60%;
+  width: 35%;
+  height: 45%;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 25px;
@@ -564,4 +582,74 @@
 .plan-structure-settings-modal-table-td-input:focus {
   border: none;
   outline: none;
+}
+.plan-structure-explain-plan-semester-cell-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-left: 1vw;
+  width: 100%;
+  margin-bottom: 4vh;
+}
+.plan-structure-explain-plan-semester-cell-info {
+  font-size: 1.8vh;
+  background-color: rgba(240, 246, 251, 1);
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  margin-bottom: 1vh;
+}
+.plan-structure-explain-plan-semester-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 25vw;
+  height: 6vh;
+  border: 1px solid rgb(0, 0, 0);
+  font-size: 1.75vh;
+  background-color: rgba(240, 246, 251, 1);
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+.plan-structure-explain-plan-semester-cell-aud-row {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px dashed rgb(0, 0, 0);
+}
+.plan-structure-explain-plan-semester-cell-aud-row-cell {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border-right: 1px dashed rgb(0, 0, 0);
+}
+.plan-structure-explain-plan-semester-cell-aud-row-cell-last {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.plan-structure-explain-plan-semester-cell-iws-row {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+}
+.plan-structure-explain-plan-semester-cell-iws-row-cell {
+  text-align: center;
+  border-right: 1px dashed rgb(0, 0, 0);
+  width: 50%;
+  height: 100%;
+}
+.plan-structure-explain-plan-semester-cell-iws-row-cell-last {
+  text-align: center;
+  height: 100%;
+  width: 50%;
+  border: none;
 }
