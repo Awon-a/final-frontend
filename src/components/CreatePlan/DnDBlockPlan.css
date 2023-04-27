@@ -1081,3 +1081,144 @@
   border: 1px solid rgba(247, 247, 247, 1);
   white-space: nowrap;
 }
+
+.plan-structure-add-exam-sem-modal {
+  position: fixed;
+  z-index: 110;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.plan-structure-add-exam-sem-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: rgba(255, 255, 255);
+  margin: 7.5% auto;
+  padding: 1vh 1vh;
+  width: 20%;
+  height: 40%;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+}
+.plan-structure-add-exam-sem-modal-caption-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4vh;
+}
+.plan-structure-add-exam-sem-modal-caption {
+  font-size: 1.75vh;
+  color: #312f31;
+  font-family: "Signika", sans-serif;
+  font-weight: 700;
+}
+.plan-structure-add-exam-sem-modal-table-container {
+  /* margin-top: 3vh; */
+  max-height: 90%;
+  height: 70%;
+  max-width: 90%;
+  overflow-y: scroll;
+  /* overflow-x: scroll; */
+  /* width: 80%; */
+}
+.plan-structure-add-exam-sem-modal-table {
+  /* margin-top: 4vh; */
+  width: 100%;
+  /* table-layout: fixed; */
+}
+.plan-structure-add-exam-sem-modal-table-thead {
+  position: sticky;
+  top: 0;
+  background-color: rgb(255, 255, 255);
+}
+.plan-structure-add-exam-sem-modal-table-header-line {
+  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  height: 3vh;
+}
+.plan-structure-add-exam-sem-modal-table-header-line-th {
+  /* padding-left: 1vw; */
+  width: 20vw;
+  color: rgba(61, 78, 87, 0.8);
+  font-family: "Signika", sans-serif;
+  font-weight: bold;
+  font-size: 1.5vh;
+  text-align: center;
+  border: 1px solid rgba(247, 247, 247, 1);
+}
+.plan-structure-add-exam-sem-modal-table-header-line-th:last-child {
+  width: 7vw;
+}
+.plan-structure-add-exam-sem-modal-table-tr:hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-add-exam-sem-modal-table-tr:nth-child(even):hover {
+  background: rgba(249, 251, 252, 1);
+}
+
+.plan-structure-add-exam-sem-modal-table-tr:nth-child(even) {
+  height: 5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+}
+
+.plan-structure-add-exam-sem-modal-table-tr {
+  height: 5vh;
+  font-size: 1.5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+.plan-structure-add-exam-sem-modal-table-tbody-td {
+  padding-left: 1vw;
+  line-height: 2.8vh;
+  text-align: left;
+  /* border: 1px solid rgba(247, 247, 247, 1); */
+}
+.plan-structure-add-exam-sem-modal-table-tr-active {
+  background-color: rgb(242, 250, 254);
+  height: 5vh;
+  font-size: 1.5vh;
+  border-bottom: 2px solid rgba(247, 247, 247, 1);
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 500;
+}
+.plan-structure-discipline-add-exam-sem-modal-content-info-panel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 92%;
+  /* margin-top: 3vh; */
+  margin-bottom: 0.5vh;
+  margin-left: 0.5vh;
+}
+.plan-structure-discipline-add-exam-sem-modal-content-select {
+  /* margin-left: 2.5vw; */
+  width: 100%;
+  height: 4vh;
+  color: rgba(55, 69, 80, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  /* text-decoration: underline; */
+  font-size: 1.5vh;
+  border: none;
+  outline: none;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
+}
+.plan-structure-discipline-add-exam-sem-modal-content-select:hover {
+  background-color: rgba(249, 251, 252, 1);
+}

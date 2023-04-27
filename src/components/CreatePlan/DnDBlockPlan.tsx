@@ -76,22 +76,46 @@ function CreateBlockPlace({
     ).name;
     let newDiscipline: DisciplineForPlan = {
       ...discipline,
-      semesters: discipline.semesters.map((sem: any, index: number) => {
-        if (index === semNum) {
-          return {
-            ...sem,
-            [key]: +event.target.value,
-            attestation: Object.keys(PlanLoadsToAttestationMapper).includes(
-              loadName
-            )
-              ? PlanLoadsToAttestationMapper[loadName]
-              : sem.attestation,
-          };
+      semesters: discipline.semesters.map(
+        (sem: DisciplineForPlan["semesters"][number], index: number) => {
+          if (index === semNum) {
+            return {
+              ...sem,
+              attestation: Object.keys(PlanLoadsToAttestationMapper).includes(
+                loadName
+              )
+                ? PlanLoadsToAttestationMapper[loadName]
+                : sem.attestation,
+              [key]: +event.target.value,
+            };
+          }
+          return sem;
         }
-        return sem;
-      }),
+      ),
       // [key]: +event.target.value,
     };
+    if (Object.keys(PlanLoadsToAttestationMapper).includes(loadName)) {
+      newDiscipline = {
+        ...newDiscipline,
+        semesters: newDiscipline.semesters.map(
+          (sem: DisciplineForPlan["semesters"][number], index: number) => {
+            if (index === semNum) {
+              console.log({ newDiscipline, sem, [key]: +event.target.value });
+              return {
+                ...sem,
+                courseWorkH: 0,
+                courseProjectH: 0,
+                creditH: 0,
+                diffCreditH: 0,
+                examH: 0,
+                [key]: +event.target.value,
+              };
+            }
+            return sem;
+          }
+        ),
+      };
+    }
     newDiscipline = {
       ...newDiscipline,
       semesters: newDiscipline.semesters.map(
@@ -101,8 +125,8 @@ function CreateBlockPlace({
             sem.courseProjectH +
             sem.courseWorkH +
             sem.creditH +
-            sem.diffCreditH +
-            sem.examH,
+            sem.diffCreditH,
+          // sem.examH,
         })
       ),
     };
@@ -165,7 +189,6 @@ function CreateBlockPlace({
       );
     }
   }, [planDisciplines, disciplineToFill]);
-  console.log("FILL", disciplineToFill);
   // useEffect(() => {
   //   // setDisciplineLoad(disciplineToFill.credits);
   //   const discipline = planDisciplines.find(
@@ -177,9 +200,6 @@ function CreateBlockPlace({
   //   };
   //   onChangeDiscipline(newDiscipline);
   // }, [disciplineLoad, disciplineToFill, planDisciplines, onChangeDiscipline]);
-  const [pickedLoad, setPickedLoad]: [any, any] = useState(false);
-  const [selectedLoad, setSelectedLoad]: [any, any] = useState(false);
-  const [isShowLoadData, setIsShowLoadData] = useState(false);
   const coursesNames = [
     "Первый курс",
     "Второй курс",
@@ -199,6 +219,130 @@ function CreateBlockPlace({
     "Девятый семестр",
     "Десятый семестр",
   ];
+  const [pickedLoad, setPickedLoad]: [any, any] = useState(false);
+  const [selectedLoad, setSelectedLoad]: [any, any] = useState(false);
+  const [isShowLoadData, setIsShowLoadData] = useState(false);
+  const [isShowSetExamSem, setIsShowSetExamSem] = useState(false);
+  const [selectedExamSem, setSelectedExamSem]: [any, any] = useState(false);
+  const [examSemForAdding, setExamSemForAdding] = useState(semestersNames[0]);
+  const handleClickOnChangeExamSem = (discipline: DisciplineForPlan) => {
+    setDisciplineToFill(discipline as any);
+    setIsShowSetExamSem(true);
+  };
+  const handleCloseChangeExamSem = () => {
+    setDisciplineToFill(false);
+    setIsShowSetExamSem(false);
+  };
+  const handleClickOnExamSem = (semNum: number, index: number) => {
+    if (selectedExamSem && selectedExamSem.index === index) {
+      setSelectedExamSem(false);
+    } else {
+      setSelectedExamSem({ semNum, index });
+    }
+  };
+  const handleChangeSelectExamSem = (event: any, semNumForReplace: number) => {
+    const semNum = semestersNames.indexOf(event.target.value);
+    const discipline = planDisciplines.find(
+      (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+    );
+    let newDiscipline = {
+      ...discipline,
+      semesters: discipline.semesters.map((sem: any, index: number) => {
+        if (index === semNum)
+          return {
+            ...sem,
+            courseWorkH: 0,
+            courseProjectH: 0,
+            creditH: 0,
+            diffCreditH: 0,
+            examPrepSumH: 0,
+            examH: 36,
+            attestation: Attestations.Exam,
+          };
+        if (index === semNumForReplace)
+          return {
+            ...sem,
+            examH: 0,
+            attestation: -1,
+          };
+        return sem;
+      }),
+    };
+    const totalExamH = calcTotalExamH(newDiscipline);
+    newDiscipline = {
+      ...newDiscipline,
+      totalExamH: totalExamH,
+      totalExamPrepH: calcTotalExamPrepHForDiscipline(newDiscipline),
+      examSemestersNums: getExamSemestersNums(newDiscipline),
+      creditsSemestersNums: getCreditSemesterSymbols(newDiscipline),
+      coursesSemestersNums: getCoursesSemesterSymbols(newDiscipline),
+    };
+    setDisciplineToFill(newDiscipline);
+    onChangeDiscipline(newDiscipline);
+  };
+  const handleClickOnAddExamSemButton = () => {
+    const discipline = planDisciplines.find(
+      (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+    );
+    let isAdded = false;
+    let newDiscipline = {
+      ...discipline,
+      semesters: discipline.semesters.map(
+        (sem: DisciplineForPlan["semesters"][number]) => {
+          if (!isAdded && (sem.attestation as any) === -1) {
+            isAdded = true;
+            return {
+              ...sem,
+              examH: 36,
+              attestation: Attestations.Exam,
+            };
+          }
+          return sem;
+        }
+      ),
+    };
+    newDiscipline = {
+      ...newDiscipline,
+      totalExamH: calcTotalExamH(newDiscipline),
+      // totalExamPrepH: calcTotalExamPrepHForDiscipline(newDiscipline),
+      totalHours: calcTotalHoursForDiscipline(newDiscipline),
+      totalCredits: calcTotalCreditsForDiscipline(newDiscipline),
+      examSemestersNums: getExamSemestersNums(newDiscipline),
+    };
+    setDisciplineToFill(newDiscipline);
+    onChangeDiscipline(newDiscipline);
+  };
+  const handleClickOnDeleteExamSemButton = (selectedExamSem: any) => {
+    const discipline = planDisciplines.find(
+      (discipline: DisciplineForPlan) => discipline.id === disciplineToFill.id
+    );
+    let newDiscipline = {
+      ...discipline,
+      semesters: discipline.semesters.map(
+        (sem: DisciplineForPlan["semesters"][number], index: number) => {
+          if (index === selectedExamSem.semNum) {
+            return {
+              ...sem,
+              attestation: -1,
+              examH: 0,
+            };
+          }
+          return sem;
+        }
+      ),
+    };
+    newDiscipline = {
+      ...newDiscipline,
+      totalExamH: calcTotalExamH(newDiscipline),
+      totalExamPrepH: calcTotalExamPrepHForDiscipline(newDiscipline),
+      totalHours: calcTotalHoursForDiscipline(newDiscipline),
+      totalCredits: calcTotalCreditsForDiscipline(newDiscipline),
+      examSemestersNums: getExamSemestersNums(newDiscipline),
+    };
+    setSelectedExamSem(false);
+    setDisciplineToFill(newDiscipline);
+    onChangeDiscipline(newDiscipline);
+  };
   const handleDoubleClickOnDisciplineInBlock = (
     discipline: DisciplineForPlan
   ) => {
@@ -241,7 +385,6 @@ function CreateBlockPlace({
           [pickedLoad.disciplineKey]: 0,
         })
       );
-      console.log("pickedLoad.disciplineKey", pickedLoad.disciplineKey);
       let newDiscipline = {
         ...discipline,
         credits: discipline.credits.filter(
@@ -258,9 +401,13 @@ function CreateBlockPlace({
               sem.courseProjectH +
               sem.courseWorkH +
               sem.creditH +
-              sem.diffCreditH +
-              sem.examH,
-            attestation: -1,
+              sem.diffCreditH,
+            // sem.examH,
+            attestation:
+              PlanLoadsToAttestationMapper[pickedLoad.name as any] ===
+              (sem.attestation as any)
+                ? -1
+                : sem.attestation,
           })
         ),
       };
@@ -395,7 +542,7 @@ function CreateBlockPlace({
     return sumH;
   };
   const calcTotalExamH = (discipline: DisciplineForPlan) => {
-    const sumH = discipline.semesters.reduce(
+    const countExam = discipline.semesters.reduce(
       (
         prevSum: number,
         curSem: DisciplineForPlan["semesters"][number],
@@ -406,7 +553,7 @@ function CreateBlockPlace({
       },
       0
     );
-    return sumH * 36;
+    return countExam * 36;
   };
   const calcTotalHoursForDiscipline = (discipline: DisciplineForPlan) => {
     const sumH = discipline.semesters.reduce(
@@ -685,6 +832,106 @@ function CreateBlockPlace({
           </div>
         </div>
       )}
+      {isShowSetExamSem && (
+        <div className="plan-structure-add-exam-sem-modal">
+          <div className="plan-structure-add-exam-sem-modal-content-container">
+            <div className="plan-structure-add-exam-sem-modal-caption-container">
+              <div className="plan-structure-add-exam-sem-modal-caption">
+                Выбор нагрузки
+              </div>
+            </div>
+            <div className="plan-structure-discipline-add-exam-sem-modal-content-info-panel">
+              <button
+                className="plan-structure-discipline-data-modal-content-info-panel-add"
+                onClick={handleClickOnAddExamSemButton}
+              >
+                <img
+                  className="plan-structure-discipline-data-modal-content-info-panel-add-icon"
+                  src={AddLoad}
+                  alt="icon"
+                />
+                <div className="plan-structure-discipline-data-modal-content-info-panel-add-content">
+                  Добавить
+                </div>
+              </button>
+              <button
+                className="plan-structure-discipline-data-modal-content-info-panel-delete"
+                onClick={() =>
+                  handleClickOnDeleteExamSemButton(selectedExamSem)
+                }
+              >
+                <img
+                  className="plan-structure-discipline-data-modal-content-info-panel-delete-icon"
+                  src={DeleteLoad}
+                  alt="icon"
+                />
+                <div className="plan-structure-discipline-data-modal-content-info-panel-delete-content">
+                  Удалить
+                </div>
+              </button>
+            </div>
+            <div className="plan-structure-add-exam-sem-modal-table-container">
+              <table className="plan-structure-add-exam-sem-modal-table">
+                <thead className="plan-structure-add-exam-sem-modal-table-thead">
+                  <tr className="plan-structure-add-exam-sem-modal-table-header-line">
+                    <th className="plan-structure-add-exam-sem-modal-table-header-line-th">
+                      Семестр
+                    </th>
+                    <th className="plan-structure-add-exam-sem-modal-table-header-line-th">
+                      Количество
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {disciplineToFill.examSemestersNums.split(",")[0] !== ""
+                    ? disciplineToFill.examSemestersNums
+                        .split(",")
+                        .map(Number)
+                        .map((semNum: number, index: number) => (
+                          <tr
+                            className={
+                              selectedExamSem && selectedExamSem.index === index
+                                ? "plan-structure-add-exam-sem-modal-table-tr-active"
+                                : "plan-structure-add-exam-sem-modal-table-tr"
+                            }
+                            onClick={() =>
+                              handleClickOnExamSem(semNum - 1, index)
+                            }
+                          >
+                            <td className="plan-structure-add-exam-sem-modal-table-tbody-td">
+                              <Select
+                                className={
+                                  "plan-structure-discipline-add-exam-sem-modal-content-select"
+                                }
+                                valueFrom={semestersNames[semNum - 1]}
+                                mapper={semestersNames.slice(0, +courses * 2)}
+                                onChange={(event: any) =>
+                                  handleChangeSelectExamSem(event, semNum - 1)
+                                }
+                              />
+                              {/* {semestersNames[semNum - 1]} */}
+                            </td>
+                            <td
+                              className="plan-structure-add-exam-sem-modal-table-tbody-td"
+                              style={{ textAlign: "center" }}
+                            >
+                              {HOURS_PER_CREDITS}
+                            </td>
+                          </tr>
+                        ))
+                    : ""}
+                </tbody>
+              </table>
+            </div>
+            <span
+              className="plan-structure-add-load-modal-close"
+              onClick={handleCloseChangeExamSem}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      )}
       <div
         ref={drop}
         className="plan-disciplines-conteiner"
@@ -872,17 +1119,21 @@ function CreateBlockPlace({
                   </tr>
                 )}
                 {planDisciplines.map((discipline: DisciplineForPlan) => (
-                  <tr
-                    key={discipline.id}
-                    className="plan-discipline-table-tr"
-                    onDoubleClick={() =>
-                      handleDoubleClickOnDisciplineInBlock(discipline)
-                    }
-                  >
-                    <td className="plan-discipline-table-tr-td">
+                  <tr key={discipline.id} className="plan-discipline-table-tr">
+                    <td
+                      className="plan-discipline-table-tr-td"
+                      onDoubleClick={() =>
+                        handleDoubleClickOnDisciplineInBlock(discipline)
+                      }
+                    >
                       {discipline.name}
                     </td>
-                    <td className="plan-discipline-table-tr-td">
+                    <td
+                      className="plan-discipline-table-tr-td"
+                      onDoubleClick={() =>
+                        handleClickOnChangeExamSem(discipline)
+                      }
+                    >
                       {/* <input
                         type="text"
                         pattern="[0-9]+(,[0-9]+)?$"
@@ -932,176 +1183,26 @@ function CreateBlockPlace({
                         >
                           <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours">
                             <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
-                              {discipline.semesters[index].lectureH || ""}
+                              {discipline.semesters[index]?.lectureH || ""}
                             </div>
                             <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
-                              {discipline.semesters[index].practiceH || ""}
+                              {discipline.semesters[index]?.practiceH || ""}
                             </div>
                             <div className="plan-structure-discipline-block-modal-table-tr-td-aud-hours-cell">
-                              {discipline.semesters[index].labH || ""}
+                              {discipline.semesters[index]?.labH || ""}
                             </div>
                           </div>
                           <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours">
                             <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours-cell">
-                              {discipline.semesters[index].iwsH || ""}
+                              {discipline.semesters[index]?.iwsH || ""}
                             </div>
                             <div className="plan-structure-discipline-block-modal-table-tr-td-iws-hours-cell">
-                              {discipline.semesters[index].examPrepSumH || ""}
+                              {discipline.semesters[index]?.examPrepSumH || ""}
                             </div>
                           </div>
                         </td>
                       )
                     )}
-                    {/* <td
-                      className="plan-discipline-table-tr-td"
-                      title="Зачетные единицы"
-                    >
-                      <div className="plan-discipline-table-tr-td-input-credits">
-                        {discipline.sumH}
-                      </div>
-                    </td> */}
-                    {/* <td title="Лекции" className="plan-discipline-table-tr-td">
-                      <div className="plan-discipline-table-tr-td-container-credits">
-                        <input
-                          type="number"
-                          min={0}
-                          pattern="[0-9]+"
-                          className="plan-discipline-table-tr-td-input-lecture"
-                          value={
-                            !!discipline.lectureH ? discipline.lectureH : ""
-                          }
-                          onChange={(event) =>
-                            handleInputData(event, discipline.id, "lectureH")
-                          }
-                        ></input>
-                        <div className="plan-discipline-table-tr-td-percent">
-                          /
-                          {(!!discipline.sumH &&
-                            calcPercentDiscCredits(
-                              discipline.lectureH,
-                              discipline.sumH
-                            )) ||
-                            0}
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      title="Лабораторные"
-                      className="plan-discipline-table-tr-td"
-                    >
-                      <div className="plan-discipline-table-tr-td-container-credits">
-                        <input
-                          type="number"
-                          min={0}
-                          pattern="[0-9]+"
-                          value={!!discipline.labH ? discipline.labH : ""}
-                          onChange={(event) =>
-                            handleInputData(event, discipline.id, "labH")
-                          }
-                          className="plan-discipline-table-tr-td-input-lab"
-                        ></input>
-                        <div className="plan-discipline-table-tr-td-percent">
-                          /
-                          {(!!discipline.sumH &&
-                            calcPercentDiscCredits(
-                              discipline.labH,
-                              discipline.sumH
-                            )) ||
-                            0}
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      title="Практики"
-                      className="plan-discipline-table-tr-td"
-                    >
-                      <div className="plan-discipline-table-tr-td-container-credits">
-                        <input
-                          type="number"
-                          min={0}
-                          pattern="[0-9]+"
-                          value={
-                            !!discipline.practiceH ? discipline.practiceH : ""
-                          }
-                          onChange={(event) =>
-                            handleInputData(event, discipline.id, "practiceH")
-                          }
-                          className="plan-discipline-table-tr-td-input-practice"
-                        ></input>
-                        <div className="plan-discipline-table-tr-td-percent">
-                          /
-                          {(!!discipline.sumH &&
-                            calcPercentDiscCredits(
-                              discipline.practiceH,
-                              discipline.sumH
-                            )) ||
-                            0}
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      title="Самостоятельная работа"
-                      className="plan-discipline-table-tr-td"
-                    >
-                      <div className="plan-discipline-table-tr-td-container-credits">
-                        <input
-                          type="number"
-                          min={0}
-                          pattern="[0-9]+"
-                          value={!!discipline.iwsH ? discipline.iwsH : ""}
-                          onChange={(event) =>
-                            handleInputData(event, discipline.id, "iwsH")
-                          }
-                          className="plan-discipline-table-tr-td-input-iws"
-                        ></input>
-                        <div className="plan-discipline-table-tr-td-percent">
-                          /
-                          {(!!discipline.sumH &&
-                            calcPercentDiscCredits(
-                              discipline.iwsH,
-                              discipline.sumH
-                            )) ||
-                            0}
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      title="Контроль самостоятельной работы"
-                      className="plan-discipline-table-tr-td"
-                    >
-                      <div className="plan-discipline-table-tr-td-container-credits">
-                        <input
-                          type="number"
-                          min={0}
-                          pattern="\d*"
-                          value={
-                            !!discipline.examPrep ? discipline.examPrep : ""
-                          }
-                          onChange={(event) =>
-                            handleInputData(event, discipline.id, "examPrep")
-                          }
-                          className="plan-discipline-table-tr-td-input-prep"
-                        ></input>
-                        <div className="plan-discipline-table-tr-td-percent">
-                          /
-                          {(!!discipline.sumH &&
-                            calcPercentDiscCredits(
-                              discipline.examPrep,
-                              discipline.sumH
-                            )) ||
-                            0}
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      title="Форма аттестации"
-                      className="plan-discipline-table-tr-td"
-                    >
-                      <Select
-                        discipline={discipline}
-                        onChange={handleAttestationSelect}
-                      />
-                    </td> */}
                     <td className="plan-discipline-table-tr-td">
                       {discipline.codeDepartment}
                     </td>
@@ -1136,17 +1237,36 @@ function CreateBlockPlace({
   );
 }
 
-function Select({ discipline, onChange }: any) {
-  const value = AttestationNameMapper[discipline.attestation];
+// function Select({ discipline, onChange }: any) {
+//   const value = AttestationNameMapper[discipline.attestation];
+//   return (
+//     <select
+//       className="plan-discipline-table-tr-td-input-attestation"
+//       value={value}
+//       onChange={(event) => onChange(event, discipline.id, "attestation")}
+//     >
+//       {Object.keys(AttestationNameMapper).map((key: any) => (
+//         <option key={key} value={AttestationNameMapper[key]}>
+//           {AttestationNameMapper[key]}
+//         </option>
+//       ))}
+//     </select>
+//   );
+// }
+function Select({ valueFrom, mapper, onChange, className }: any) {
+  const keyFromValue = Object.keys(mapper).find(
+    (key) => valueFrom === mapper[key]
+  );
+  const value = mapper[keyFromValue as any];
   return (
     <select
-      className="plan-discipline-table-tr-td-input-attestation"
+      className={className}
       value={value}
-      onChange={(event) => onChange(event, discipline.id, "attestation")}
+      onChange={(event) => onChange(event)}
     >
-      {Object.keys(AttestationNameMapper).map((key: any) => (
-        <option key={key} value={AttestationNameMapper[key]}>
-          {AttestationNameMapper[key]}
+      {Object.keys(mapper).map((key: any) => (
+        <option key={key} value={mapper[key]}>
+          {mapper[key]}
         </option>
       ))}
     </select>

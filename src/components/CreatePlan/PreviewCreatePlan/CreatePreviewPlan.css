@@ -22,10 +22,11 @@
   position: sticky;
   top: 0;
   background-color: #f8f3f3;
+  border-bottom: 2px solid rgba(49, 47, 49, 1);
 }
 
 .preview-table-thead-line {
-  border-bottom: 1px solid rgb(155, 156, 159, 0.5);
+  border-bottom: 2px solid rgba(49, 47, 49, 1);
   color: rgb(116, 116, 122);
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -56,8 +57,8 @@
 .preview-table-table-container {
   max-height: 100vh;
   /* max-width: 100%; */
-  overflow-y: scroll;
   /* overflow-x: scroll; */
+  overflow-y: scroll;
 }
 .preview-table-table {
   /* margin-top: 4vh; */
@@ -70,7 +71,7 @@
   background-color: rgba(255, 255, 255);
 }
 .preview-table-table-header-line {
-  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
+  border-bottom: 2px solid rgb(49, 47, 49);
   color: rgba(61, 78, 87, 0.8);
   font-family: "Signika", sans-serif;
   font-weight: bold;
@@ -89,7 +90,7 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgba(247, 247, 247, 1);
 }
 .preview-table-table-thead-line-td-department-code {
   padding-top: 2.5vh;
@@ -101,14 +102,15 @@
   font-size: 1.5vh;
   transform: rotate(180deg);
   writing-mode: vertical-rl;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td-department-code {
   width: 5vw;
   max-width: 2vw;
   white-space: pre-wrap;
   word-wrap: break-word;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
+  border-right: none;
   text-align: center;
 }
 .preview-table-table-thead-line-td-shortcut {
@@ -119,12 +121,12 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 /* .plan-disciplines-table-thead-line-td:nth-child(1), */
 .preview-table-table-thead-line-td:nth-child(2) {
   text-align: center;
-  border: 1px solid rgba(240, 246, 251, 1);
+  border: 2px solid rgb(49, 47, 49);
   width: 7vw;
 }
 .preview-table-table-header-line-th-attest {
@@ -134,7 +136,7 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 .preview-table-table-header-line-th-common-hours {
   width: 8vw;
@@ -143,7 +145,7 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 .preview-table-table-header-line-th-aud-in-hours {
   width: 10vw;
@@ -152,7 +154,7 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 .preview-table-table-header-line-th-iws {
   width: 5vw;
@@ -161,7 +163,7 @@
   font-weight: 500;
   font-size: 1.5vh;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
 }
 .preview-table-table-header-line-th-sub {
   /* padding-left: 1vw; */
@@ -171,7 +173,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   /* white-space: nowrap; */
 }
 .preview-table-table-header-line-th-sub-code {
@@ -182,16 +184,8 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
   white-space: nowrap;
-}
-.preview-table-table-header-line {
-  border-bottom: 0.5px solid rgba(247, 247, 247, 1);
-  color: rgba(61, 78, 87, 0.8);
-  font-family: "Signika", sans-serif;
-  font-weight: bold;
-  font-size: 1.5vh;
-  height: 3vh;
 }
 .preview-table-table-header-line-th-sub-attest {
   width: 2vw;
@@ -200,7 +194,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   /* white-space: pre-line; */
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -213,7 +207,7 @@
   text-align: center;
   font-size: 1.5vh;
   background-color: rgb(231, 233, 234);
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
 }
 .preview-table-table-header-line-th-sub-common-amount-hours {
@@ -223,7 +217,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
 }
 .preview-table-table-header-line-th-sub-common-amount-hours-exam {
@@ -233,7 +227,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -245,7 +239,7 @@
   font-weight: bolder;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -257,7 +251,7 @@
   font-weight: bolder;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
@@ -269,7 +263,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
 }
 .preview-table-table-header-line-th-sub-iws-total {
@@ -279,7 +273,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
 }
 .preview-table-table-header-line-th-sub-iws-control {
@@ -289,7 +283,7 @@
   font-weight: 500;
   text-align: center;
   font-size: 1.5vh;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 2px solid rgb(49, 47, 49);
   white-space: nowrap;
 }
 .preview-table-table-tbody {
@@ -311,13 +305,23 @@
   font-weight: 300;
   font-size: 1.5vh;
   background-color: rgba(255, 255, 255);
-  border-bottom: 3px solid rgba(240, 246, 251, 1);
+  border-bottom: 1px solid rgb(49, 47, 49);
+}
+.preview-table-table-tr-block {
+  height: 6vh;
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 300;
+  font-size: 1.5vh;
+  background-color: rgba(255, 255, 255);
+  border-bottom: 3px solid rgb(49, 47, 49);
+  border-top: 3px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td-shortcut {
   width: 3vw;
   max-width: 3vw;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(1) {
   padding-left: 1vw;
@@ -328,14 +332,14 @@
   /* overflow-wrap: break-word; */
   /* text-overflow: ellipsis; */
   border-bottom: 3px solid rgba(240, 246, 251, 1);
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(6) {
   text-align: center;
   width: 4vw;
   font-weight: bold;
   background-color: rgb(231, 233, 234);
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(2) {
   width: 3vw;
@@ -343,26 +347,26 @@
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(3) {
   width: 3vw;
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(4) {
   width: 3vw;
   white-space: pre-wrap;
   word-wrap: break-word;
   text-align: center;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 .preview-table-table-tr-td:nth-child(n + 3) {
   text-align: center;
   width: 1.5vw;
-  border: 1px solid rgba(247, 247, 247, 1);
+  border: 1px solid rgb(49, 47, 49);
 }
 
 /* .preview-table-table-tr-td:last-child() {
@@ -378,7 +382,7 @@
   justify-content: start;
   align-items: center;
   width: 100%;
-  padding: 0;
+  padding: 0.05vh 0.025vw;
 }
 .preview-table-table-tr-td-aud-hours-cell {
   width: 33%;
@@ -386,14 +390,14 @@
   text-align: center;
   font-size: 1.4vh;
   padding: 0;
-  border: 1px dashed rgba(247, 247, 247, 1);
+  border: 1px dashed rgba(49, 47, 49, 0.5);
 }
 .preview-table-table-tr-td-iws-hours {
   display: flex;
   justify-content: start;
   align-items: center;
   width: 100%;
-  padding: 0;
+  padding: 0.1vh 0.025vw;
 }
 .preview-table-table-tr-td-iws-hours-cell {
   width: 50%;
@@ -402,5 +406,5 @@
   text-align: center;
   padding: 0;
   background-color: rgb(255, 255, 255);
-  border: 1px dashed rgba(247, 247, 247, 1);
+  border: 1px dashed rgba(49, 47, 49, 0.5);
 }

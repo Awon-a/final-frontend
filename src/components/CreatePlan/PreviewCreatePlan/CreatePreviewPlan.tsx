@@ -124,7 +124,7 @@ const CreatePreviewPlan = ({ data, courses }: any) => {
                   Кафедра
                 </th>
               </tr>
-              <tr className="ppreview-table-table-header-line">
+              <tr className="preview-table-table-header-line">
                 <th className="preview-table-table-header-line-th-sub-attest">
                   Экз.
                 </th>
@@ -185,7 +185,7 @@ const CreatePreviewPlan = ({ data, courses }: any) => {
                   }
                 ) => (
                   <>
-                    <tr className="preview-table-table-tr">
+                    <tr className="preview-table-table-tr-block">
                       <td className="preview-table-table-tr-td-shortcut">
                         {block.shortcut}
                       </td>
@@ -234,6 +234,7 @@ const CreatePreviewPlan = ({ data, courses }: any) => {
                           ></td>
                         )
                       )}
+                      <td className="preview-table-table-tr-td"></td>
                     </tr>
                     {block.disciplines.map(
                       (discipline: DisciplineForPlan, index: number) => (

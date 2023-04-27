@@ -187,7 +187,7 @@ const CreatePlanStructure = ({
         block.minCreditsSum > totalCredits
       )
         messages.push(
-          `Блок: ${block.blockName}: ЗЕТ не соответствует минимальному объему ${block.minCreditsSum}.`
+          `Блок: ${block.blockName}: ЗЕТ не соответствует минимальному объему ${block.minCreditsSum} (текущий: ${totalCredits}).`
         );
       else if (
         block.minCreditsSum &&
@@ -196,7 +196,7 @@ const CreatePlanStructure = ({
           totalCredits > block.maxCreditsSum)
       )
         messages.push(
-          `Блок: ${block.blockName}: ЗЕТ не соответствует ограничению по объему ${block.minCreditsSum}-${block.maxCreditsSum}.`
+          `Блок: ${block.blockName}: ЗЕТ не соответствует ограничению по объему ${block.minCreditsSum}-${block.maxCreditsSum} (текущий: ${totalCredits}).`
         );
     });
     if (creditsSum < BOUND_H || creditsSum > BOUND_H)

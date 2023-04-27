@@ -261,9 +261,7 @@ const PlanMeta = ({
                 Квалификация:
               </div>
               <Select
-                className={
-                  "plan-meta-form-and-level-education-tr-level-select "
-                }
+                className={"plan-meta-form-and-level-education-tr-level-select"}
                 valueFrom={degree}
                 mapper={PlanDegreeMapper}
                 onChange={handleDegreeChange}
