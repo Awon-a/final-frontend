@@ -258,7 +258,7 @@ const PlanMeta = ({
             />
             <div className="plan-meta-form-and-level-education-tr-level">
               <div className="plan-meta-form-and-level-education-tr-level-label">
-                Квалификация:
+                Уровень образования:
               </div>
               <Select
                 className={"plan-meta-form-and-level-education-tr-level-select"}

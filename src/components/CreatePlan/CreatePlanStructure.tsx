@@ -25,6 +25,10 @@ const CreatePlanStructure = ({
   activeTab,
   viewType,
   courses,
+  trainingForm,
+  degree,
+  planDirectionName,
+  specialization,
   isPlanStructureCompetenciesCollapsed,
   showDownArrow,
   blocks,
@@ -608,6 +612,10 @@ const CreatePlanStructure = ({
                     key="preview-table"
                     data={dataForPreviewTable}
                     courses={courses}
+                    trainingForm={trainingForm}
+                    degree={degree}
+                    planDirectionName={planDirectionName}
+                    specialization={specialization}
                   />
                 ))}
               <div className="plan-structure-explain-plan-semester-cell-container">

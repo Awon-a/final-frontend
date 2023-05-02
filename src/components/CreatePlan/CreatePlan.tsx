@@ -585,7 +585,7 @@ const CreatePlan = () => {
     maxCreditsSum?: number;
   }[] = [
     {
-      blockName: "Дисциплины",
+      blockName: "Обязательная часть",
       disciplines: baseDisciplines,
       onDrop: handleBaseDisciplineDrop,
       icon: Base,
@@ -638,7 +638,7 @@ const CreatePlan = () => {
 
   return (
     <>
-      <Header currentPath={pathname} />
+      {/* <Header currentPath={pathname} /> */}
       {current === PlacesTypes.planMeta && (
         <PlanMeta
           goNext={goToPlanCompetencies}
@@ -718,8 +718,12 @@ const CreatePlan = () => {
           practiceDisciplines={practiceDisciplines}
           showDownArrow={showDownArrow}
           blocks={blocks}
-          blockNames={blockNames}
+          trainingForm={trainingForm}
+          degree={degree}
           courses={courses}
+          planDirectionName={planDirectionName}
+          specialization={specialization}
+          blockNames={blockNames}
           currentBlockName={blockName}
           disciplinesBlockMapper={blockMapper}
           selectedCompetencies={selectedCompetencies}

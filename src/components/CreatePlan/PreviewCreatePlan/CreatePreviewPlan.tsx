@@ -10,7 +10,14 @@ interface CreatePreviewPlanProps {
   courses: number;
 }
 
-const CreatePreviewPlan = ({ data, courses }: any) => {
+const CreatePreviewPlan = ({
+  data,
+  courses,
+  trainingForm,
+  degree,
+  planDirectionName,
+  specialization,
+}: any) => {
   data = data.map((block: CreatePreviewPlanProps["data"][number]) => {
     const totalCredits = block.disciplines.reduce(
       (sum: number, curDisc: DisciplineForPlan) => sum + curDisc.totalCredits,
@@ -63,6 +70,51 @@ const CreatePreviewPlan = ({ data, courses }: any) => {
   });
   return (
     <>
+      <div className="preview-meta-info-block-container">
+        <div className="preview-meta-info-block-container-tr">
+          <div className="preview-meta-info-block-container-label">
+            Направление подготовки (специальность):
+          </div>
+          <div className="preview-meta-info-block-container-value">
+            {planDirectionName}
+          </div>
+        </div>
+        <div className="preview-meta-info-block-container-tr">
+          <div className="preview-meta-info-block-container-label">
+            Направленность (специализация/профиль):
+          </div>
+          <div className="preview-meta-info-block-container-value">
+            {specialization}
+          </div>
+        </div>
+        <div className="preview-meta-info-block-container-tr">
+          <div className="preview-meta-info-block-container-label">
+            Форма обучения:
+          </div>
+          <div className="preview-meta-info-block-container-value">
+            {trainingForm}
+          </div>
+        </div>
+        <div className="preview-meta-info-block-container-tr">
+          <div className="preview-meta-info-block-container-label">
+            Уровень образования:
+          </div>
+          <div className="preview-meta-info-block-container-value">
+            {degree}
+          </div>
+        </div>
+        <div className="preview-meta-info-block-container-tr">
+          <div className="preview-meta-info-block-container-label">
+            Срок обучения:
+          </div>
+          <div className="preview-meta-info-block-container-value">
+            {courses}{" "}
+            {((+courses >= 5 || +courses <= 0) && "лет") ||
+              (+courses > 1 && "года") ||
+              "год"}
+          </div>
+        </div>
+      </div>
       <div className="preview-container">
         <div className={"preview-table-table-container"}>
           <table className="preview-table-table">

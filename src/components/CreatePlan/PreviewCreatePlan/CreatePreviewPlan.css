@@ -408,3 +408,36 @@
   background-color: rgb(255, 255, 255);
   border: 1px dashed rgba(49, 47, 49, 0.5);
 }
+.preview-meta-info-block-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  height: 20vh;
+  width: 100%;
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+  margin-left: 0.5vw;
+}
+.preview-meta-info-block-container-tr {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: auto;
+  min-height: 3.5vh;
+}
+.preview-meta-info-block-container-label {
+  width: 30%;
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 300;
+  font-size: 1.7vh;
+}
+.preview-meta-info-block-container-value {
+  width: 100%;
+  color: rgba(61, 78, 87, 1);
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 1.7vh;
+}
